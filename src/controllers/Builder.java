@@ -178,8 +178,7 @@ public class Builder {
 
         }
         if (mistakesFound == true){
-            throw new InitiationException("class: Builder: createItemListFromRooms: "
-                    + "some Items have the same name!");
+            throw new InitiationException(errorString);
         }
     }
     
