@@ -1,0 +1,26 @@
+ 1, Gert     , 339
+ 2, Lene     , 336
+ 3, gert     , 106
+ 4, unknown01, 105
+ 5, unknown02, 100
+ 6, unknown03,  95
+ 7, unknown04,  90
+ 8, unknown05,  85
+ 9, unknown06,  80
+10, unknown07,  75
+11, unknown08,  70
+12, unknown09,  65
+13, unknown10,  60
+14, unknown11,  55
+15, unknown12,  50
+16, unknown13,  45
+17, bob      ,  40
+18, unknown14,  40
+19, Gert     ,  39
+20, unknown15,  35
+21, unknown16,  30
+22, unknown17,  25
+23, unknown18,  20
+24, unknown19,  15
+25, unknown20,  10
+26, unknown21,   5
