@@ -38,7 +38,7 @@ public class RoomController {
         ui.showNumberOfRooms(roomList.size());
     }
 
-    //Checks if a boobytrap is present in room and if so makes changes to player health.
+    //Checks if a boobytrap is present in a room and if so makes changes to player health.
     private void checkForBoobyTrap(Player player, Room r) {
         int randomHealthRemoved;
         if (r.isBoobytrap()) {
