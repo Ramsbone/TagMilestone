@@ -35,7 +35,7 @@ public class Builder {
         checkRoomNamesElseThrowExcept(roomList);
         sortRoomListByName(roomList);
         
-        //Distribues Items, Traps and NonPlayableCaracters into rooms:
+        //Creates and distribues Items, Traps and NonPlayableCaracters into rooms:
         initItems();
         
         //Creates an itemList from the roomList 
