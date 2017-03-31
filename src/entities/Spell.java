@@ -30,6 +30,9 @@ public class Spell extends Item{
         return protectionChange;
     }
     
+    /**
+     * Applies changes to the player's damage, protection and health maximum, according to the values defined in the spell's attributes.
+     */
     public void activateSpell(Player player){
         int damage = player.getDamage();
         int protection = player.getProtection();
