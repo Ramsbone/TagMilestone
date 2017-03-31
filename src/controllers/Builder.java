@@ -143,9 +143,30 @@ public class Builder {
         }
     }
     
+    private void checkRoomNamesElseThrowExcept(ArrayList<Room> rooms){
+        ArrayList<String> tempArrayList = new ArrayList<String>();
+        for (Room r: rooms) {
+            tempArrayList.add(r.getName());
+        }
+        
+        checkListOfStrings(tempArrayList, 
+                "class: Builder: checkRoomNamesElseThrowExcept: "
+                    + "some Rooms have the same name!");
+    }
     
     
-    private void checkListOfStrings(ArrayList<String> itemList){
+    private void checkItemNamesElseThrowExcept(ArrayList<Item> itemList){        
+        ArrayList<String> tempArrayList = new ArrayList<String>();
+        for (Item i: itemList) {
+            tempArrayList.add(i.getName());
+        }
+        
+        checkListOfStrings(tempArrayList, 
+                "class: Builder: checkItemNamesElseThrowExcept: "
+                    + "some Items have the same name!");
+    }
+    
+    private void checkListOfStrings(ArrayList<String> itemList, String errorString){
         boolean mistakesFound = false;
         for (String s: itemList) {
             int a = itemList.lastIndexOf(s);
@@ -161,26 +182,6 @@ public class Builder {
                     + "some Items have the same name!");
         }
     }
-    
-    //the methods: checkItemNamesElseThrowExcept && checkRoomNamesElseThrowExcept
-    private void checkItemNamesElseThrowExcept(ArrayList<Item> itemList){        
-        ArrayList<String> tempArrayList = new ArrayList<String>();
-        for (Item i: itemList) {
-            tempArrayList.add(i.getName());
-        }
-        
-        checkListOfStrings(tempArrayList);
-    }
-    
-    private void checkRoomNamesElseThrowExcept(ArrayList<Room> rooms){
-        ArrayList<String> tempArrayList = new ArrayList<String>();
-        for (Room r: rooms) {
-            tempArrayList.add(r.getName());
-        }
-        
-        checkListOfStrings(tempArrayList);
-    }
-    
     
     
     //Finds a specific room in roomList
