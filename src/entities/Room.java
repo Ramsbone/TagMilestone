@@ -84,10 +84,6 @@ public class Room {
         return gold;
     }
 
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
-
     public void setGold(int gold) {
         this.gold = gold;
     }
@@ -96,12 +92,12 @@ public class Room {
         return goldchance;
     }
 
-//    public void setGoldchance(int goldchance) {
-//        this.goldchance = goldchance;
-//    }
-    
-    //used to initialize rooms when creating the structure of the map.
-    public void setDoors(Room north, Room south, Room east, Room west){
+   /**
+    * Sets in which directions you can leave the room,
+    * If a parameter is null then the direction is blocked
+    */
+    public void setDoors(Room north, Room south, Room east, Room west){  //used to initialize rooms when creating the structure of the map.
+   
         this.north = north;
         this.south = south;
         this.east  = east;
@@ -140,6 +136,12 @@ public class Room {
         inventory.remove(i);
     }
     
+    /**
+     * Checks if an item with a specific name is present in room inventory
+     * 
+     * @param name the name searched for in inventory
+     * @return if Item with name is found then returns the item, else null is returned
+     */
     public Item checkForItem(String name) {
         Item output = null;
 

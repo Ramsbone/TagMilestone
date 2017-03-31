@@ -38,11 +38,17 @@ public class Player {
         this.armour = null;
         this.inventory = new ArrayList();
     }
-
+    
+    /**
+     * checks if player inventory is empty
+     */
     public boolean isInventoryEmpty() {
         return this.inventory.isEmpty();
     }
-
+    
+    /**
+     * checks if player inventory exceeds the defined maximum
+     */
     public boolean isInventoryFull() {
         return (this.inventory.size() == inventoryMaxSize);
     }
@@ -152,6 +158,12 @@ public class Player {
         inventory.remove(i);
     }
 
+     /**
+     * Checks if an item with a specific name is present in player inventory
+     * 
+     * @param name the name searched for in inventory
+     * @return if Item with name is found then returns the item, else null is returned
+     */
     public Item checkForItem(String name) {
         Item output = null;
 
