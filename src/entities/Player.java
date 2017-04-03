@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /*
 Her er Christian: jeg skal nu lave switchen om. kl. er 11.42
-
+Her er næste kommentar.
 */
 
 public class Player {
