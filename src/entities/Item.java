@@ -35,18 +35,32 @@ public abstract class Item {
      * @param player the player from which you get the damage points
      * @param value the value which is added to the players damage points
      */
-    public void changeDamage(Player player, int value) {
+    public void changeDamage(Character character, int value) {   
+        character.setDamage(character.getDefaultDamage() + value);
+    }
+    ///////////////////////////////////////////////////////////////////kode ændret af Christian Lykke 2017-03-04
+    /*
+    public void changeDamage(Player player, int value) {   
         player.setDamage(player.getDefaultDamage() + value);
     }
-
+    */
+    
      /**
      * Changes the players protection points, when item is used.
      * @param player the player from which you get the protection points
      * @param value the value which is added to the players protection points
      */
+    
+    
+    public void changeProtection(Character character, int value) {
+        character.setProtection(character.getDefaultProtection() + value);
+    }
+    ///////////////////////////////////////////////////////////////////kode ændret af Christian Lykke 2017-03-04
+    /*
     public void changeProtection(Player player, int value) {
         player.setProtection(player.getDefaultProtection() + value);
     }
+    */
 
     /**
      * Changes the players health points, when item is used.

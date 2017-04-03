@@ -37,7 +37,7 @@ public class CommandController {
     //Handles the different commands from the player.
     private void commandControl() {
         String userInput = "";
-        Room nextRoom;
+        Room nextRoom = null;
 
         while (!userInput.equals("quit") && !player.getCurrentRoom().getName().equals("Exit Point") && player.getHealth() > 0) {
 
@@ -70,6 +70,60 @@ public class CommandController {
                         moveOn = true;
                         break;
                     case "n":
+                        moveOn = n(nextRoom, player, moveOn);
+                        break;
+                    case "s":
+                        moveOn = s(nextRoom, player, moveOn);
+                        break;
+                    case "e":
+                        moveOn = e(nextRoom, player, moveOn);
+                        break;
+                    case "w":
+                        moveOn = w(nextRoom, player, moveOn);
+                        break;
+                    case "take":
+                        take(command, parameter);
+                        break;
+                    case "drop":
+                        drop(command, parameter);
+                        break;
+                    case "use":
+                        use(command, parameter, moveOn);
+                        break;
+                    case "look":
+                        look(parameter, command);
+                        break;
+                    case "stat":
+                        ui.showStat(player);
+                        break;
+                    case "inv":
+                        ui.showPlayerInventory(player);
+                        break;
+                    case "hs":
+                        infoFromHighscore();
+                        break;
+                    default:
+                        rc.roomDebugger();
+                }
+            }
+        }
+        if(player.getHealth()<=0){
+            ui.died();
+            infoFromHighscore();
+        }
+        else if (userInput.equals("quit")) {
+            ui.usedQuitCommand();
+            infoFromHighscore();
+
+        } else {
+            ui.showEndText(player.getGold());
+            infoFromHighscore();
+            writeToHighscoreDocument();
+        }
+
+    }
+    
+    private boolean n(Room nextRoom, Player player, boolean moveOn){
                         nextRoom = player.getCurrentRoom().getNorth();
                         if (nextRoom == null) {
                             ui.outputWrongWay();
@@ -77,36 +131,44 @@ public class CommandController {
                             player.setCurrentRoom(nextRoom);
                             moveOn = true;
                         }
-                        break;
-                    case "s":
-                        nextRoom = player.getCurrentRoom().getSouth();
+                     return moveOn;    
+                    }
+    
+    private boolean s(Room nextRoom, Player player, boolean moveOn){
+        nextRoom = player.getCurrentRoom().getSouth();
                         if (nextRoom == null) {
                             ui.outputWrongWay();
                         } else {
                             player.setCurrentRoom(nextRoom);
                             moveOn = true;
                         }
-                        break;
-                    case "e":
-                        nextRoom = player.getCurrentRoom().getEast();
+                        return moveOn;
+    }
+    
+    private boolean e(Room nextRoom, Player player, boolean moveOn){
+        nextRoom = player.getCurrentRoom().getEast();
                         if (nextRoom == null) {
                             ui.outputWrongWay();
                         } else {
                             player.setCurrentRoom(nextRoom);
                             moveOn = true;
                         }
-                        break;
-                    case "w":
-                        nextRoom = player.getCurrentRoom().getWest();
+                        return moveOn;
+    }
+    
+    private boolean w(Room nextRoom, Player player, boolean moveOn){
+        nextRoom = player.getCurrentRoom().getWest();
                         if (nextRoom == null) {
                             ui.outputWrongWay();
                         } else {
                             player.setCurrentRoom(nextRoom);
                             moveOn = true;
                         }
-                        break;
-                    case "take":
-                        if (parameter.equals("gold")) {
+                        return moveOn;
+    }
+    
+    private void take(String command, String parameter){
+        if (parameter.equals("gold")) {
                             if (player.getCurrentRoom().getGold() == 0) {
                                 ui.noGoldInRoom();
                             } else {
@@ -130,10 +192,10 @@ public class CommandController {
                                 ui.unknownParameter(command);
                             }
                         }
-
-                        break;
-                    case "drop":
-                        if (parameter.equals("gold")) {
+    }
+    
+    private void drop(String command, String parameter){
+        if (parameter.equals("gold")) {
                             int dropped = ui.askHowMuchGoldToDrop();
                             if (dropped > player.getGold()) {
                                 ui.tryToDropTooMuchGold();
@@ -172,10 +234,10 @@ public class CommandController {
                                 ui.unknownParameter(command);
                             }
                         }
-
-                        break;
-                    case "use":
-                        Item item = player.checkForItem(parameter);
+    }
+    
+    private void use(String command, String parameter, boolean moveOn){
+        Item item = player.checkForItem(parameter);
                         if (item != null) {
                             if (item instanceof Weapon) {
                                 int value = ((Weapon) item).getDamageIncrease();
@@ -218,14 +280,15 @@ public class CommandController {
                                 ui.unknownParameter(command);
                             }
                         }
-                        break;
-                    case "look":
-                        if (parameter.equals("")) {
+    }
+    
+    private void look(String parameter, String command){
+        if (parameter.equals("")) {
                             ui.showRoom(player.getCurrentRoom());
                         } else if (parameter.equals("gold")) {
                             ui.lookAtGold(player.getGold() + player.getCurrentRoom().getGold());
                         } else {
-                            item = player.checkForItem(parameter);
+                            Item item = player.checkForItem(parameter);
                             if (item != null) {
                                 ui.lookAtItem(item);
                             } else {
@@ -237,37 +300,9 @@ public class CommandController {
                                 }
                             }
                         }
-                        break;
-                    case "stat":
-                        ui.showStat(player);
-                        break;
-                    case "inv":
-                        ui.showPlayerInventory(player);
-                        break;
-                    case "hs":
-                        infoFromHighscore();
-                        break;
-                    default:
-                        rc.roomDebugger();
-                }
-            }
-        }
-        if(player.getHealth()<=0){
-            ui.died();
-            infoFromHighscore();
-        }
-        else if (userInput.equals("quit")) {
-            ui.usedQuitCommand();
-            infoFromHighscore();
-
-        } else {
-            ui.showEndText(player.getGold());
-            infoFromHighscore();
-            writeToHighscoreDocument();
-        }
-
     }
-
+    
+    
     //Gets input from boundary and cheeck if it is valid input
     private String inputAndCheckCommand() {
         String input = null;

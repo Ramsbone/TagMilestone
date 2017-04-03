@@ -1,57 +1,16 @@
 /*
-* Player entity class, which hold the data of the player.
+ * Abstract class for Players and Non Playable Characters (NPC's)
  */
 package entities;
 
 import java.util.ArrayList;
 
-/*
-Player klassen er lavet om af Christian Lykke d. 2017-03-04
-Hele den gamle player klasse ligger udkommenteret til sidst i filen
-*/
-
-public class Player extends Character{
-
-    private int gold;
+public abstract class Character {
     
-    public Player(String name, Room currentRoom) {
-        super(name, currentRoom);
-        this.gold = 0;
-    }
-    
-    
-    public int getGold() {
-        return gold;
-    }
-
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
-
-}
-
-
-////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-/*
-* Player entity class, which hold the data of the player.
- */
-/*
-package entities;
-
-import java.util.ArrayList;
-*/
-/*
-Her er Christian: jeg skal nu lave switchen om. kl. er 11.42
-Her er næste kommentar.
-*/
-/*
-public class Player {
-
     private final String name;
+    private final String description;
     private Room currentRoom;
-    private int gold;
+    //private int gold;
     private int health;
     private int healthMaxSize;
     private int damage;
@@ -63,11 +22,12 @@ public class Player {
     private Weapon weapon;
     private Armour armour;
     private ArrayList<Item> inventory;
-
-    public Player(String name, Room currentRoom) {
+    
+    public Character(String name, Room currentRoom) {
         this.name = name;
+        this.description = null;
         this.currentRoom = currentRoom;
-        this.gold = 0;
+        //this.gold = 0;
         this.health = 100;
         this.healthMaxSize = 100;
         this.defaultDamage = 10;
@@ -80,22 +40,51 @@ public class Player {
         this.armour = null;
         this.inventory = new ArrayList();
     }
-    */
-
+    
+    public Character(String name, 
+            Room currentRoom, 
+            Weapon weapon, 
+            Armour armour,
+            String description) {
+        this.name = name;
+        this.description = description;
+        this.currentRoom = currentRoom;
+        //this.gold = 0;
+        this.health = 100;
+        this.healthMaxSize = 100;
+        this.defaultDamage = 10;
+        this.damage = defaultDamage;
+        this.defaultProtection = 0;
+        this.protection = defaultProtection;
+        this.defaultInventorySize = 6;
+        this.inventoryMaxSize = defaultInventorySize;
+        
+        //this.weapon = weapon;
+        //this.addToInventory(weapon);
+        int value = ((Weapon) weapon).getDamageIncrease();
+        weapon.changeDamage(this, value);
+        this.setWeapon((Weapon) weapon);
+        
+        //this.armour = armour;
+        //this.addToInventory(armour);
+        value = ((Armour) armour).getProtectionIncrease();
+        armour.changeProtection(this, value);
+        this.setArmour((Armour) armour);
+        
+        
+        this.inventory = new ArrayList();
+    }
+    
     /**
-     * checks if player inventory is empty
+     * checks if character inventory is empty
      */
-     /*
     public boolean isInventoryEmpty() {
         return this.inventory.isEmpty();
     }
-    */
-
+    
     /**
-     * checks if player inventory exceeds the defined maximum
+     * checks if character inventory exceeds the defined maximum
      */
-
-     /*
     public boolean isInventoryFull() {
         return (this.inventory.size() == inventoryMaxSize);
     }
@@ -185,14 +174,6 @@ public class Player {
         return currentRoom;
     }
 
-    public int getGold() {
-        return gold;
-    }
-
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
-
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
     }
@@ -204,16 +185,13 @@ public class Player {
     public void removeFromInventory(Item i) {
         inventory.remove(i);
     }
-    */
 
      /**
-     * Checks if an item with a specific name is present in player inventory
+     * Checks if an item with a specific name is present in character inventory
      * 
      * @param name the name searched for in inventory
      * @return if Item with name is found then returns the item, else null is returned
      */
-
-/*
     public Item checkForItem(String name) {
         Item output = null;
 
@@ -226,6 +204,4 @@ public class Player {
 
         return output;
     }
-
 }
-*/
