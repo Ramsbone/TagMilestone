@@ -24,6 +24,7 @@ public class Boundary {
     Scanner scan = new Scanner(System.in);
 
     public String getCommand() {
+
         System.out.print("Please enter a command: ");
         String input = scan.nextLine();
         return input;
@@ -33,10 +34,19 @@ public class Boundary {
         System.out.println("Unknown command, please try again");
     }
 
-    public void showStartText() {
-        String startText = "***********************************************************************************"
+    public String inputPlayerName() {
+
+        System.out.println("***********************************************************************************"
                 + "\n\t\t\tWelcome to Text Adventure Game!"
-                + "\n***********************************************************************************"
+                + "\n***********************************************************************************");
+        System.out.print("Please enter your name: ");
+        String name = scan.nextLine();
+        return name;
+    }
+
+    public void showStartText() {
+
+        String output = "*********************************************************************************"
                 + "\n\t\t\tType 'help' for a list of commands."
                 + "\n***********************************************************************************"
                 + "\nYou have been travelling across the land in search for the legendary dwarfen mines."
@@ -46,12 +56,12 @@ public class Boundary {
                 + "\nA strange symbol in the rock catches your eyes."
                 + "\nYou touch the symbol and the mountain starts to rumble."
                 + "\nSuddenly the ground beneath you disappear!";
-
-        System.out.println(startText);
+        System.out.println(output);
     }
 
     public void showEndText(int gold) {
-        String endText = "***********************************************************************************"
+
+        String output = "***********************************************************************************"
                 + "\nThe sunlight blinds you, as you step outside."
                 + "\nYou have finally found your way out, and relieved you breath in the fresh air."
                 + "\nBehind you is a great adventure, dangers and propably still unfound treasure."
@@ -60,20 +70,12 @@ public class Boundary {
                 + "\n***********************************************************************************"
                 + "\nYou have collected " + gold + " gold"
                 + "\n***********************************************************************************";
-
-        System.out.println(endText);
-    }
-
-    public String inputPlayerName() {
-        System.out.println("***********************************************************************************");
-        System.out.print("Please enter your name: ");
-        String name = scan.nextLine();
-        return name;
-
+        System.out.println(output);
     }
 
     public void showHelp() {
-        String help = "***********************************************************************************"
+
+        String output = "***********************************************************************************"
                 + "\nChoose from following commands:"
                 + "\n***********************************************************************************"
                 + "\n-'gold'\t\t\t\t: Shows how much gold is carried"
@@ -89,22 +91,22 @@ public class Boundary {
                 + "\n-'look'\t\t\t\t: Shows room info"
                 + "\n-'look <item>'\t\t\t: Shows item info"
                 + "\n***********************************************************************************";
-        System.out.println(help);
+        System.out.println(output);
     }
 
     public void usedQuitCommand() {
 
         String output = "***********************************************************************************"
                 + "\nYou have chosen to quit the game. Come back and play TAG soon again.";
-
         System.out.println(output);
-
     }
-    
-    public void died(){
-        System.out.println("***********************************************************************************"
+
+    public void died() {
+
+        String output = "***********************************************************************************"
                 + "\nSorry, you suffered from a horrible and grusome death. "
-                + "\nPlease come again and play TAG another time.");
+                + "\nPlease come again and play TAG another time.";
+        System.out.println(output);
     }
 
     public void showStat(Player player) {
@@ -114,18 +116,15 @@ public class Boundary {
                 + "\nYou inflict " + player.getDamage() + " damage points and got " + player.getProtection() + " protection points.";
 
         if (player.getWeapon() != null) {
-            output = output
-                    + "\nYou hold " + player.getWeapon().getName() + " in your hands. ";
+            output += "\nYou hold " + player.getWeapon().getName() + " in your hands. ";
         }
+
         if (player.getArmour() != null) {
-            output = output
-                    + "\nYou wear " + player.getArmour().getName() + " as armour. ";
+            output += "\nYou wear " + player.getArmour().getName() + " as armour. ";
         }
 
-        output = output + "\n***********************************************************************************";
-
+        output += "\n***********************************************************************************";
         System.out.println(output);
-
     }
 
     public void showPlayerGold(Player player) {
@@ -167,7 +166,6 @@ public class Boundary {
                 + "\n***********************************************************************************\n"
                 + item.getDescription()
                 + "\n***********************************************************************************";
-
         System.out.println(output);
 
     }
@@ -187,6 +185,33 @@ public class Boundary {
         System.out.println(output);
 
     }
+    
+    public void showSpellEffect(Player player, Spell spell) {
+
+        String output = "***********************************************************************************"
+                + "\nYou have read the " + spell.getName() + ", and following changes inflict on you"
+                + "\n***********************************************************************************";
+
+        if (spell.getDamageChange() != 0) {
+
+            output += "\nYour damage without any weapons has been changed to " + (player.getDefaultDamage());
+
+        }
+        if (spell.getProtectionChange() != 0) {
+
+            output += "\nYour protection without any armour has been changed to " + (player.getDefaultProtection());
+
+        }
+        if (spell.getHealthChange() != 0) {
+
+            output += "\nYour maximum health has been changed to " + (player.getHealthMaxSize());
+
+        }
+        output += "\n***********************************************************************************";
+
+        System.out.println(output);
+
+    }
 
     public void showPlayerInventory(Player player) {
 
@@ -198,6 +223,7 @@ public class Boundary {
     }
 
     public String showItems(ArrayList<Item> inventory) {
+
         String output = "";
         for (Item item : inventory) {
             output += item.getName() + " * ";
@@ -207,14 +233,16 @@ public class Boundary {
 
     public void printInfoFromHighscore(ArrayList<String> infoFromHighscore) {
 
-        System.out.println("***********************************************************************************");
-        System.out.println("Highscore:");
-        System.out.println("\t\tRank \t\tPlayer \t\t\tGold");
-        System.out.println("***********************************************************************************");
+        String output = "***********************************************************************************"
+                + "\nHighscore:\tRank \t\tPlayer \t\t\tGold"
+                + "\n***********************************************************************************";
+
         for (int i = 0; i < infoFromHighscore.size(); i++) {
-            System.out.println("\t\t"+infoFromHighscore.get(i));
+            output += "\n\t\t" + infoFromHighscore.get(i);
         }
-        System.out.println("***********************************************************************************");
+
+        output += "\n***********************************************************************************";
+        System.out.println(output);
 
     }
 
@@ -257,6 +285,7 @@ public class Boundary {
     }
 
     public void aNPCsneaksAway() {
+
         String output = "You hear a faint noise. You look around but see nothing...pobably just a rat..."
                 + "\n***********************************************************************************";
         System.out.println(output);
@@ -291,14 +320,13 @@ public class Boundary {
     }
 
     public void drinkHealth(String name, int value) {
-        
-            System.out.println("You drink " + name + " and now has " + value + "% in health.");
-        
-        
+
+        System.out.println("You drink " + name + " and now has " + value + "% in health.");
+
     }
 
     public void drinkPoison(String name, int value) {
-        if(value > 0){
+        if (value > 0) {
             System.out.println("You drink " + name + " and now has " + value + "% in health.");
         }
     }
@@ -394,12 +422,11 @@ public class Boundary {
 
         for (Item i : inventory) {
             Item itemInstance = i.getClass().cast(i);
-            inventoryString = inventoryString 
+            inventoryString = inventoryString
                     + itemInstance.getName()
-                    +", ";
+                    + ", ";
         }
-       
-        
+
         String output
                 = BLUE + name + BLACK
                 + " Gold: " + RED + gold + BLACK
@@ -407,7 +434,7 @@ public class Boundary {
                 + " \n\t" + rooms
                 + "\n\t" + inventoryString
                 + "\n\t" + boobytrap + thief + taxcollector;
-        
+
         System.out.println(output);
 
     }
@@ -417,33 +444,5 @@ public class Boundary {
 
     }
 
-    public void showSpellEffect(Player player, Spell spell) {
-        
-        
-        String output = "***********************************************************************************"
-                + "\nYou have read the " + spell.getName() + ", and following changes inflict on you"
-                + "\n***********************************************************************************";
-              
-
-        if (spell.getDamageChange() != 0) {
-
-            output += "\nYour damage without any weapons has been changed to " + (player.getDefaultDamage());
-
-        }
-         if (spell.getProtectionChange() != 0) {
-
-            output += "\nYour protection without any armour has been changed to " + (player.getDefaultProtection());
-
-        }
-            if (spell.getHealthChange()!= 0) {
-
-            output += "\nYour maximum health has been changed to " + (player.getHealthMaxSize());         
-
-        }
-            output += "\n***********************************************************************************";
-
-        System.out.println(output);
-        
-    }
-   
+    
 }
