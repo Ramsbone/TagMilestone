@@ -24,11 +24,16 @@ public class FightController {
         boolean flee = false;
 
         Monster monster = player.getCurrentRoom().getMonster();
+        
+        ui.showMonster(monster);
 
         while (monster.getHealth() > 0 && player.getHealth() > 0 && !flee) {
+            ui.showCombatStats(monster, player);
 
             int monsterhit = calculateDamage(monster.getDamage(), player.getProtection());
             hit(monsterhit, player);
+            
+            ui.monsterAttack(monster, monsterhit);
 
             if (player.getHealth() > 0) {
                 boolean validMove = false;
@@ -151,24 +156,12 @@ public class FightController {
         //not same hit everytime
         Random r = new Random();
 
-        int n = r.nextInt(3); //int mellem 1 og 5
+        int n = r.nextInt(3); //int mellem 1 og 3
         double dmg = damage;
 
-        switch (n) {
-            case 1:
-                dmg = dmg * 0.8;
-                break;
-            case 2:
-                dmg = dmg * 0.9;
-                break;
-            default:
-                dmg = dmg * 1.0;
-                break;
-        }
+        dmg = dmg*(1-n/10.0);
 
-        protection = protection / 100;
-
-        dmg = dmg - (protection * dmg);
+        dmg = dmg - ((protection / 100) * dmg);
 
         damage = (int) dmg;
 
