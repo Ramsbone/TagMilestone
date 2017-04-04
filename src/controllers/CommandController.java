@@ -22,6 +22,7 @@ public class CommandController {
 
     private final Boundary ui = new Boundary();
     private final RoomController rc = new RoomController();
+    private final FightController fc = new FightController();
     private final Player player = new Player(ui.inputPlayerName(), null);
     private final Highscore hs = new Highscore();
     //Debug can be set to true when access is needed to roomList.
@@ -42,8 +43,10 @@ public class CommandController {
         while (!userInput.equals("quit") && !player.getCurrentRoom().getName().equals("Exit Point") && player.getHealth() > 0) {
 
             rc.enterRoom(player);
-
             boolean moveOn = false;
+            if(player.getCurrentRoom().getMonster() != null){
+                moveOn = fc.fight(player);
+            }
 
             while (!moveOn && player.getHealth() > 0) {
 
@@ -123,18 +126,16 @@ public class CommandController {
     }
 
     private boolean moving(String command, Room nextRoom, Player player, boolean moveOn) {
-
         switch (command) {
-
             case "n":
                 nextRoom = player.getCurrentRoom().getNorth();
-
+                break;
             case "s":
                 nextRoom = player.getCurrentRoom().getSouth();
-
+                break;
             case "e":
                 nextRoom = player.getCurrentRoom().getEast();
-
+                break;
             default:
                 nextRoom = player.getCurrentRoom().getWest();
         }
@@ -148,50 +149,6 @@ public class CommandController {
         }
         return moveOn;
     }
-
-//    private boolean n(Room nextRoom, Player player, boolean moveOn) {
-//        nextRoom = player.getCurrentRoom().getNorth();
-//        if (nextRoom == null) {
-//            ui.outputWrongWay();
-//        } else {
-//            player.setCurrentRoom(nextRoom);
-//            moveOn = true;
-//        }
-//        return moveOn;
-//    }
-//
-//    private boolean s(Room nextRoom, Player player, boolean moveOn) {
-//        nextRoom = player.getCurrentRoom().getSouth();
-//        if (nextRoom == null) {
-//            ui.outputWrongWay();
-//        } else {
-//            player.setCurrentRoom(nextRoom);
-//            moveOn = true;
-//        }
-//        return moveOn;
-//    }
-//
-//    private boolean e(Room nextRoom, Player player, boolean moveOn) {
-//        nextRoom = player.getCurrentRoom().getEast();
-//        if (nextRoom == null) {
-//            ui.outputWrongWay();
-//        } else {
-//            player.setCurrentRoom(nextRoom);
-//            moveOn = true;
-//        }
-//        return moveOn;
-//    }
-//
-//    private boolean w(Room nextRoom, Player player, boolean moveOn) {
-//        nextRoom = player.getCurrentRoom().getWest();
-//        if (nextRoom == null) {
-//            ui.outputWrongWay();
-//        } else {
-//            player.setCurrentRoom(nextRoom);
-//            moveOn = true;
-//        }
-//        return moveOn;
-//    }
 
     private void take(String command, String parameter) {
         if (parameter.equals("gold")) {
