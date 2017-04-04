@@ -12,20 +12,47 @@ Hele den gamle player klasse ligger udkommenteret til sidst i filen
 
 public class Player extends Character{
 
-    private int gold;
+    private int defaultInventorySize;
+    private int inventoryMaxSize;
+    private Room currentRoom;
     
     public Player(String name, Room currentRoom) {
         super(name, currentRoom);
-        this.gold = 0;
+        this.currentRoom = currentRoom;
+        this.defaultInventorySize = 6;
+        this.inventoryMaxSize = defaultInventorySize;
     }
     
     
-    public int getGold() {
-        return gold;
+    public Room getCurrentRoom() {
+        return currentRoom;
     }
 
-    public void setGold(int gold) {
-        this.gold = gold;
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+    
+    /**
+     * checks if character inventory is empty
+     */
+    public boolean isInventoryEmpty() {
+        return this.inventory.isEmpty();
+    }
+    
+    /**
+     * checks if character inventory exceeds the defined maximum
+     */
+    public boolean isInventoryFull() {
+        return (this.inventory.size() == inventoryMaxSize);
+    }
+    
+    
+    public int getInventoryMaxSize() {
+        return inventoryMaxSize;
+    }
+
+    public void setInventoryMaxSize(int inventoryMaxSize) {
+        this.inventoryMaxSize = inventoryMaxSize;
     }
 
 }

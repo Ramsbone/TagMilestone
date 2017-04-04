@@ -8,87 +8,71 @@ import java.util.ArrayList;
 public abstract class Character {
     
     private final String name;
-    private final String description;
-    private Room currentRoom;
-    //private int gold;
+    private int gold;
     private int health;
     private int healthMaxSize;
     private int damage;
     private int defaultDamage;
     private int protection;
     private int defaultProtection;
-    private int defaultInventorySize;
-    private int inventoryMaxSize;
     private Weapon weapon;
     private Armour armour;
-    private ArrayList<Item> inventory;
+    public ArrayList<Item> inventory;
     
     public Character(String name, Room currentRoom) {
         this.name = name;
-        this.description = null;
-        this.currentRoom = currentRoom;
-        //this.gold = 0;
+        this.gold = 0;
         this.health = 100;
         this.healthMaxSize = 100;
         this.defaultDamage = 10;
         this.damage = defaultDamage;
         this.defaultProtection = 0;
         this.protection = defaultProtection;
-        this.defaultInventorySize = 6;
-        this.inventoryMaxSize = defaultInventorySize;
         this.weapon = null;
         this.armour = null;
         this.inventory = new ArrayList();
     }
     
     public Character(String name, 
-            Room currentRoom, 
             Weapon weapon, 
             Armour armour,
             String description) {
         this.name = name;
-        this.description = description;
-        this.currentRoom = currentRoom;
-        //this.gold = 0;
+        this.gold = 0;
         this.health = 100;
         this.healthMaxSize = 100;
         this.defaultDamage = 10;
         this.damage = defaultDamage;
         this.defaultProtection = 0;
         this.protection = defaultProtection;
-        this.defaultInventorySize = 6;
-        this.inventoryMaxSize = defaultInventorySize;
+        this.inventory = new ArrayList();
         
         //this.weapon = weapon;
         //this.addToInventory(weapon);
         int value = ((Weapon) weapon).getDamageIncrease();
         weapon.changeDamage(this, value);
         this.setWeapon((Weapon) weapon);
+        this.addToInventory((Weapon)weapon);
         
         //this.armour = armour;
         //this.addToInventory(armour);
         value = ((Armour) armour).getProtectionIncrease();
         armour.changeProtection(this, value);
         this.setArmour((Armour) armour);
+        this.addToInventory((Armour)armour);
+               
         
-        
-        this.inventory = new ArrayList();
     }
     
-    /**
-     * checks if character inventory is empty
-     */
-    public boolean isInventoryEmpty() {
-        return this.inventory.isEmpty();
-    }
     
-    /**
-     * checks if character inventory exceeds the defined maximum
-     */
-    public boolean isInventoryFull() {
-        return (this.inventory.size() == inventoryMaxSize);
+    public int getGold() {
+        return gold;
     }
 
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+    
     public ArrayList<Item> getInventory() {
         return inventory;
     }
@@ -115,14 +99,6 @@ public abstract class Character {
 
     public void setDefaultProtection(int defaultProtection) {
         this.defaultProtection = defaultProtection;
-    }
-
-    public int getInventoryMaxSize() {
-        return inventoryMaxSize;
-    }
-
-    public void setInventoryMaxSize(int inventoryMaxSize) {
-        this.inventoryMaxSize = inventoryMaxSize;
     }
 
     
@@ -168,14 +144,6 @@ public abstract class Character {
 
     public String getName() {
         return name;
-    }
-
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
     }
 
     public void addToInventory(Item i) {
