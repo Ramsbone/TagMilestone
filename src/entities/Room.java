@@ -21,7 +21,7 @@ public class Room {
     private boolean taxcollector;
     private boolean thief;
     private ArrayList<Item> inventory;
-    private ArrayList<Monster> monsterList;
+    private ArrayList<Monster> monsterList = new ArrayList<Monster>();
 
 
     public Room(String name, String description, int goldchance) {
@@ -58,6 +58,7 @@ public class Room {
     
     public void addMonster(Monster m){
         this.monsterList.add(m);
+        
     }
     
     public ArrayList<Monster> getMonsterList() {

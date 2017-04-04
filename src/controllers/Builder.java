@@ -7,6 +7,7 @@ package controllers;
 
 import entities.Armour;
 import entities.Item;
+import entities.Monster;
 import entities.Player;
 import entities.Potion;
 import entities.Portal;
@@ -24,18 +25,24 @@ public class Builder {
 
     private ArrayList<Room> roomList = new ArrayList<Room>();
     private ArrayList<Item> itemList = new ArrayList<Item>();
+    private ArrayList<Monster> monsterList = new ArrayList<Monster>();
 
     public ArrayList<Room> buildAdventure(Player player) {
         
         //Creates all the rooms and sets room-connections: 
         initRooms(player);
         
-        //Creates a roomList, check for identical names and sort it by name.
+        //Creates a roomList, check for identical names and sort list by name.
         createRoomListFromPlayer(player, roomList);
         checkRoomNamesElseThrowExcept(roomList);
         sortRoomListByName(roomList);
         
-        //Creates and distribues Items, Traps and NonPlayableCaracters into rooms:
+        //creates a monsterList, check for identical names.
+        initMonster();
+        this.createMonsterListFromRooms(roomList);
+        this.checkMonsterNamesElseThrowExcept(monsterList);
+        
+        //Creates and distribues Items, Traps and NonPlayableCaracters into rooms and monster:
         initItems();
         
         //Creates an itemList from the roomList 
@@ -166,6 +173,17 @@ public class Builder {
                     + "some Items have the same name!");
     }
     
+    private void checkMonsterNamesElseThrowExcept(ArrayList<Monster> monsterList){        
+        ArrayList<String> tempArrayList = new ArrayList<String>();
+        for (Monster m: monsterList) {
+            tempArrayList.add(m.getName());
+        }
+        
+        checkListOfStrings(tempArrayList, 
+                "class: Builder: checkMonsterNamesElseThrowExcept: "
+                    + "some Monsters have the same name!");
+    }
+    
     private void checkListOfStrings(ArrayList<String> itemList, String errorString){
         boolean mistakesFound = false;
         for (String s: itemList) {
@@ -182,6 +200,24 @@ public class Builder {
         }
     }
     
+    private Monster findMonsterInList(String monsterName){
+        
+        Monster output;
+        int findIndex = 0;
+        Monster testMonster = monsterList.get(findIndex);
+        while (!testMonster.getName().equals(monsterName)) {
+            findIndex++;
+            if (findIndex == monsterList.size()){
+                throw new InitiationException("class: Builder: findMonsterInList: Room " 
+                        + monsterName + " does not exist!");
+            }
+            testMonster = monsterList.get(findIndex);
+        }
+        
+            output = monsterList.get(findIndex);
+        
+        return output;
+    }
     
     //Finds a specific room in roomList
     private Room findRoomInList(String roomName) {
@@ -203,6 +239,14 @@ public class Builder {
         return output;
     }
     
+    private void createMonsterListFromRooms(ArrayList<Room> roomList){
+        for (Room r: roomList) {
+            for (Monster m: r.getMonsterList()) {
+                this.monsterList.add(m);
+            }
+        }
+    }
+    
     private void createItemListFromRooms(ArrayList<Room> roomList){
         //ArrayList<Item> tempItemList = new ArrayList<Item>();
         for (Room r: roomList) {
@@ -210,6 +254,24 @@ public class Builder {
                 this.itemList.add(i);
             }
         }      
+    }
+    
+    private void initMonster(){
+                
+        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!");
+        Monster goblin = new Monster("Skarsnik", "An evil goblin");
+        Monster scoundrel = new Monster("Blackbeard", "Arrgh!");
+        Monster troll = new Monster("Troll", "Troll...");
+        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....");
+        Monster dragon = new Monster("Smaug", "Smaug....");
+        
+        findRoomInList("Mining Tunnel").addMonster(rat);
+        findRoomInList("Guards Quarter").addMonster(goblin);
+        findRoomInList("Dwarfs Quarter").addMonster(scoundrel);
+        findRoomInList("Prison Dungeon").addMonster(troll);
+        findRoomInList("Gallery").addMonster(halfgiant);
+        findRoomInList("Kings Tomb").addMonster(dragon);
+        
     }
     
     //Initialize and place items in rooms.
@@ -252,16 +314,31 @@ public class Builder {
         
         findRoomInList("Mining Tunnel").addToInventory(stick);
         findRoomInList("Guards Quarter").addToInventory(fightSpell);
-        findRoomInList("Dwarfs Quarter").addToInventory(pickaxe);
-        findRoomInList("Prison Dungeon").addToInventory(leather);
-        findRoomInList("Gallery").addToInventory(chainmail);
-        findRoomInList("Kings Tomb").addToInventory(greatsword);
+        //findRoomInList("Dwarfs Quarter").addToInventory(pickaxe);
+        //findRoomInList("Prison Dungeon").addToInventory(leather);
+        //findRoomInList("Gallery").addToInventory(chainmail);
+        //findRoomInList("Kings Tomb").addToInventory(greatsword);
         findRoomInList("Lovers Den").addToInventory(poison);
         findRoomInList("Cathedral South").addToInventory(heavy);
         findRoomInList("Bedroom").addToInventory(portal2);
         findRoomInList("Pirates Hideout").addToInventory(portal1);
         findRoomInList("Priests Room").addToInventory(protection);
         findRoomInList("Pirates Hideout").addToInventory(badspell);
+        
+        /*
+        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!");
+        Monster goblin = new Monster("Skarsnik", "An evil goblin");
+        Monster scoundrel = new Monster("Blackbeard", "Arrgh!");
+        Monster troll = new Monster("Troll", "Troll...");
+        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....");
+        Monster dragon = new Monster("Smaug", "Smaug....");
+        */
+        
+        this.findMonsterInList("Skarsnik").setWeapon(pickaxe);
+        this.findMonsterInList("Skarsnik").setArmour(leather);
+        this.findMonsterInList("Blackbeard").setWeapon(greatsword);
+        this.findMonsterInList("Blackbeard").setArmour(chainmail);
+        
         
         ArrayList<Room> tempRoomList = getUniqueRandomRooms(5, roomList);
 
@@ -279,6 +356,7 @@ public class Builder {
         tempRoomList.get(1).addToInventory(potion02);
         tempRoomList.get(2).addToInventory(potion03);
     }   
+    
     
     //Initialize rooms and set room-connections.
     private void initRooms(Player p) {
