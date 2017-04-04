@@ -15,12 +15,15 @@ public class Player extends Character{
     private int defaultInventorySize;
     private int inventoryMaxSize;
     private Room currentRoom;
+    private String moveDirection;
+    private int killCounter;
     
     public Player(String name, Room currentRoom) {
         super(name, currentRoom);
         this.currentRoom = currentRoom;
         this.defaultInventorySize = 6;
         this.inventoryMaxSize = defaultInventorySize;
+        this.killCounter = 0;
     }
     
     
@@ -29,6 +32,7 @@ public class Player extends Character{
     }
 
     public void setCurrentRoom(Room currentRoom) {
+        
         this.currentRoom = currentRoom;
     }
     
@@ -54,6 +58,24 @@ public class Player extends Character{
     public void setInventoryMaxSize(int inventoryMaxSize) {
         this.inventoryMaxSize = inventoryMaxSize;
     }
+
+    public String getMoveDirection() {
+        return moveDirection;
+    }
+
+    public void setMoveDirection(String moveDirection) {
+        this.moveDirection = moveDirection;
+    }
+
+    public int getKillCounter() {
+        return killCounter;
+    }
+
+    public void setKillCounter(int killCounter) {
+        this.killCounter = killCounter;
+    }
+    
+    
 
 }
 
