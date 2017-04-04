@@ -123,18 +123,16 @@ public class CommandController {
     }
 
     private boolean moving(String command, Room nextRoom, Player player, boolean moveOn) {
-
         switch (command) {
-
             case "n":
                 nextRoom = player.getCurrentRoom().getNorth();
-
+                break;
             case "s":
                 nextRoom = player.getCurrentRoom().getSouth();
-
+                break;
             case "e":
                 nextRoom = player.getCurrentRoom().getEast();
-
+                break;
             default:
                 nextRoom = player.getCurrentRoom().getWest();
         }
@@ -148,50 +146,6 @@ public class CommandController {
         }
         return moveOn;
     }
-
-//    private boolean n(Room nextRoom, Player player, boolean moveOn) {
-//        nextRoom = player.getCurrentRoom().getNorth();
-//        if (nextRoom == null) {
-//            ui.outputWrongWay();
-//        } else {
-//            player.setCurrentRoom(nextRoom);
-//            moveOn = true;
-//        }
-//        return moveOn;
-//    }
-//
-//    private boolean s(Room nextRoom, Player player, boolean moveOn) {
-//        nextRoom = player.getCurrentRoom().getSouth();
-//        if (nextRoom == null) {
-//            ui.outputWrongWay();
-//        } else {
-//            player.setCurrentRoom(nextRoom);
-//            moveOn = true;
-//        }
-//        return moveOn;
-//    }
-//
-//    private boolean e(Room nextRoom, Player player, boolean moveOn) {
-//        nextRoom = player.getCurrentRoom().getEast();
-//        if (nextRoom == null) {
-//            ui.outputWrongWay();
-//        } else {
-//            player.setCurrentRoom(nextRoom);
-//            moveOn = true;
-//        }
-//        return moveOn;
-//    }
-//
-//    private boolean w(Room nextRoom, Player player, boolean moveOn) {
-//        nextRoom = player.getCurrentRoom().getWest();
-//        if (nextRoom == null) {
-//            ui.outputWrongWay();
-//        } else {
-//            player.setCurrentRoom(nextRoom);
-//            moveOn = true;
-//        }
-//        return moveOn;
-//    }
 
     private void take(String command, String parameter) {
         if (parameter.equals("gold")) {
