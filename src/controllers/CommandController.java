@@ -22,6 +22,7 @@ public class CommandController {
 
     private final Boundary ui = new Boundary();
     private final RoomController rc = new RoomController();
+    private final FightController fc = new FightController();
     private final Player player = new Player(ui.inputPlayerName(), null);
     private final Highscore hs = new Highscore();
     //Debug can be set to true when access is needed to roomList.
@@ -42,8 +43,10 @@ public class CommandController {
         while (!userInput.equals("quit") && !player.getCurrentRoom().getName().equals("Exit Point") && player.getHealth() > 0) {
 
             rc.enterRoom(player);
-
             boolean moveOn = false;
+            if(player.getCurrentRoom().getMonster() != null){
+                moveOn = fc.fight(player);
+            }
 
             while (!moveOn && player.getHealth() > 0) {
 

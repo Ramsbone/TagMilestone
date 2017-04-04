@@ -6,7 +6,6 @@ import entities.Monster;
 import boundary.Boundary;
 import entities.Armour;
 import entities.Item;
-import entities.Portal;
 import entities.Potion;
 import entities.Room;
 import entities.Spell;
@@ -22,50 +21,53 @@ public class FightController {
     Boundary ui = new Boundary();
 
     public boolean fight(Player player) {
+        boolean flee = false;
 
         Monster monster = player.getCurrentRoom().getMonster();
 
-        while (monster.getHealth() > 0 && player.getHealth() > 0) {
+        while (monster.getHealth() > 0 && player.getHealth() > 0 && !flee) {
 
             int monsterhit = calculateDamage(monster.getDamage(), player.getProtection());
             hit(monsterhit, player);
 
             if (player.getHealth() > 0) {
                 boolean validMove = false;
-                while(!validMove){
-                String userInput = isValidCommand();
-                String[] userInputArray = userInput.split(" ");
-                String command = userInputArray[0].toLowerCase();
-                String parameter;
-                if (userInputArray.length == 2) {
-                    parameter = userInputArray[1];
-                } else if (userInputArray.length > 2) {
-                    parameter = userInputArray[1] + userInputArray[2];
-                } else {
-                    parameter = "";
-                }
+                while (!validMove) {
+                    String userInput = isValidCommand();
+                    String[] userInputArray = userInput.split(" ");
+                    String command = userInputArray[0].toLowerCase();
+                    String parameter;
+                    if (userInputArray.length == 2) {
+                        parameter = userInputArray[1];
+                    } else if (userInputArray.length > 2) {
+                        parameter = userInputArray[1] + userInputArray[2];
+                    } else {
+                        parameter = "";
+                    }
 
-                switch (command) {
-                    case "use":
+                    switch (command) {
+                        case "use":
                             validMove = use(command, parameter, player);
-                        break;
-                    case "attack":
-                        int playerhit = calculateDamage(player.getDamage(), monster.getProtection());
-                        hit(playerhit, monster);
-                        break;
-                    case "flee":
+                            break;
+                        case "attack":
+                            int playerhit = calculateDamage(player.getDamage(), monster.getProtection());
+                            hit(playerhit, monster);
+                            break;
+                        case "flee":
+                            flee = flee(player);
+                            break;
+                        default:
+                            ui.unknownCommand();
+                    }
+                }
 
-                        break;
-                    default:
-                        ui.unknownCommand();
-                }
-                }
-                
             }
 
         }
-
-        return false;
+        if (monster.getHealth() <= 0) {
+            monster.monsterDies(player);
+        }
+        return flee;
 
     }
 
@@ -107,8 +109,7 @@ public class FightController {
         return itemused;
     }
 
-
-public void hit(int damage, Character character) { //calculated damage and the character which is victim
+    public void hit(int damage, Character character) { //calculated damage and the character which is victim
         character.setHealth(character.getHealth() - damage);
 
     }
@@ -165,7 +166,41 @@ public void hit(int damage, Character character) { //calculated damage and the c
 
         damage = (int) dmg;
 
-        //critical strike later
+        //critical strike
+        
+        int x = r.nextInt(100);
+        
+        if(x <= 5){
+            damage = damage*2;
+        }
+        
         return damage;
+    }
+
+    private boolean flee(Player player) {
+        boolean succes = false;
+        String direction = player.getMoveDirection();
+        Room fleeRoom = null;
+
+        switch (direction) {
+            case "n":
+                fleeRoom = player.getCurrentRoom().getSouth();
+                break;
+            case "s":
+                fleeRoom = player.getCurrentRoom().getNorth();
+                break;
+            case "e":
+                fleeRoom = player.getCurrentRoom().getWest();
+                break;
+            default:
+                fleeRoom = player.getCurrentRoom().getEast();
+        }
+        
+        if(fleeRoom != null){
+            succes = true;
+            player.setCurrentRoom(fleeRoom);
+        }
+
+        return succes;
     }
 }
