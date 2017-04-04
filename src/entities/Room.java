@@ -21,6 +21,7 @@ public class Room {
     private boolean taxcollector;
     private boolean thief;
     private ArrayList<Item> inventory;
+    private ArrayList<Monster> monsterList;
 
 
     public Room(String name, String description, int goldchance) {
@@ -46,6 +47,28 @@ public class Room {
         this.gold = myran;
         
     }
+        
+    public Monster getMonster(){   //get the first monster in the list
+        if (this.monsterList.size() < 1) {
+            return null;
+        }else{
+            return this.monsterList.get(0);
+        }
+    }
+    
+    public void addMonster(Monster m){
+        this.monsterList.add(m);
+    }
+    
+    public ArrayList<Monster> getMonsterList() {
+        return monsterList;
+    }
+
+    public void setMonsterList(ArrayList<Monster> monsterList) {
+        this.monsterList = monsterList;
+    }
+    
+    
     
     public boolean isInventoryEmpty(){
         return this.inventory.isEmpty();

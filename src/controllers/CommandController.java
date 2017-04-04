@@ -53,9 +53,9 @@ public class CommandController {
                 String parameter;
                 if (userInputArray.length == 2) {
                     parameter = userInputArray[1];
-                } else if(userInputArray.length > 2){
+                } else if (userInputArray.length > 2) {
                     parameter = userInputArray[1] + userInputArray[2];
-                }else {
+                } else {
                     parameter = "";
                 }
 
@@ -70,16 +70,16 @@ public class CommandController {
                         moveOn = true;
                         break;
                     case "n":
-                        moveOn = n(nextRoom, player, moveOn);
+                        moveOn = moving(command, nextRoom, player, moveOn);
                         break;
                     case "s":
-                        moveOn = s(nextRoom, player, moveOn);
+                        moveOn = moving(command, nextRoom, player, moveOn);
                         break;
                     case "e":
-                        moveOn = e(nextRoom, player, moveOn);
+                        moveOn = moving(command, nextRoom, player, moveOn);
                         break;
                     case "w":
-                        moveOn = w(nextRoom, player, moveOn);
+                        moveOn = moving(command, nextRoom, player, moveOn);
                         break;
                     case "take":
                         take(command, parameter);
@@ -107,11 +107,10 @@ public class CommandController {
                 }
             }
         }
-        if(player.getHealth()<=0){
+        if (player.getHealth() <= 0) {
             ui.died();
             infoFromHighscore();
-        }
-        else if (userInput.equals("quit")) {
+        } else if (userInput.equals("quit")) {
             ui.usedQuitCommand();
             infoFromHighscore();
 
@@ -122,187 +121,213 @@ public class CommandController {
         }
 
     }
-    
-    private boolean n(Room nextRoom, Player player, boolean moveOn){
-                        nextRoom = player.getCurrentRoom().getNorth();
-                        if (nextRoom == null) {
-                            ui.outputWrongWay();
-                        } else {
-                            player.setCurrentRoom(nextRoom);
-                            moveOn = true;
-                        }
-                     return moveOn;    
+
+    private boolean moving(String command, Room nextRoom, Player player, boolean moveOn) {
+
+        switch (command) {
+
+            case "n":
+                nextRoom = player.getCurrentRoom().getNorth();
+
+            case "s":
+                nextRoom = player.getCurrentRoom().getSouth();
+
+            case "e":
+                nextRoom = player.getCurrentRoom().getEast();
+
+            default:
+                nextRoom = player.getCurrentRoom().getWest();
+        }
+
+        if (nextRoom == null) {
+            ui.outputWrongWay();
+        } else {
+            player.setCurrentRoom(nextRoom);
+            player.setMoveDirection(command);
+            moveOn = true;
+        }
+        return moveOn;
+    }
+
+//    private boolean n(Room nextRoom, Player player, boolean moveOn) {
+//        nextRoom = player.getCurrentRoom().getNorth();
+//        if (nextRoom == null) {
+//            ui.outputWrongWay();
+//        } else {
+//            player.setCurrentRoom(nextRoom);
+//            moveOn = true;
+//        }
+//        return moveOn;
+//    }
+//
+//    private boolean s(Room nextRoom, Player player, boolean moveOn) {
+//        nextRoom = player.getCurrentRoom().getSouth();
+//        if (nextRoom == null) {
+//            ui.outputWrongWay();
+//        } else {
+//            player.setCurrentRoom(nextRoom);
+//            moveOn = true;
+//        }
+//        return moveOn;
+//    }
+//
+//    private boolean e(Room nextRoom, Player player, boolean moveOn) {
+//        nextRoom = player.getCurrentRoom().getEast();
+//        if (nextRoom == null) {
+//            ui.outputWrongWay();
+//        } else {
+//            player.setCurrentRoom(nextRoom);
+//            moveOn = true;
+//        }
+//        return moveOn;
+//    }
+//
+//    private boolean w(Room nextRoom, Player player, boolean moveOn) {
+//        nextRoom = player.getCurrentRoom().getWest();
+//        if (nextRoom == null) {
+//            ui.outputWrongWay();
+//        } else {
+//            player.setCurrentRoom(nextRoom);
+//            moveOn = true;
+//        }
+//        return moveOn;
+//    }
+
+    private void take(String command, String parameter) {
+        if (parameter.equals("gold")) {
+            if (player.getCurrentRoom().getGold() == 0) {
+                ui.noGoldInRoom();
+            } else {
+                pickupGold(player.getCurrentRoom());
+                ui.showPlayerGold(player);
+            }
+        } else {
+            Item item = player.getCurrentRoom().checkForItem(parameter);
+            if (item != null) {
+                if (player.isInventoryFull()) {
+                    ui.cantCarryMore();
+                } else {
+                    if (item instanceof Portal) {
+                        ui.cantPickUpPortal();
+                    } else {
+                        item.pickUpItem(player);
+                        ui.pickedUpItem(item.getName());
                     }
-    
-    private boolean s(Room nextRoom, Player player, boolean moveOn){
-        nextRoom = player.getCurrentRoom().getSouth();
-                        if (nextRoom == null) {
-                            ui.outputWrongWay();
-                        } else {
-                            player.setCurrentRoom(nextRoom);
-                            moveOn = true;
-                        }
-                        return moveOn;
+                }
+            } else {
+                ui.unknownParameter(command);
+            }
+        }
     }
-    
-    private boolean e(Room nextRoom, Player player, boolean moveOn){
-        nextRoom = player.getCurrentRoom().getEast();
-                        if (nextRoom == null) {
-                            ui.outputWrongWay();
-                        } else {
-                            player.setCurrentRoom(nextRoom);
-                            moveOn = true;
-                        }
-                        return moveOn;
-    }
-    
-    private boolean w(Room nextRoom, Player player, boolean moveOn){
-        nextRoom = player.getCurrentRoom().getWest();
-                        if (nextRoom == null) {
-                            ui.outputWrongWay();
-                        } else {
-                            player.setCurrentRoom(nextRoom);
-                            moveOn = true;
-                        }
-                        return moveOn;
-    }
-    
-    private void take(String command, String parameter){
+
+    private void drop(String command, String parameter) {
         if (parameter.equals("gold")) {
-                            if (player.getCurrentRoom().getGold() == 0) {
-                                ui.noGoldInRoom();
-                            } else {
-                                pickupGold(player.getCurrentRoom());
-                                ui.showPlayerGold(player);
-                            }
-                        } else {
-                            Item item = player.getCurrentRoom().checkForItem(parameter);
-                            if (item != null) {
-                                if (player.isInventoryFull()) {
-                                    ui.cantCarryMore();
-                                } else {
-                                    if (item instanceof Portal) {
-                                        ui.cantPickUpPortal();
-                                    } else {
-                                        item.pickUpItem(player);
-                                        ui.pickedUpItem(item.getName());
-                                    }
-                                }
-                            } else {
-                                ui.unknownParameter(command);
-                            }
+            int dropped = ui.askHowMuchGoldToDrop();
+            if (dropped > player.getGold()) {
+                ui.tryToDropTooMuchGold();
+
+            } else {
+                dropGold(player.getCurrentRoom(), dropped);
+                ui.showPlayerGold(player);
+            }
+        } else {
+            Item item = player.checkForItem(parameter);
+            if (item != null) {
+                item.DropItem(player);
+                ui.droppedItem(item.getName());
+
+                if (item instanceof Weapon) {
+                    Weapon weaponHolded = player.getWeapon();
+                    if (weaponHolded != null) {
+                        if (weaponHolded.getName().toLowerCase().equals(parameter)) {
+                            player.setDamage(player.getDefaultDamage());
+                            player.setWeapon(null);
                         }
-    }
-    
-    private void drop(String command, String parameter){
-        if (parameter.equals("gold")) {
-                            int dropped = ui.askHowMuchGoldToDrop();
-                            if (dropped > player.getGold()) {
-                                ui.tryToDropTooMuchGold();
+                    }
+                }
 
-                            } else {
-                                dropGold(player.getCurrentRoom(), dropped);
-                                ui.showPlayerGold(player);
-                            }
-                        } else {
-                            Item item = player.checkForItem(parameter);
-                            if (item != null) {
-                                item.DropItem(player);
-                                ui.droppedItem(item.getName());
-
-                                if (item instanceof Weapon) {
-                                    Weapon weaponHolded = player.getWeapon();
-                                    if (weaponHolded != null) {
-                                        if (weaponHolded.getName().toLowerCase().equals(parameter)){
-                                            player.setDamage(player.getDefaultDamage());
-                                            player.setWeapon(null);
-                                        }
-                                    }
-                                }
-
-                                if (item instanceof Armour) {
-                                    Armour armourWeared = player.getArmour();
-                                    if (armourWeared != null) {
-                                        if (armourWeared.getName().toLowerCase().equals(parameter)){
-                                            player.setProtection(player.getDefaultProtection());
-                                            player.setArmour(null);
-                                        }
-                                    }
-                                }
-
-                            } else {
-                                ui.unknownParameter(command);
-                            }
+                if (item instanceof Armour) {
+                    Armour armourWeared = player.getArmour();
+                    if (armourWeared != null) {
+                        if (armourWeared.getName().toLowerCase().equals(parameter)) {
+                            player.setProtection(player.getDefaultProtection());
+                            player.setArmour(null);
                         }
+                    }
+                }
+
+            } else {
+                ui.unknownParameter(command);
+            }
+        }
     }
-    
-    private void use(String command, String parameter, boolean moveOn){
+
+    private void use(String command, String parameter, boolean moveOn) {
         Item item = player.checkForItem(parameter);
-                        if (item != null) {
-                            if (item instanceof Weapon) {
-                                int value = ((Weapon) item).getDamageIncrease();
-                                item.changeDamage(player, value);
-                                player.setWeapon((Weapon) item);
-                                ui.holdItem(item.getName(), player.getDamage());
-                            }
-                            if (item instanceof Armour) {
-                                int value = ((Armour) item).getProtectionIncrease();
-                                item.changeProtection(player, value);
-                                player.setArmour((Armour) item);
-                                ui.wearItem(item.getName(), value);
-                            }
-                            if (item instanceof Potion) {
-                                int value = ((Potion) item).getHealthChange();
-                                item.changeHealth(player, value);
-                                player.removeFromInventory(item);
-                                if (value < 0) {
-                                    ui.drinkPoison(item.getName(), player.getHealth());
-                                } else {
-                                    ui.drinkHealth(item.getName(), player.getHealth());
-                                }
-                            }
-                            if(item instanceof Spell){
-                                ((Spell) item).activateSpell(player);
-                                ui.showSpellEffect(player, ((Spell) item));
-                            }
-                        } else {
-                            item = player.getCurrentRoom().checkForItem(parameter);
-                            if (item != null) {
-                                if (item instanceof Portal) {
-                                    Room newRoom = ((Portal) item).getRoomToEnter();
-                                    player.setCurrentRoom(newRoom);
-                                    moveOn = true;
-                                    ui.portalUsed();
-                                } else {
-                                    ui.pickUpItemFirst();
-                                }
-                            } else {
-                                ui.unknownParameter(command);
-                            }
-                        }
+        if (item != null) {
+            if (item instanceof Weapon) {
+                int value = ((Weapon) item).getDamageIncrease();
+                item.changeDamage(player, value);
+                player.setWeapon((Weapon) item);
+                ui.holdItem(item.getName(), player.getDamage());
+            }
+            if (item instanceof Armour) {
+                int value = ((Armour) item).getProtectionIncrease();
+                item.changeProtection(player, value);
+                player.setArmour((Armour) item);
+                ui.wearItem(item.getName(), value);
+            }
+            if (item instanceof Potion) {
+                int value = ((Potion) item).getHealthChange();
+                item.changeHealth(player, value);
+                player.removeFromInventory(item);
+                if (value < 0) {
+                    ui.drinkPoison(item.getName(), player.getHealth());
+                } else {
+                    ui.drinkHealth(item.getName(), player.getHealth());
+                }
+            }
+            if (item instanceof Spell) {
+                ((Spell) item).activateSpell(player);
+                ui.showSpellEffect(player, ((Spell) item));
+            }
+        } else {
+            item = player.getCurrentRoom().checkForItem(parameter);
+            if (item != null) {
+                if (item instanceof Portal) {
+                    Room newRoom = ((Portal) item).getRoomToEnter();
+                    player.setCurrentRoom(newRoom);
+                    moveOn = true;
+                    ui.portalUsed();
+                } else {
+                    ui.pickUpItemFirst();
+                }
+            } else {
+                ui.unknownParameter(command);
+            }
+        }
     }
-    
-    private void look(String parameter, String command){
+
+    private void look(String parameter, String command) {
         if (parameter.equals("")) {
-                            ui.showRoom(player.getCurrentRoom());
-                        } else if (parameter.equals("gold")) {
-                            ui.lookAtGold(player.getGold() + player.getCurrentRoom().getGold());
-                        } else {
-                            Item item = player.checkForItem(parameter);
-                            if (item != null) {
-                                ui.lookAtItem(item);
-                            } else {
-                                item = player.getCurrentRoom().checkForItem(parameter);
-                                if (item != null) {
-                                    ui.lookAtItem(item);
-                                } else {
-                                    ui.unknownParameter(command);
-                                }
-                            }
-                        }
+            ui.showRoom(player.getCurrentRoom());
+        } else if (parameter.equals("gold")) {
+            ui.lookAtGold(player.getGold() + player.getCurrentRoom().getGold());
+        } else {
+            Item item = player.checkForItem(parameter);
+            if (item != null) {
+                ui.lookAtItem(item);
+            } else {
+                item = player.getCurrentRoom().checkForItem(parameter);
+                if (item != null) {
+                    ui.lookAtItem(item);
+                } else {
+                    ui.unknownParameter(command);
+                }
+            }
+        }
     }
-    
-    
+
     //Gets input from boundary and cheeck if it is valid input
     private String inputAndCheckCommand() {
         String input = null;
