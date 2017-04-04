@@ -438,6 +438,7 @@ public class Boundary {
                 try {
                     for (int j = 0; j < r.getMonsterList().get(i).getInventory().size(); j++) {
                         monsterInventory += r.getMonsterList().get(i).getInventory().get(j).getName();
+                        monsterInventory += ", ";
                     }
                 } catch (Exception e) {
                     monsterInventory += "";
@@ -447,11 +448,12 @@ public class Boundary {
                 monsterName += "";
             }
             
-            monsterLine = monsterName + "--" + monsterInventory;
+            monsterLine += monsterName + "--" + monsterInventory + " ***";
             monsterName = "";
             monsterInventory = "";
             
         }
+        
 
         String output
                 = BLUE + name + BLACK
@@ -461,7 +463,7 @@ public class Boundary {
                 + "\n\t" + inventoryString
                 + "\n\t" + boobytrap + thief + taxcollector
                 + "\n\t" + monsterLine;
-
+        
         System.out.println(output);
 
     }
