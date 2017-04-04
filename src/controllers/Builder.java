@@ -47,7 +47,7 @@ public class Builder {
         
         //Creates an itemList from the roomList 
         //Check itemList for identical names: (mostly for debugging purposes).
-        createItemListFromRooms(roomList);
+        createItemListFromRoomsAndMonster(roomList);
         checkItemNamesElseThrowExcept(this.itemList);  
         
         //Removes doors to secret rooms after roomList has been builded:
@@ -247,13 +247,19 @@ public class Builder {
         }
     }
     
-    private void createItemListFromRooms(ArrayList<Room> roomList){
+    private void createItemListFromRoomsAndMonster(ArrayList<Room> roomList){
         //ArrayList<Item> tempItemList = new ArrayList<Item>();
         for (Room r: roomList) {
             for (Item i: r.getInventory()) {
                 this.itemList.add(i);
             }
+            for (Monster m: r.getMonsterList()) {
+                for (Item it: m.getInventory()) {
+                    this.itemList.add(it);
+                }
+            }
         }      
+        
     }
     
     private void initMonster(){

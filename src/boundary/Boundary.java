@@ -448,7 +448,7 @@ public class Boundary {
                 monsterName += "";
             }
             
-            monsterLine += monsterName + "--" + monsterInventory + " ***";
+            monsterLine += RED + monsterName + BLACK +"--" + monsterInventory + " ***";
             monsterName = "";
             monsterInventory = "";
             
