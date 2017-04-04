@@ -15,19 +15,20 @@ public class Monster extends Character{
     
     private final String description;
     
-    public Monster(String name, 
-            Weapon weapon, 
-            Armour armour,
-            String description,
-            ArrayList<Item> itemsForMonster) {
-        super(name, weapon, armour, description);
+    public Monster(String name,
+            String description
+            ) {
+        
+        super(name, description);
         this.description = description;
         
-        for (Item i: itemsForMonster){
+    }
+    
+    public void setInventory(ArrayList<Item> itemsForMonster){
+    for (Item i: itemsForMonster){
             this.addToInventory(i);
         }
     }
-    
     
     public void monsterDies(Player p){     //removes the first mnster in the list
         Room currentRoom = p.getCurrentRoom();

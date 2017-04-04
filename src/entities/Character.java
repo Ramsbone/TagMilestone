@@ -34,8 +34,6 @@ public abstract class Character {
     }
     
     public Character(String name, 
-            Weapon weapon, 
-            Armour armour,
             String description) {
         this.name = name;
         this.gold = 0;
@@ -46,21 +44,6 @@ public abstract class Character {
         this.defaultProtection = 0;
         this.protection = defaultProtection;
         this.inventory = new ArrayList();
-        
-        //this.weapon = weapon;
-        //this.addToInventory(weapon);
-        int value = ((Weapon) weapon).getDamageIncrease();
-        weapon.changeDamage(this, value);
-        this.setWeapon((Weapon) weapon);
-        this.addToInventory((Weapon)weapon);
-        
-        //this.armour = armour;
-        //this.addToInventory(armour);
-        value = ((Armour) armour).getProtectionIncrease();
-        armour.changeProtection(this, value);
-        this.setArmour((Armour) armour);
-        this.addToInventory((Armour)armour);
-               
         
     }
     
@@ -123,11 +106,23 @@ public abstract class Character {
     }
 
     public void setWeapon(Weapon weapon) {
+        //this.weapon = weapon;
+        //this.addToInventory(weapon);
+        int value = ((Weapon) weapon).getDamageIncrease();
+        weapon.changeDamage(this, value);
         this.weapon = weapon;
+        this.addToInventory((Weapon)weapon);
     }
 
     public void setArmour(Armour armour) {
+        //this.armour = armour;
+        //this.addToInventory(armour);
+        int value = ((Armour) armour).getProtectionIncrease();
+        armour.changeProtection(this, value);
         this.armour = armour;
+        this.addToInventory((Armour)armour);
+        
+        
     }
 
     public void setHealth(int health) {
