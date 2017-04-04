@@ -49,7 +49,7 @@ public class FightController {
                         case "use":
                             validMove = use(command, parameter, player);
                             break;
-                        case "attack":
+                        case "a":
                             int playerhit = calculateDamage(player.getDamage(), monster.getProtection());
                             hit(playerhit, monster);
                             break;
@@ -124,7 +124,7 @@ public class FightController {
             String[] words = input.split(" ");
             switch (words[0]) {
                 case "use":
-                case "attack":
+                case "a":
                 case "flee":
                     badInput = false;
                     break;
@@ -138,7 +138,13 @@ public class FightController {
     }
 
     public String wordReplacer(String input) {
-        return "";
+
+        while (input.contains("  ")) {
+            input = input.replace("  ", " ");
+        }
+        input = input.replaceAll("attack", "a");
+
+        return input;
     }
 
     public int calculateDamage(int damage, int protection) { //damage from attacker, protection from victim
@@ -167,13 +173,12 @@ public class FightController {
         damage = (int) dmg;
 
         //critical strike
-        
         int x = r.nextInt(100);
-        
-        if(x <= 5){
-            damage = damage*2;
+
+        if (x <= 5) {
+            damage = damage * 2;
         }
-        
+
         return damage;
     }
 
@@ -195,8 +200,8 @@ public class FightController {
             default:
                 fleeRoom = player.getCurrentRoom().getEast();
         }
-        
-        if(fleeRoom != null){
+
+        if (fleeRoom != null) {
             succes = true;
             player.setCurrentRoom(fleeRoom);
         }
