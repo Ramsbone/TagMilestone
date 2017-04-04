@@ -4,6 +4,7 @@
 package boundary;
 
 import entities.Item;
+import entities.Monster;
 import java.util.ArrayList;
 import java.util.Scanner;
 import entities.Player;
@@ -93,22 +94,24 @@ public class Boundary {
                 + "\n***********************************************************************************";
         System.out.println(output);
     }
-
-    public void usedQuitCommand() {
-
+    
+    public void showMonster(Monster monster){
         String output = "***********************************************************************************"
-                + "\nYou have chosen to quit the game. Come back and play TAG soon again.";
+                    + "\nYou have encountered " + monster.getName() + "."
+                    + "\n" + monster.getDescription()
+                    + "\n***********************************************************************************";
+        
         System.out.println(output);
     }
-
-    public void died() {
-
-        String output = "***********************************************************************************"
-                + "\nSorry, you suffered from a horrible and grusome death. "
-                + "\nPlease come again and play TAG another time.";
-        System.out.println(output);
+    
+     public void showCombatStats(Monster monster, Player player) {
+        String output = "***********************************************************************************" 
+                + player.getName() + " has " + player.getHealth() + " hp. " + monster.getName() + " has " + monster.getHealth() + " hp.";
+         System.out.println(output);
+         showPlayerInventory(player);
+                
     }
-
+    
     public void showStat(Player player) {
 
         String output = "***********************************************************************************"
@@ -157,6 +160,21 @@ public class Boundary {
 
         System.out.println(output);
 
+    }
+    
+        public void usedQuitCommand() {
+
+        String output = "***********************************************************************************"
+                + "\nYou have chosen to quit the game. Come back and play TAG soon again.";
+        System.out.println(output);
+    }
+
+    public void died() {
+
+        String output = "***********************************************************************************"
+                + "\nSorry, you suffered from a horrible and grusome death. "
+                + "\nPlease come again and play TAG another time.";
+        System.out.println(output);
     }
 
     public void lookAtItem(Item item) {
@@ -289,6 +307,13 @@ public class Boundary {
         String output = "You hear a faint noise. You look around but see nothing...pobably just a rat..."
                 + "\n***********************************************************************************";
         System.out.println(output);
+    }
+    
+     public void monsterAttack(Monster monster, int monsterhit) {
+         String output = "***********************************************************************************"
+                        +"\n" + monster.getName() + " attacks you and inflicts " + monsterhit + " damage"
+                        +"\n***********************************************************************************";
+        
     }
 
     public void outputWrongWay() {
@@ -473,5 +498,5 @@ public class Boundary {
 
     }
 
-    
+     
 }

@@ -24,6 +24,10 @@ public class Monster extends Character{
         
     }
     
+    public String getDescription(){
+        return description;
+    }
+    
     public void setInventory(ArrayList<Item> itemsForMonster){
     for (Item i: itemsForMonster){
             this.addToInventory(i);
