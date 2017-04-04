@@ -426,6 +426,32 @@ public class Boundary {
                     + itemInstance.getName()
                     + ", ";
         }
+        
+        //get monster and items from monster:
+        String monsterLine = "";
+        String monsterName = "";
+        String monsterInventory = "";
+        for (int i = 0; i < r.getMonsterList().size(); i++) {
+            try {
+                monsterName += r.getMonsterList().get(i).getName();
+            
+                try {
+                    for (int j = 0; j < r.getMonsterList().get(i).getInventory().size(); j++) {
+                        monsterInventory += r.getMonsterList().get(i).getInventory().get(j).getName();
+                    }
+                } catch (Exception e) {
+                    monsterInventory += "";
+                }
+            
+            } catch (Exception e) {
+                monsterName += "";
+            }
+            
+            monsterLine = monsterName + "--" + monsterInventory;
+            monsterName = "";
+            monsterInventory = "";
+            
+        }
 
         String output
                 = BLUE + name + BLACK
@@ -433,7 +459,8 @@ public class Boundary {
                 + " GC: " + CYAN + goldchance + BLACK
                 + " \n\t" + rooms
                 + "\n\t" + inventoryString
-                + "\n\t" + boobytrap + thief + taxcollector;
+                + "\n\t" + boobytrap + thief + taxcollector
+                + "\n\t" + monsterLine;
 
         System.out.println(output);
 
