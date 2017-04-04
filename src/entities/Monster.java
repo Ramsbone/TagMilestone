@@ -29,6 +29,17 @@ public class Monster extends Character{
     }
     
     
+    public void monsterDies(Player p){     //removes the first mnster in the list
+        Room currentRoom = p.getCurrentRoom();
+        currentRoom.setGold(currentRoom.getGold() + this.getGold());
+        for (Item i: this.inventory){
+            currentRoom.addToInventory(i);
+        }
+        this.setGold(0);
+        this.inventory.clear();
+        p.getCurrentRoom().getMonsterList().remove(this);
+    }
+    
     
     
 }
