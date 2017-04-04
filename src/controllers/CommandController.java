@@ -143,7 +143,7 @@ public class CommandController {
             ui.outputWrongWay();
         } else {
             player.setCurrentRoom(nextRoom);
-            
+            player.setMoveDirection(command);
             moveOn = true;
         }
         return moveOn;
