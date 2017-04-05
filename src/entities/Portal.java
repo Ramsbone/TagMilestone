@@ -7,6 +7,7 @@ public class Portal extends Item {
     public Portal(String name, Room room, String description) {
         super(name, description);
         this.roomToEnter = room;
+        this.setTakeable(false);
     }
 
     public Room getRoomToEnter() {

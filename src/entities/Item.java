@@ -16,7 +16,11 @@ public abstract class Item {
         this.description = description;
         validateName();
     }
-
+//    
+//    public boolean use(){   
+//        return false;
+//    }
+    
     public void validateName() {
         if (this.getName().split(" ").length > 2) {
             throw new InitiationException("class: Items: Invalid name - max 2 words!");
@@ -98,6 +102,11 @@ public abstract class Item {
         return takeable;
     }
 
+    public void setTakeable(boolean takeable) {
+        this.takeable = takeable;
+    }
+
+    
     
     
 }

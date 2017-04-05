@@ -15,6 +15,7 @@ import entities.Item;
 import entities.Spell;
 import entities.Weapon;
 import entities.Armour;
+import entities.Furniture;
 import entities.Portal;
 import entities.Potion;
 
@@ -164,8 +165,8 @@ public class CommandController {
                 if (player.isInventoryFull()) {
                     ui.cantCarryMore();
                 } else {
-                    if (item instanceof Portal) {
-                        ui.cantPickUpPortal();
+                    if (item.isTakeable() == false) {
+                        ui.cantPickUpObject();
                     } else {
                         item.pickUpItem(player);
                         ui.pickedUpItem(item.getName());
@@ -248,6 +249,7 @@ public class CommandController {
                 ((Spell) item).activateSpell(player);
                 ui.showSpellEffect(player, ((Spell) item));
             }
+            
         } else {
             item = player.getCurrentRoom().checkForItem(parameter);
             if (item != null) {
@@ -256,6 +258,10 @@ public class CommandController {
                     player.setCurrentRoom(newRoom);
                     moveOn = true;
                     ui.portalUsed();
+                }
+                if (item instanceof Furniture){
+                    ((Furniture) item).use(player);
+                
                 } else {
                     ui.pickUpItemFirst();
                 }
