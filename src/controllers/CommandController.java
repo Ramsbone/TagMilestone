@@ -131,16 +131,13 @@ public class CommandController {
 
         if (player.getHealth() <= 0) {
             ui.died();
-            infoFromHighscore(player);
             restartGame = restartRequest();
             
         } else if (userInput.equals("quit")) {
             ui.usedQuitCommand();
-            infoFromHighscore(player);
 
         } else if (userInput.equals("new")) {
             ui.restartGame();
-            infoFromHighscore(player);
             restartGame = true;
 
         } else {
