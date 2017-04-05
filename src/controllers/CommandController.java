@@ -288,7 +288,7 @@ public class CommandController {
                 }
                 if (item instanceof Furniture) {
                     ((Furniture) item).use(player);
-
+                    //her skal være en ui printout der afhænger af hvilket slags furniture der er tale om
                 } else {
                     ui.pickUpItemFirst();
                 }
