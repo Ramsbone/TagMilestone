@@ -8,7 +8,7 @@ import entities.Player;
 
 public class TreasureChest extends Furniture{
     
-    private final int goldReserve;
+    private int goldReserve;
     
     public TreasureChest(String name, String description, int gold){
         super(name, description);
@@ -17,6 +17,7 @@ public class TreasureChest extends Furniture{
     
     public boolean use(Player p){
         p.setGold(p.getGold()+this.goldReserve);
+        goldReserve = 0;
         return true;
     }
 
