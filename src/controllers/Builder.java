@@ -265,13 +265,13 @@ public class Builder {
     
     private void initMonster(){
                 
-        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!");
+        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!", 2,4,4);
         rat.setHealth(10);
-        Monster goblin = new Monster("Skarsnik", "An evil goblin");
-        Monster scoundrel = new Monster("Blackbeard", "Arrgh!");
-        Monster troll = new Monster("Troll", "Troll...");
-        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....");
-        Monster dragon = new Monster("Smaug", "Smaug....");
+        Monster goblin = new Monster("Skarsnik", "An evil goblin",4,5,5);
+        Monster scoundrel = new Monster("Blackbeard", "Arrgh!",6,7,7);
+        Monster troll = new Monster("Troll", "Troll...",10,20,20);
+        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....",20,3,3);
+        Monster dragon = new Monster("Smaug", "Smaug....",40,4,4);
         
         findRoomInList("Mining Tunnel").addMonster(rat);
         findRoomInList("Guards Quarter").addMonster(goblin);

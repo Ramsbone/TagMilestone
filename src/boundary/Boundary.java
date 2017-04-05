@@ -117,7 +117,7 @@ public class Boundary {
     public void showStat(Player player) {
 
         String output = "***********************************************************************************"
-                + "\nPlayer " + player.getName() + " has " + player.getHealth() + "% health."
+                + "\nPlayer " + player.getName() + " has " + player.getHealth() + " hp."
                 + "\nYou inflict " + player.getDamage() + " damage points and got " + player.getProtection() + " protection points.";
 
         if (player.getWeapon() != null) {
@@ -245,7 +245,7 @@ public class Boundary {
         }
         if (spell.getHealthChange() != 0) {
 
-            output += "\nYour maximum health has been changed to " + (player.getHealthMaxSize());
+            output += "\nYour maximum health has been changed to " + (player.getHealthMaxSize()) +" hp";
 
         }
         output += "\n***********************************************************************************";
@@ -298,7 +298,7 @@ public class Boundary {
     public void boobyTrapReleased(Player player) {
 
         String output = "You have encountered a boobytrap in the room and releases it by accident."
-                + "\nPlayer " + player.getName() + " has " + player.getHealth() + "% health."
+                + "\nPlayer " + player.getName() + " has " + player.getHealth() + " hp."
                 + "\n***********************************************************************************";
 
         System.out.println(output);
@@ -333,7 +333,7 @@ public class Boundary {
 
     public void monsterAttack(Monster monster, int monsterhit, Player player) {
         String output = "***********************************************************************************"
-                + "\n" + monster.getName() + " attacks you and inflicts " + monsterhit + " damage. You have now " + player.getHealth() + " health."
+                + "\n" + monster.getName() + " attacks you and inflicts " + monsterhit + " damage. You have now " + player.getHealth() + " hp"
                 + "\n***********************************************************************************";
         System.out.println(output);
 
@@ -378,13 +378,13 @@ public class Boundary {
 
     public void drinkHealth(String name, int value) {
 
-        System.out.println("You drink " + name + " and now has " + value + "% in health.");
+        System.out.println("You drink " + name + " and now has " + value + " hp.");
 
     }
 
     public void drinkPoison(String name, int value) {
         if (value > 0) {
-            System.out.println("You drink " + name + " and now has " + value + "% in health.");
+            System.out.println("You drink " + name + " and now has " + value + " hp.");
         }
     }
 
