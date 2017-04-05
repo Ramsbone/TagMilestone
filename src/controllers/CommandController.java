@@ -23,7 +23,7 @@ public class CommandController {
     private final Boundary ui = new Boundary();
     private final RoomController rc = new RoomController();
     private final FightController fc = new FightController();
-    private final Player player = new Player(ui.inputPlayerName(), null);
+    private final Player player = new Player("", null);
     private final Highscore hs = new Highscore();
     //Debug can be set to true when access is needed to roomList.
     private final boolean DEBUG = true;
@@ -34,6 +34,7 @@ public class CommandController {
         boolean restartGame = true;
 
         while (restartGame) {
+            player.setName(ui.inputPlayerName());
             rc.roomBuilder(player);
             ui.showStartText();
             restartGame = commandControl();
