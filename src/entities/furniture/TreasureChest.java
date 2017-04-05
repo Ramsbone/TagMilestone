@@ -10,7 +10,7 @@ public class TreasureChest extends Furniture{
     
     private final int goldReserve;
     
-    TreasureChest(String name, String description, int gold){
+    public TreasureChest(String name, String description, int gold){
         super(name, description);
         this.goldReserve = gold;
     }
