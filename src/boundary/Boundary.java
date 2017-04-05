@@ -333,8 +333,12 @@ public class Boundary {
         System.out.println("You can't carry anymore.");
     }
 
-    public void cantPickUpPortal() {
-        System.out.println("You can't pick up a portal.");
+    public void cantPickUpObject() {
+        System.out.println("You can't pick up this object.");
+    }
+    
+    public void cantUseThisObject(){
+        System.out.println("You can't use this object");
     }
 
     public void pickUpItemFirst() {

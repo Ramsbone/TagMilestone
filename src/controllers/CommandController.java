@@ -15,15 +15,14 @@ import entities.Item;
 import entities.Spell;
 import entities.Weapon;
 import entities.Armour;
+import entities.Furniture;
 import entities.Portal;
 import entities.Potion;
 
 public class CommandController {
 
     private final Boundary ui = new Boundary();
-    private final RoomController rc = new RoomController();
     private final FightController fc = new FightController();
-    private final Player player = new Player("", null);
     private final Highscore hs = new Highscore();
     //Debug can be set to true when access is needed to roomList.
     private final boolean DEBUG = true;
@@ -34,21 +33,25 @@ public class CommandController {
         boolean restartGame = true;
 
         while (restartGame) {
-            player.setName(ui.inputPlayerName());
+            RoomController rc = new RoomController();
+            Player player = new Player(ui.inputPlayerName(), null);
             rc.roomBuilder(player);
             ui.showStartText();
-            restartGame = commandControl();
+            restartGame = commandControl(player, rc);
         }
 
     }
 
     //Handles the different commands from the player.
-    private boolean commandControl() {
+    private boolean commandControl(Player player, RoomController rc) {
         String userInput = "";
         Room nextRoom = null;
         boolean restartGame = false;
 
-        while (!userInput.equals("quit") && !player.getCurrentRoom().getName().equals("Exit Point") && player.getHealth() > 0) {
+        while ( !userInput.equals("quit")
+                && !userInput.equals("new")
+                && !player.getCurrentRoom().getName().equals("Exit Point") 
+                && player.getHealth() > 0) {
 
             rc.enterRoom(player);
             boolean moveOn = false;
@@ -99,16 +102,16 @@ public class CommandController {
                         moveOn = moving(command, nextRoom, player, moveOn);
                         break;
                     case "take":
-                        take(command, parameter);
+                        take(command, parameter, player);
                         break;
                     case "drop":
-                        drop(command, parameter);
+                        drop(command, parameter, player);
                         break;
                     case "use":
-                        use(command, parameter, moveOn);
+                        moveOn = use(command, parameter, moveOn, player);
                         break;
                     case "look":
-                        look(parameter, command);
+                        look(parameter, command, player);
                         break;
                     case "stat":
                         ui.showStat(player);
@@ -117,7 +120,7 @@ public class CommandController {
                         ui.showPlayerInventory(player);
                         break;
                     case "hs":
-                        infoFromHighscore();
+                        infoFromHighscore(player);
                         break;
                     default:
                         rc.roomDebugger();
@@ -127,23 +130,26 @@ public class CommandController {
 
         if (player.getHealth() <= 0) {
             ui.died();
-            infoFromHighscore();
-//            if (ui.askIfNewGame()) {
-//            restartGame = true;
-//            };
+            infoFromHighscore(player);
+             
+           char request = getRequest();
+//           restartGame = true;
+//            
+                
+
         } else if (userInput.equals("quit")) {
             ui.usedQuitCommand();
-            infoFromHighscore();
+            infoFromHighscore(player);
 
         } else if (userInput.equals("new")) {
             //ui.restartGame();
-            infoFromHighscore();
+            infoFromHighscore(player);
             restartGame = true;
 
         } else {
             ui.showEndText(player.getGold());
-            infoFromHighscore();
-            writeToHighscoreDocument();
+            infoFromHighscore(player);
+            writeToHighscoreDocument(player);
 //            if (ui.askIfNewGame()) {
 //            restartGame = true;
 //            };
@@ -177,12 +183,12 @@ public class CommandController {
         return moveOn;
     }
 
-    private void take(String command, String parameter) {
+    private void take(String command, String parameter, Player player) {
         if (parameter.equals("gold")) {
             if (player.getCurrentRoom().getGold() == 0) {
                 ui.noGoldInRoom();
             } else {
-                pickupGold(player.getCurrentRoom());
+                pickupGold(player.getCurrentRoom(), player);
                 ui.showPlayerGold(player);
             }
         } else {
@@ -191,8 +197,8 @@ public class CommandController {
                 if (player.isInventoryFull()) {
                     ui.cantCarryMore();
                 } else {
-                    if (item instanceof Portal) {
-                        ui.cantPickUpPortal();
+                    if (item.isTakeable() == false) {
+                        ui.cantPickUpObject();
                     } else {
                         item.pickUpItem(player);
                         ui.pickedUpItem(item.getName());
@@ -204,14 +210,14 @@ public class CommandController {
         }
     }
 
-    private void drop(String command, String parameter) {
+    private void drop(String command, String parameter, Player player) {
         if (parameter.equals("gold")) {
             int dropped = ui.askHowMuchGoldToDrop();
             if (dropped > player.getGold()) {
                 ui.tryToDropTooMuchGold();
 
             } else {
-                dropGold(player.getCurrentRoom(), dropped);
+                dropGold(player.getCurrentRoom(), dropped, player);
                 ui.showPlayerGold(player);
             }
         } else {
@@ -246,7 +252,7 @@ public class CommandController {
         }
     }
 
-    private void use(String command, String parameter, boolean moveOn) {
+    private boolean use(String command, String parameter, boolean moveOn, Player player) {
         Item item = player.checkForItem(parameter);
         if (item != null) {
             if (item instanceof Weapon) {
@@ -275,6 +281,7 @@ public class CommandController {
                 ((Spell) item).activateSpell(player);
                 ui.showSpellEffect(player, ((Spell) item));
             }
+            
         } else {
             item = player.getCurrentRoom().checkForItem(parameter);
             if (item != null) {
@@ -283,6 +290,10 @@ public class CommandController {
                     player.setCurrentRoom(newRoom);
                     moveOn = true;
                     ui.portalUsed();
+                }
+                if (item instanceof Furniture){
+                    ((Furniture) item).use(player);
+                
                 } else {
                     ui.pickUpItemFirst();
                 }
@@ -290,9 +301,10 @@ public class CommandController {
                 ui.unknownParameter(command);
             }
         }
+        return moveOn;
     }
 
-    private void look(String parameter, String command) {
+    private void look(String parameter, String command, Player player) {
         if (parameter.equals("")) {
             ui.showRoom(player.getCurrentRoom());
         } else if (parameter.equals("gold")) {
@@ -378,8 +390,17 @@ public class CommandController {
 
         return input;
     }
+    
+    private char getRequest() {
+        
+        char requestChar = ' '; 
+        while (requestChar != 'y' && requestChar != 'n') {
+            requestChar = "yes".toLowerCase().charAt(0);
+        }
+        return requestChar;
+    }
 
-    private void writeToHighscoreDocument() {
+    private void writeToHighscoreDocument(Player player) {
         try {
             hs.writeToHighscoreDocument(player.getName(), player.getGold());
         } catch (FileNotFoundException ex) {
@@ -391,7 +412,7 @@ public class CommandController {
         }
     }
 
-    private void infoFromHighscore() {
+    private void infoFromHighscore(Player player) {
         ArrayList<String> highscoreOutput = new ArrayList<String>();
         try {
             highscoreOutput = hs.endGameHighscore(player.getName(), player.getGold());
@@ -403,12 +424,12 @@ public class CommandController {
         ui.printInfoFromHighscore(highscoreOutput);
     }
 
-    private void pickupGold(Room r) {
+    private void pickupGold(Room r, Player player) {
         player.setGold(player.getGold() + r.getGold());
         r.setGold(0);
     }
 
-    private void dropGold(Room r, int amount) {
+    private void dropGold(Room r, int amount, Player player) {
         r.setGold(r.getGold() + amount);
         player.setGold(player.getGold() - amount);
     }
