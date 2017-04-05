@@ -74,6 +74,7 @@ public class Player extends Character{
 
     public void setKillCounter(int killCounter) {
         this.killCounter = killCounter;
+        super.setHealthMaxSize(super.getHealthMaxSize()+10);
     }
     
     

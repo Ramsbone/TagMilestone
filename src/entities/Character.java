@@ -65,7 +65,12 @@ public abstract class Character {
     }
 
     public void setHealthMaxSize(int healthMaxSize) {
+        int oldMax = this.healthMaxSize;
         this.healthMaxSize = healthMaxSize;
+        if(this.health == oldMax){
+            this.health = this.healthMaxSize;
+        }
+        
     }
 
     public int getDefaultDamage() {
