@@ -12,10 +12,7 @@ import entities.Spell;
 import entities.Weapon;
 import java.util.Random;
 
-/**
- *
- * @author lene_
- */
+
 public class FightController {
 
     Boundary ui = new Boundary();
@@ -33,7 +30,7 @@ public class FightController {
             int monsterhit = calculateDamage(monster.getDamage(), player.getProtection());
             hit(monsterhit, player);
             
-            ui.monsterAttack(monster, monsterhit);
+            ui.monsterAttack(monster, monsterhit, player);
 
             if (player.getHealth() > 0) {
                 boolean validMove = false;
@@ -57,8 +54,11 @@ public class FightController {
                         case "a":
                             int playerhit = calculateDamage(player.getDamage(), monster.getProtection());
                             hit(playerhit, monster);
+                            validMove = true;
+                            ui.playerAttack(playerhit, player);
                             break;
                         case "flee":
+                            validMove = true;
                             flee = flee(player);
                             break;
                         default:
@@ -71,6 +71,10 @@ public class FightController {
         }
         if (monster.getHealth() <= 0) {
             monster.monsterDies(player);
+            player.setKillCounter(player.getKillCounter()+1);
+            ui.monsterDefeated(monster, player);
+        } if(player.getHealth() <= 0){
+            ui.playerDefeated(monster,player);
         }
         return flee;
 
@@ -197,6 +201,9 @@ public class FightController {
         if (fleeRoom != null) {
             succes = true;
             player.setCurrentRoom(fleeRoom);
+            ui.playerFlees(player);
+        }else{
+            ui.cannotFlee();
         }
 
         return succes;

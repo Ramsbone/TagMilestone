@@ -94,24 +94,24 @@ public class Boundary {
                 + "\n***********************************************************************************";
         System.out.println(output);
     }
-    
-    public void showMonster(Monster monster){
+
+    public void showMonster(Monster monster) {
         String output = "***********************************************************************************"
-                    + "\nYou have encountered " + monster.getName() + "."
-                    + "\n" + monster.getDescription()
-                    + "\n***********************************************************************************";
-        
+                + "\nYou have encountered " + monster.getName() + "."
+                + "\n" + monster.getDescription()
+                + "\n***********************************************************************************";
+
         System.out.println(output);
     }
-    
-     public void showCombatStats(Monster monster, Player player) {
-        String output = "***********************************************************************************" 
+
+    public void showCombatStats(Monster monster, Player player) {
+        String output = "***********************************************************************************"
                 + player.getName() + " has " + player.getHealth() + " hp. " + monster.getName() + " has " + monster.getHealth() + " hp.";
-         System.out.println(output);
-         showPlayerInventory(player);
-                
+        System.out.println(output);
+        showPlayerInventory(player);
+
     }
-    
+
     public void showStat(Player player) {
 
         String output = "***********************************************************************************"
@@ -161,8 +161,8 @@ public class Boundary {
         System.out.println(output);
 
     }
-    
-        public void usedQuitCommand() {
+
+    public void usedQuitCommand() {
 
         String output = "***********************************************************************************"
                 + "\nYou have chosen to quit the game. Come back and play TAG soon again.";
@@ -203,7 +203,7 @@ public class Boundary {
         System.out.println(output);
 
     }
-    
+
     public void showSpellEffect(Player player, Spell spell) {
 
         String output = "***********************************************************************************"
@@ -308,12 +308,13 @@ public class Boundary {
                 + "\n***********************************************************************************";
         System.out.println(output);
     }
-    
-     public void monsterAttack(Monster monster, int monsterhit) {
-         String output = "***********************************************************************************"
-                        +"\n" + monster.getName() + " attacks you and inflicts " + monsterhit + " damage"
-                        +"\n***********************************************************************************";
-        
+
+    public void monsterAttack(Monster monster, int monsterhit, Player player) {
+        String output = "***********************************************************************************"
+                + "\n" + monster.getName() + " attacks you and inflicts " + monsterhit + " damage. You have now " + player.getHealth() + " health."
+                + "\n***********************************************************************************";
+        System.out.println(output);
+
     }
 
     public void outputWrongWay() {
@@ -451,7 +452,7 @@ public class Boundary {
                     + itemInstance.getName()
                     + ", ";
         }
-        
+
         //get monster and items from monster:
         String monsterLine = "";
         String monsterName = "";
@@ -459,7 +460,7 @@ public class Boundary {
         for (int i = 0; i < r.getMonsterList().size(); i++) {
             try {
                 monsterName += r.getMonsterList().get(i).getName();
-            
+
                 try {
                     for (int j = 0; j < r.getMonsterList().get(i).getInventory().size(); j++) {
                         monsterInventory += r.getMonsterList().get(i).getInventory().get(j).getName();
@@ -468,17 +469,16 @@ public class Boundary {
                 } catch (Exception e) {
                     monsterInventory += "";
                 }
-            
+
             } catch (Exception e) {
                 monsterName += "";
             }
-            
-            monsterLine += RED + monsterName + BLACK +"--" + monsterInventory + " ***";
+
+            monsterLine += RED + monsterName + BLACK + "--" + monsterInventory + " ***";
             monsterName = "";
             monsterInventory = "";
-            
+
         }
-        
 
         String output
                 = BLUE + name + BLACK
@@ -488,7 +488,7 @@ public class Boundary {
                 + "\n\t" + inventoryString
                 + "\n\t" + boobytrap + thief + taxcollector
                 + "\n\t" + monsterLine;
-        
+
         System.out.println(output);
 
     }
@@ -498,5 +498,37 @@ public class Boundary {
 
     }
 
-     
+    public void playerAttack(int playerhit, Player player) {
+        String output = "***********************************************************************************"
+                + "\nPlayer " + player.getName() + " attacks and inflicts " + playerhit + " damage.";
+                
+        System.out.println(output);
+    }
+
+    public void playerFlees(Player player) {
+        String output = "***********************************************************************************"
+                + "\nPlayer " + player.getName() + " has succesfully fled";
+                
+        System.out.println(output);
+        
+    }
+
+    public void cannotFlee() {
+        String output ="***********************************************************************************" 
+                +"\nIt is not possible to flee from this room";
+        System.out.println(output);
+    }
+
+    public void monsterDefeated(Monster monster, Player player) {
+           String output ="***********************************************************************************" 
+                +"\nPlayer "+ player.getName() + " has defeated " + monster.getName() + ".";
+        System.out.println(output);
+    }
+
+    public void playerDefeated(Monster monster, Player player) {
+        String output ="***********************************************************************************" 
+                +"\nPlayer "+ player.getName() + " has been killed by " + monster.getName() + ".";
+        System.out.println(output);
+    }
+
 }
