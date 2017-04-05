@@ -591,6 +591,16 @@ public class Builder {
                 + "\nSouth is back into the Treasure Room.",
                 10);
         
+        Room room26 = new Room("Wizards Vault",
+                "You have entered the Wizards Vault."
+                + "\nYou entering the room makes the ceiling collapse."
+                + "\nRubble from the ceiling blocks your way back."
+                + "\nThis is where the wizard designs and codes his spells."
+                + "\nAll over the wall different UML scrolls are attached."
+                + "\nThe room is cold and gloomy. And you shiver a little. "
+                + "\nOnly way out of the vault is south.",
+                10);
+        
         Room roomEnd = new Room("Exit Point", "", 0);
 
         roomStart.setDoors(null, room1, null, null);
@@ -635,7 +645,7 @@ public class Builder {
 
         room20.setDoors(room19, null, null, room22);
 
-        room21.setDoors(null, roomEnd, room19, null);
+        room21.setDoors(null, room26, room19, null);
 
         room22.setDoors(null, null, room23, null);
 
@@ -644,6 +654,8 @@ public class Builder {
         room24.setDoors(room25, null, null, room23);
 
         room25.setDoors(null, room24, null, null);
+
+        room26.setDoors(null, roomEnd, null, null);
 
         roomEnd.setDoors(room21, null, null, null);
 
