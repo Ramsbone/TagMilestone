@@ -165,7 +165,6 @@ public class Boundary {
 
     }
 
-
     public void usedQuitCommand() {
 
         String output = "***********************************************************************************"
@@ -173,14 +172,34 @@ public class Boundary {
         System.out.println(output);
     }
 
+    public String inputRestartRequest() {
+        System.out.print("***********************************************************************************");
+        System.out.print("Do you want to play again (y/n): ");
+        String request = scan.nextLine();
+        return request;
+    }
+
+    public void restartGame() {
+        String output = "***********************************************************************************"
+                + "\nYou have chosen to restart the game. Good luck.";
+        System.out.println(output);
+    }
+    
     public void died() {
 
         String output = "***********************************************************************************"
-                + "\nSorry, you suffered from a horrible and grusome death. "
-                + "\nPlease come again and play TAG another time.";
+                + "\nSorry, you suffered from a horrible and grusome death. ";
         System.out.println(output);
     }
 
+    public void comeBack() {
+        String output = "***********************************************************************************"
+                        + "\nPlease come again and play TAG another time."
+                        + "\n***********************************************************************************";
+        System.out.println(output);
+
+    }
+    
     public void lookAtItem(Item item) {
 
         String output = "***********************************************************************************"
@@ -263,7 +282,6 @@ public class Boundary {
             output += "\n\t\t" + infoFromHighscore.get(i);
         }
 
-        output += "\n***********************************************************************************";
         System.out.println(output);
 
     }
@@ -327,6 +345,10 @@ public class Boundary {
 
     public void unknownParameter(String command) {
         System.out.println("unknown parameter for the " + command + " command.");
+    }
+
+    public void unknownRequest() {
+        System.out.println("unknown respond - please type y or n.");
     }
 
     public void cantCarryMore() {

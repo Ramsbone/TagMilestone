@@ -39,6 +39,7 @@ public class CommandController {
             ui.showStartText();
             restartGame = commandControl(player, rc);
         }
+        ui.comeBack();
 
     }
 
@@ -48,9 +49,9 @@ public class CommandController {
         Room nextRoom = null;
         boolean restartGame = false;
 
-        while ( !userInput.equals("quit")
+        while (!userInput.equals("quit")
                 && !userInput.equals("new")
-                && !player.getCurrentRoom().getName().equals("Exit Point") 
+                && !player.getCurrentRoom().getName().equals("Exit Point")
                 && player.getHealth() > 0) {
 
             rc.enterRoom(player);
@@ -58,10 +59,10 @@ public class CommandController {
             if (player.getCurrentRoom().getMonster() != null) {
                 moveOn = fc.fight(player);
             }
-            if(player.getHealth()>0){
-                 ui.showRoom(player.getCurrentRoom()); 
+            if (player.getHealth() > 0) {
+                ui.showRoom(player.getCurrentRoom());
             }
-          
+
             while (!moveOn && player.getHealth() > 0) {
 
                 userInput = inputAndCheckCommand();
@@ -131,18 +132,14 @@ public class CommandController {
         if (player.getHealth() <= 0) {
             ui.died();
             infoFromHighscore(player);
-             
-           char request = getRequest();
-//           restartGame = true;
-//            
-                
-
+            restartGame = restartRequest();
+            
         } else if (userInput.equals("quit")) {
             ui.usedQuitCommand();
             infoFromHighscore(player);
 
         } else if (userInput.equals("new")) {
-            //ui.restartGame();
+            ui.restartGame();
             infoFromHighscore(player);
             restartGame = true;
 
@@ -150,9 +147,7 @@ public class CommandController {
             ui.showEndText(player.getGold());
             infoFromHighscore(player);
             writeToHighscoreDocument(player);
-//            if (ui.askIfNewGame()) {
-//            restartGame = true;
-//            };
+            restartGame = restartRequest();
         }
 
         return restartGame;
@@ -281,7 +276,7 @@ public class CommandController {
                 ((Spell) item).activateSpell(player);
                 ui.showSpellEffect(player, ((Spell) item));
             }
-            
+
         } else {
             item = player.getCurrentRoom().checkForItem(parameter);
             if (item != null) {
@@ -291,9 +286,9 @@ public class CommandController {
                     moveOn = true;
                     ui.portalUsed();
                 }
-                if (item instanceof Furniture){
+                if (item instanceof Furniture) {
                     ((Furniture) item).use(player);
-                
+
                 } else {
                     ui.pickUpItemFirst();
                 }
@@ -390,14 +385,15 @@ public class CommandController {
 
         return input;
     }
-    
-    private char getRequest() {
-        
-        char requestChar = ' '; 
+
+    private boolean restartRequest() {
+        char requestChar = ' ';
+            requestChar = ui.inputRestartRequest().toLowerCase().charAt(0);
         while (requestChar != 'y' && requestChar != 'n') {
-            requestChar = "yes".toLowerCase().charAt(0);
+            ui.unknownRequest();
+            requestChar = ui.inputRestartRequest().toLowerCase().charAt(0);
         }
-        return requestChar;
+        return (requestChar == 'y');
     }
 
     private void writeToHighscoreDocument(Player player) {
