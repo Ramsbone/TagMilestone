@@ -144,11 +144,7 @@ public abstract class Character {
     public void setProtection(int protection) {
         this.protection = protection;
     }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
+   
     public String getName() {
         return name;
     }

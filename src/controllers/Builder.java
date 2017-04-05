@@ -265,6 +265,7 @@ public class Builder {
     private void initMonster(){
                 
         Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!");
+        rat.setHealth(10);
         Monster goblin = new Monster("Skarsnik", "An evil goblin");
         Monster scoundrel = new Monster("Blackbeard", "Arrgh!");
         Monster troll = new Monster("Troll", "Troll...");
