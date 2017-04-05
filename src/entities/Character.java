@@ -34,14 +34,14 @@ public abstract class Character {
     }
     
     public Character(String name, 
-            String description) {
+            String description, int startHealth, int startDamage,int startProtection) {
         this.name = name;
         this.gold = 0;
-        this.health = 100;
-        this.healthMaxSize = 100;
-        this.defaultDamage = 10;
+        this.health = startHealth;
+        this.healthMaxSize = startHealth;
+        this.defaultDamage = startDamage;
         this.damage = defaultDamage;
-        this.defaultProtection = 0;
+        this.defaultProtection = startProtection;
         this.protection = defaultProtection;
         this.inventory = new ArrayList();
         

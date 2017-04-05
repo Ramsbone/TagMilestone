@@ -16,10 +16,13 @@ public class Monster extends Character{
     private final String description;
     
     public Monster(String name,
-            String description
+            String description,
+            int startHealth,
+            int startDamage,
+            int startProtection
             ) {
         
-        super(name, description);
+        super(name, description, startHealth, startDamage,startProtection);
         this.description = description;
         
     }
