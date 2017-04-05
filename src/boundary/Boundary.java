@@ -173,7 +173,7 @@ public class Boundary {
     }
 
     public String inputRestartRequest() {
-        System.out.print("\n***********************************************************************************");
+        System.out.println("***********************************************************************************");
         System.out.print("Do you want to play again (y/n): ");
         String request = scan.nextLine();
         return request;
