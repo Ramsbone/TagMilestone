@@ -23,6 +23,7 @@ public class FightController {
         Monster monster = player.getCurrentRoom().getMonster();
         
         ui.showMonster(monster);
+        ui.showCombatCommands();
 
         while (monster.getHealth() > 0 && player.getHealth() > 0 && !flee) {
             ui.showCombatStats(monster, player);
@@ -56,6 +57,11 @@ public class FightController {
                             hit(playerhit, monster);
                             validMove = true;
                             ui.playerAttack(playerhit, player);
+                            try{
+                            Thread.sleep(1000);
+                            } catch(Exception e){
+                                System.out.println(e);
+                            }
                             break;
                         case "flee":
                             validMove = true;

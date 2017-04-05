@@ -55,7 +55,10 @@ public class CommandController {
             if (player.getCurrentRoom().getMonster() != null) {
                 moveOn = fc.fight(player);
             }
-
+            if(player.getHealth()>0){
+                 ui.showRoom(player.getCurrentRoom()); 
+            }
+          
             while (!moveOn && player.getHealth() > 0) {
 
                 userInput = inputAndCheckCommand();

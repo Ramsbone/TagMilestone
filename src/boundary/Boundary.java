@@ -96,19 +96,21 @@ public class Boundary {
     }
 
     public void showMonster(Monster monster) {
-        String output = "***********************************************************************************"
-                + "\nYou have encountered " + monster.getName() + "."
-                + "\n" + monster.getDescription()
-                + "\n***********************************************************************************";
+        String output ="***********************************************************************************"
+                +"\nYou have encountered " + monster.getName() + "."
+                + "\n" + monster.getDescription();
+                
 
         System.out.println(output);
     }
 
     public void showCombatStats(Monster monster, Player player) {
         String output = "***********************************************************************************"
-                + player.getName() + " has " + player.getHealth() + " hp. " + monster.getName() + " has " + monster.getHealth() + " hp.";
+                + "\n" + player.getName() + " has " + player.getHealth() + " hp \t * \t" + monster.getName() + " has " + monster.getHealth() + " hp.";
         System.out.println(output);
-        showPlayerInventory(player);
+        if (!player.isInventoryEmpty()) {
+            showPlayerInventory(player);
+        }
 
     }
 
@@ -146,8 +148,8 @@ public class Boundary {
                 + "\n***********************************************************************************"
                 + room.getDescription()
                 + "\n***********************************************************************************";
-
-        if (room.getGold() != 0) {
+        
+           if (room.getGold() != 0) {
 
             output += "\nThere are " + room.getGold() + " pieces of gold in the room."
                     + "\n***********************************************************************************";
@@ -157,10 +159,12 @@ public class Boundary {
             output += "\nItems : " + showItems(room.getInventory())
                     + "\n***********************************************************************************";
         }
-
+                
         System.out.println(output);
+       
 
     }
+
 
     public void usedQuitCommand() {
 
@@ -234,7 +238,7 @@ public class Boundary {
     public void showPlayerInventory(Player player) {
 
         String output = "***********************************************************************************"
-                + "\nInventory : " + (player.isInventoryEmpty() ? "" : showItems(player.getInventory()))
+                + "\nPlayer inventory : " + (player.isInventoryEmpty() ? "" : showItems(player.getInventory()))
                 + "\n***********************************************************************************";
 
         System.out.println(output);
@@ -339,6 +343,7 @@ public class Boundary {
 
     public void holdItem(String name, int value) {
         System.out.println("You hold " + name + " and your now inflict " + value + " damage points when attacking.");
+        System.out.println("***********************************************************************************");
     }
 
     public void wearItem(String name, int value) {
@@ -359,10 +364,12 @@ public class Boundary {
 
     public void pickedUpItem(String name) {
         System.out.println("You have picked up " + name);
+        System.out.println("***********************************************************************************");
     }
 
     public void droppedItem(String name) {
         System.out.println("You dropped " + name);
+        System.out.println("***********************************************************************************");
     }
 
     //Is used when trying to pick up gold.
@@ -501,33 +508,43 @@ public class Boundary {
     public void playerAttack(int playerhit, Player player) {
         String output = "***********************************************************************************"
                 + "\nPlayer " + player.getName() + " attacks and inflicts " + playerhit + " damage.";
-                
+
         System.out.println(output);
     }
 
     public void playerFlees(Player player) {
         String output = "***********************************************************************************"
                 + "\nPlayer " + player.getName() + " has succesfully fled";
-                
+
         System.out.println(output);
-        
+
     }
 
     public void cannotFlee() {
-        String output ="***********************************************************************************" 
-                +"\nIt is not possible to flee from this room";
+        String output = "***********************************************************************************"
+                + "\nIt is not possible to flee from this room";
         System.out.println(output);
     }
 
     public void monsterDefeated(Monster monster, Player player) {
-           String output ="***********************************************************************************" 
-                +"\nPlayer "+ player.getName() + " has defeated " + monster.getName() + ".";
+        String output = "***********************************************************************************"
+                + "\nPlayer " + player.getName() + " has defeated " + monster.getName() + ".";
         System.out.println(output);
     }
 
     public void playerDefeated(Monster monster, Player player) {
-        String output ="***********************************************************************************" 
-                +"\nPlayer "+ player.getName() + " has been killed by " + monster.getName() + ".";
+        String output = "***********************************************************************************"
+                + "\nPlayer " + player.getName() + " has been killed by " + monster.getName() + ".";
+        System.out.println(output);
+    }
+
+    public void showCombatCommands() {
+        String output = "***********************************************************************************"
+                + "\nFollowing commands can be used during combat:"
+                + "\nattack/a: \t attack the monster"
+                + "\nuse <item>: \t use an item in your inventory"
+                + "\nflee: \t\t flees to your previous room (if possible)";
+        
         System.out.println(output);
     }
 
