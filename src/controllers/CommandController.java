@@ -223,16 +223,16 @@ public class CommandController {
         Item item = player.checkForItem(parameter);
         if (item != null) {
             if (item instanceof Weapon) {
-                int value = ((Weapon) item).getDamageIncrease();
-                item.changeDamage(player, value);
+                //int value = ((Weapon) item).getDamageIncrease();
+                //item.changeDamage(player, value);
                 player.setWeapon((Weapon) item);
                 ui.holdItem(item.getName(), player.getDamage());
             }
             if (item instanceof Armour) {
-                int value = ((Armour) item).getProtectionIncrease();
-                item.changeProtection(player, value);
+                //int value = ((Armour) item).getProtectionIncrease();
+                //item.changeProtection(player, value);
                 player.setArmour((Armour) item);
-                ui.wearItem(item.getName(), value);
+                ui.wearItem(item.getName(), player.getProtection());
             }
             if (item instanceof Potion) {
                 int value = ((Potion) item).getHealthChange();

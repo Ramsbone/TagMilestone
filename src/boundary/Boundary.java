@@ -341,7 +341,7 @@ public class Boundary {
     }
 
     public void wearItem(String name, int value) {
-        System.out.println("You now wear " + name + " as armour and gain " + value + " points in extra protection.");
+        System.out.println("You now wear " + name + " as armour and has " + value + " points in total protection.");
     }
 
     public void drinkHealth(String name, int value) {
