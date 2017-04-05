@@ -265,13 +265,13 @@ public class Builder {
     
     private void initMonster(){
                 
-        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!", 2,4,4);
+        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!", 20,4,4);
         rat.setHealth(10);
-        Monster goblin = new Monster("Skarsnik", "An evil goblin",4,5,5);
-        Monster scoundrel = new Monster("Blackbeard", "Arrgh!",6,7,7);
-        Monster troll = new Monster("Troll", "Troll...",10,20,20);
-        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....",20,3,3);
-        Monster dragon = new Monster("Smaug", "Smaug....",40,4,4);
+        Monster goblin = new Monster("Skarsnik", "An evil goblin",30,5,5);
+        Monster scoundrel = new Monster("Blackbeard", "Arrgh!",50,7,7);
+        Monster troll = new Monster("Troll", "Troll...",80,20,20);
+        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....",100,3,3);
+        Monster dragon = new Monster("Smaug", "Smaug....",120,10,30);
         
         findRoomInList("Mining Tunnel").addMonster(rat);
         findRoomInList("Guards Quarter").addMonster(goblin);
@@ -315,12 +315,17 @@ public class Builder {
         Potion potion01 = new Potion("Green Bottle", 10, "Drinkable potion in a glassbottle");
         Potion potion02 = new Potion("Yellow Bottle", 20, "Drinkable potion in a glassbottle");
         Potion potion03 = new Potion("Red Bottle", -30, "Drinkable potion in a glassbottle");
+        Potion mpotion1 = new Potion("Black bottle",20,"Drinkable potion in a glassbottle");
+        Potion mpotion2 = new Potion("Small bottle",25,"Drinkable potion in a glassbottle");
+        Potion mpotion3 = new Potion("Golden bottle",50,"Drinkable potion in a glassbottle");
+        Potion mpotion4 = new Potion("White bottle",100,"Drinkable potion in a glassbottle");
         
         Spell fightSpell = new Spell("Fighting Spell","Improves your meelee skills and makes you stronger",5,10,0);
         Spell protection = new Spell("Protection Spell","Increases your protection against attacks",0,0,10);
         Spell badspell = new Spell("Captains Spell","Scroll with scriplings in an ancient language",-5,-15,0);
         
-        TreasureChest chest = new TreasureChest("Luggage", "A large chest made of Sapient Pearwood. There seems to be hundreds of little legs protruding from its underside.", 200);
+        TreasureChest chest = new TreasureChest("Luggage", "A large chest made of Sapient Pearwood. "
+                + "\nThere seems to be hundreds of little legs protruding from its underside.", 200);
         
         findRoomInList("Mining Tunnel").addToInventory(stick);
         findRoomInList("Mining Tunnel").addToInventory(chest);
@@ -349,6 +354,10 @@ public class Builder {
         this.findMonsterInList("Skarsnik").setArmour(leather);
         this.findMonsterInList("Blackbeard").setWeapon(greatsword);
         this.findMonsterInList("Blackbeard").setArmour(chainmail);
+        this.findMonsterInList("Blackbeard").addToInventory(mpotion1);
+        this.findMonsterInList("Troll").addToInventory(mpotion2);
+        this.findMonsterInList("Gorgorbey").addToInventory(mpotion3);
+        this.findMonsterInList("Smaug").addToInventory(mpotion4);
         
         
         ArrayList<Room> tempRoomList = getUniqueRandomRooms(5, roomList);
