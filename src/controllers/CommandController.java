@@ -23,28 +23,36 @@ public class CommandController {
     private final Boundary ui = new Boundary();
     private final RoomController rc = new RoomController();
     private final FightController fc = new FightController();
-    private final Player player = new Player(ui.inputPlayerName(), null);
+    private final Player player = new Player("", null);
     private final Highscore hs = new Highscore();
     //Debug can be set to true when access is needed to roomList.
     private final boolean DEBUG = true;
 
     //Launch the game.
     public void start() {
-        rc.roomBuilder(player);
-        ui.showStartText();
-        commandControl();
+
+        boolean restartGame = true;
+
+        while (restartGame) {
+            player.setName(ui.inputPlayerName());
+            rc.roomBuilder(player);
+            ui.showStartText();
+            restartGame = commandControl();
+        }
+
     }
 
     //Handles the different commands from the player.
-    private void commandControl() {
+    private boolean commandControl() {
         String userInput = "";
         Room nextRoom = null;
+        boolean restartGame = false;
 
         while (!userInput.equals("quit") && !player.getCurrentRoom().getName().equals("Exit Point") && player.getHealth() > 0) {
 
             rc.enterRoom(player);
             boolean moveOn = false;
-            if(player.getCurrentRoom().getMonster() != null){
+            if (player.getCurrentRoom().getMonster() != null) {
                 moveOn = fc.fight(player);
             }
 
@@ -70,6 +78,9 @@ public class CommandController {
                         ui.showPlayerGold(player);
                         break;
                     case "quit":
+                        moveOn = true;
+                        break;
+                    case "new":
                         moveOn = true;
                         break;
                     case "n":
@@ -110,19 +121,32 @@ public class CommandController {
                 }
             }
         }
+
         if (player.getHealth() <= 0) {
             ui.died();
             infoFromHighscore();
+//            if (ui.askIfNewGame()) {
+//            restartGame = true;
+//            };
         } else if (userInput.equals("quit")) {
             ui.usedQuitCommand();
             infoFromHighscore();
+
+        } else if (userInput.equals("new")) {
+            //ui.restartGame();
+            infoFromHighscore();
+            restartGame = true;
 
         } else {
             ui.showEndText(player.getGold());
             infoFromHighscore();
             writeToHighscoreDocument();
+//            if (ui.askIfNewGame()) {
+//            restartGame = true;
+//            };
         }
 
+        return restartGame;
     }
 
     private boolean moving(String command, Room nextRoom, Player player, boolean moveOn) {
@@ -297,6 +321,7 @@ public class CommandController {
                 case "help":
                 case "gold":
                 case "quit":
+                case "new":
                 case "n":
                 case "s":
                 case "e":

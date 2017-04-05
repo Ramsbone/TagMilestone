@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public abstract class Character {
     
-    private final String name;
+    private String name;
     private int gold;
     private int health;
     private int healthMaxSize;
@@ -144,7 +144,11 @@ public abstract class Character {
     public void setProtection(int protection) {
         this.protection = protection;
     }
-
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public String getName() {
         return name;
     }
