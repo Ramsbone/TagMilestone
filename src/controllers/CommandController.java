@@ -128,9 +128,12 @@ public class CommandController {
         if (player.getHealth() <= 0) {
             ui.died();
             infoFromHighscore(player);
-//            if (ui.askIfNewGame()) {
-//            restartGame = true;
-//            };
+             
+           char request = getRequest();
+//           restartGame = true;
+//            
+                
+
         } else if (userInput.equals("quit")) {
             ui.usedQuitCommand();
             infoFromHighscore(player);
@@ -383,6 +386,15 @@ public class CommandController {
         input = input.replaceAll("west", "w");
 
         return input;
+    }
+    
+    private char getRequest() {
+        
+        char requestChar = ' '; 
+        while (requestChar != 'y' && requestChar != 'n') {
+            requestChar = "yes".toLowerCase().charAt(0);
+        }
+        return requestChar;
     }
 
     private void writeToHighscoreDocument(Player player) {
