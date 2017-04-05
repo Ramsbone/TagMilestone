@@ -10,17 +10,21 @@ package entities;
  * @author Christian
  */
 public class Furniture extends Item{
-    public Furniture(String name, String description, boolean takeable){
+    public Furniture(String name, String description){
         super(name, description);
-        this.setTakeable(takeable);
+        this.setTakeable(false);
         
     }
     
     
-    public int use(Player p){
-        int increaseRoomGold = 50;
-        p.getCurrentRoom().setGold(p.getCurrentRoom().getGold() + increaseRoomGold);
-        return increaseRoomGold;
+    public boolean use(Player p){
+        //her må gerne være en boolean der returneres til commandControler.
+        //i så fald skal commandcontroler få boundary til at sende besked til brugeren om at dette item ikke kan bruges
+        
+//        int increaseRoomGold = 50;
+//        p.getCurrentRoom().setGold(p.getCurrentRoom().getGold() + increaseRoomGold);
+//        return increaseRoomGold;
+        return false;
     }
     
     

@@ -14,6 +14,7 @@ import entities.Portal;
 import entities.Room;
 import entities.Spell;
 import entities.Weapon;
+import entities.furniture.TreasureChest;
 import exceptions.InitiationException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -319,7 +320,10 @@ public class Builder {
         Spell protection = new Spell("Protection Spell","Increases your protection against attacks",0,0,10);
         Spell badspell = new Spell("Captains Spell","Scroll with scriplings in an ancient language",-5,-15,0);
         
+        TreasureChest chest = new TreasureChest("Luggage", "A large chest made of Sapient Pearwood. There seems to be hundreds of little legs protruding from its underside.", 200);
+        
         findRoomInList("Mining Tunnel").addToInventory(stick);
+        findRoomInList("Mining Tunnel").addToInventory(chest);
         findRoomInList("Guards Quarter").addToInventory(fightSpell);
         //findRoomInList("Dwarfs Quarter").addToInventory(pickaxe);
         //findRoomInList("Prison Dungeon").addToInventory(leather);
