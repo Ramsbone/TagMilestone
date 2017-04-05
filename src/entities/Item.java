@@ -9,6 +9,7 @@ public abstract class Item {
 
     private final String name;
     private final String description;
+    private boolean takeable = true;
 
     public Item(String name, String description) {
         this.name = name;
@@ -93,4 +94,10 @@ public abstract class Item {
         player.removeFromInventory(this);
     }
 
+    public boolean isTakeable() {
+        return takeable;
+    }
+
+    
+    
 }

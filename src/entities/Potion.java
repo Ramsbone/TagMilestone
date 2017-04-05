@@ -11,6 +11,7 @@ public class Potion extends Item {
     public Potion(String name, int healthChange, String description) {
         super(name, description);
         this.healthChange = healthChange;
+        
     }
 
     public int getHealthChange() {
