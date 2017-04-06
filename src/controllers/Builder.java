@@ -274,6 +274,8 @@ public class Builder {
         Monster troll = new Monster("Troll", "Troll...",80,20,20);
         Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....",100,3,3);
         Monster dragon = new Monster("Smaug", "Smaug....",120,10,30);
+        Monster boss = new Monster("Ronnie","You have encountered the mighty and legendary wizard, Ronnie the Black!"
+                + "\nYou has awaken him from his afternoon nap, and is now thirsty and angry.",200,20,20);
         
         findRoomInList("Mining Tunnel").addMonster(rat);
         findRoomInList("Guards Quarter").addMonster(goblin);
@@ -281,6 +283,7 @@ public class Builder {
         findRoomInList("Prison Dungeon").addMonster(troll);
         findRoomInList("Gallery").addMonster(halfgiant);
         findRoomInList("Kings Tomb").addMonster(dragon);
+        findRoomInList("Wizards Vault").addMonster(boss);
         
     }
     
@@ -297,6 +300,8 @@ public class Builder {
         Weapon pickaxe = new Weapon("Axe", 10,
                 "A simple pick axe, more a tool than a weapon, but can easily "
                 + "\nbe used as such.");
+        Weapon staff = new Weapon("Wizard Staff",20,"ancient, magic wooden staff.");
+        
         Armour leather = new Armour("Leather Shirt", 5,
                 "An old shirt of thick leather, offers protection from basic hits, "
                 + "\nand is comfortable to wear");
@@ -307,8 +312,7 @@ public class Builder {
                 "A very heavy but effective armour, with great protection. "
                 + "The metal is dark, almost black, and probably used to belong to "
                 + "\na great warrior");
-        Potion poison = new Potion("Pink bottle", -20, "Drinkable potion in a glassbottle");
-
+        
         Portal portal1 = new Portal("Pirate Portal", findRoomInList("Lovers Den"), 
                                     "The pirate flag on the wall seems to function as a magical portal to another place");
         Portal portal2 = new Portal("Mirror Portal", findRoomInList("Narrow Path"), 
@@ -322,6 +326,7 @@ public class Builder {
         Potion mpotion3 = new Potion("Golden bottle",50,"Drinkable potion in a glassbottle");
         Potion mpotion4 = new Potion("White bottle",100,"Drinkable potion in a glassbottle");
         Potion cola = new Potion("Coca Cola",200,"The programmers prefered liquid");
+        Potion poison = new Potion("Pink bottle", -20, "Drinkable potion in a glassbottle");
         
         Spell fightSpell = new Spell("Fighting Spell","Improves your meelee skills and makes you stronger",5,10,0);
         Spell protection = new Spell("Protection Spell","Increases your protection against attacks",0,0,10);
@@ -338,10 +343,6 @@ public class Builder {
         findRoomInList("Mining Tunnel").addToInventory(stick);
         findRoomInList("Mining Tunnel").addToInventory(chest);
         findRoomInList("Guards Quarter").addToInventory(fightSpell);
-        //findRoomInList("Dwarfs Quarter").addToInventory(pickaxe);
-        //findRoomInList("Prison Dungeon").addToInventory(leather);
-        //findRoomInList("Gallery").addToInventory(chainmail);
-        //findRoomInList("Kings Tomb").addToInventory(greatsword);
         findRoomInList("Lovers Den").addToInventory(poison);
         findRoomInList("Cathedral South").addToInventory(heavy);
         findRoomInList("Bedroom").addToInventory(portal2);
@@ -354,15 +355,6 @@ public class Builder {
         findRoomInList("Queens Tomb").addToInventory(tiara);
         findRoomInList("Treasure Room").addToInventory(purse);
         
-        /*
-        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!");
-        Monster goblin = new Monster("Skarsnik", "An evil goblin");
-        Monster scoundrel = new Monster("Blackbeard", "Arrgh!");
-        Monster troll = new Monster("Troll", "Troll...");
-        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....");
-        Monster dragon = new Monster("Smaug", "Smaug....");
-        */
-        
         this.findMonsterInList("Skarsnik").setWeapon(pickaxe);
         this.findMonsterInList("Skarsnik").setArmour(leather);
         this.findMonsterInList("Blackbeard").setWeapon(greatsword);
@@ -371,7 +363,7 @@ public class Builder {
         this.findMonsterInList("Troll").addToInventory(mpotion2);
         this.findMonsterInList("Gorgorbey").addToInventory(mpotion3);
         this.findMonsterInList("Smaug").addToInventory(mpotion4);
-        
+        this.findMonsterInList("Ronnie").setWeapon(staff);
         
         ArrayList<Room> tempRoomList = getUniqueRandomRooms(5, roomList);
 
