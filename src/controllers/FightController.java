@@ -99,13 +99,15 @@ public class FightController {
                 int value = ((Weapon) item).getDamageIncrease();
                 item.changeDamage(player, value);
                 player.setWeapon((Weapon) item);
-                ui.holdItem(item.getName(), player.getDamage());
+                ui.useItem((Weapon)item, ((Weapon) item).useItem(player));
+                //ui.holdItem(item.getName(), player.getDamage());
             }
             if (item instanceof Armour) {
                 int value = ((Armour) item).getProtectionIncrease();
                 item.changeProtection(player, value);
                 player.setArmour((Armour) item);
-                ui.wearItem(item.getName(), value);
+                ui.useItem((Armour) item, ((Armour) item).useItem(player));
+                //ui.wearItem(item.getName(), value);
             }
             if (item instanceof Potion) {
                 int value = ((Potion) item).getHealthChange();

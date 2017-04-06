@@ -3,6 +3,7 @@
  */
 package boundary;
 
+import entities.Armour;
 import entities.Item;
 import entities.Monster;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Scanner;
 import entities.Player;
 import entities.Room;
 import entities.Spell;
+import entities.Weapon;
 
 public class Boundary {
 
@@ -227,33 +229,6 @@ public class Boundary {
 
     }
 
-    public void showSpellEffect(Player player, Spell spell) {
-
-        String output = "***********************************************************************************"
-                + "\nYou have read the " + spell.getName() + ", and following changes inflict on you"
-                + "\n***********************************************************************************";
-
-        if (spell.getDamageChange() != 0) {
-
-            output += "\nYour damage without any weapons has been changed to " + (player.getDefaultDamage());
-
-        }
-        if (spell.getProtectionChange() != 0) {
-
-            output += "\nYour protection without any armour has been changed to " + (player.getDefaultProtection());
-
-        }
-        if (spell.getHealthChange() != 0) {
-
-            output += "\nYour maximum health has been changed to " + (player.getHealthMaxSize()) +" hp";
-
-        }
-        output += "\n***********************************************************************************";
-
-        System.out.println(output);
-
-    }
-
     public void showPlayerInventory(Player player) {
 
         String output = "***********************************************************************************"
@@ -285,15 +260,6 @@ public class Boundary {
 
         System.out.println(output);
 
-    }
-
-    public void portalUsed() {
-
-        String output = "***********************************************************************************"
-                + "\nYou are been pulled into a spiralling light and teleported to another place."
-                + "\nThe bright light and the fast movement makes you feel a little dizzy and confused.";
-
-        System.out.println(output);
     }
 
     public void boobyTrapReleased(Player player) {
@@ -366,22 +332,39 @@ public class Boundary {
         System.out.println("You can't pick up this object.");
     }
     
-    public void cantUseThisObject(){
-        System.out.println("You can't use this object");
-    }
-
-    public void pickUpItemFirst() {
-        System.out.println("You can't use this item before you carry it.");
-    }
-
-    public void holdItem(String name, int value) {
-        System.out.println("You hold " + name + " and your now inflict " + value + " damage points when attacking.");
+    
+    public void useItem(Weapon weapon, ArrayList<String> nameAndDamageIncreaseAnddefaultDamage){
+        System.out.println("You hold " + 
+                nameAndDamageIncreaseAnddefaultDamage.get(0) + 
+                " and your now inflict " + 
+                Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(1))+  
+                Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(2))+ 
+                " damage points when attacking.");
         System.out.println("***********************************************************************************");
+    
     }
+    
+    public void useItem(Armour armour, ArrayList<String> nameAndProtectionIncreaseAnddefaultProtection){
+        System.out.println("You now wear " + 
+                nameAndProtectionIncreaseAnddefaultProtection.get(0)+
+                " as armour and has "+
+                Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(1))+
+                Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(2))+
+                " points in total protection."); 
+        System.out.println("***********************************************************************************");
+    
+    
 
-    public void wearItem(String name, int value) {
-        System.out.println("You now wear " + name + " as armour and has " + value + " points in total protection.");
     }
+    
+//    public void holdItem(String name, int value) {
+//        System.out.println("You hold " + name + " and your now inflict " + value + " damage points when attacking.");
+//        System.out.println("***********************************************************************************");
+//    }
+
+//    public void wearItem(String name, int value) {
+//        System.out.println("You now wear " + name + " as armour and has " + value + " points in total protection.");
+//    }
 
     public void drinkHealth(String name, int value) {
 
@@ -394,7 +377,58 @@ public class Boundary {
             System.out.println("You drink " + name + " and now has " + value + " hp.");
         }
     }
+    
+    public void portalUsed() {
 
+        String output = "***********************************************************************************"
+                + "\nYou are been pulled into a spiralling light and teleported to another place."
+                + "\nThe bright light and the fast movement makes you feel a little dizzy and confused.";
+
+        System.out.println(output);
+    }
+
+    public void pickUpItemFirst() {
+        System.out.println("You can't use this item before you carry it.");
+    }
+    
+    public void useFurniture() {
+        System.out.println("You have used this piece of furniture");
+        System.out.println("***********************************************************************************");
+    }
+    
+    public void showSpellEffect(Player player, Spell spell) {
+
+        String output = "***********************************************************************************"
+                + "\nYou have read the " + spell.getName() + ", and following changes inflict on you"
+                + "\n***********************************************************************************";
+
+        if (spell.getDamageChange() != 0) {
+
+            output += "\nYour damage without any weapons has been changed to " + (player.getDefaultDamage());
+
+        }
+        if (spell.getProtectionChange() != 0) {
+
+            output += "\nYour protection without any armour has been changed to " + (player.getDefaultProtection());
+
+        }
+        if (spell.getHealthChange() != 0) {
+
+            output += "\nYour maximum health has been changed to " + (player.getHealthMaxSize()) +" hp";
+
+        }
+        output += "\n***********************************************************************************";
+
+        System.out.println(output);
+
+    }
+    
+    //the following functions does not have to be changed --christian - 2017-04-06
+    
+    public void cantUseThisObject(){
+        System.out.println("You can't use this object");
+    }
+    
     public void pickedUpItem(String name) {
         System.out.println("You have picked up " + name);
         System.out.println("***********************************************************************************");
