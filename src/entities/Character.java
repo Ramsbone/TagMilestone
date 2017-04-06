@@ -37,9 +37,9 @@ public abstract class Character {
     }
     
     public Character(String name, 
-            String description, int startHealth, int startDamage,int startProtection) {
+            String description, int startHealth, int startDamage, int startProtection, int startGold) {
         this.name = name;
-        this.gold = 0;
+        this.gold = startGold;
         this.health = startHealth;
         this.healthMaxSize = startHealth;
         this.defaultDamage = startDamage;
