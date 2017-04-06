@@ -276,7 +276,7 @@ public class Builder {
         
         findRoomInList("Mining Tunnel").addMonster(rat);
         findRoomInList("Guards Quarter").addMonster(goblin);
-        findRoomInList("Dwarfs Quarter").addMonster(scoundrel);
+        findRoomInList("Treasure Room").addMonster(scoundrel);
         findRoomInList("Prison Dungeon").addMonster(troll);
         findRoomInList("Gallery").addMonster(halfgiant);
         findRoomInList("Kings Tomb").addMonster(dragon);
@@ -332,6 +332,7 @@ public class Builder {
         Treasure pearls = new Treasure("Pearl Necklace","Beautiful white pearls",25);
         Treasure ring = new Treasure("Gold Ring","Simple golden ring, with ancient elven inscriptions",50);
         Treasure tiara = new Treasure("Diamond Tiara","Golden tiara, jeweled with lots of diamonds and rubies.",80);
+        Treasure purse = new Treasure("Purse","Purse with pirate coins",20);
         
         findRoomInList("Mining Tunnel").addToInventory(stick);
         findRoomInList("Mining Tunnel").addToInventory(chest);
@@ -350,6 +351,7 @@ public class Builder {
         findRoomInList("Lovers Den").addToInventory(pearls);
         findRoomInList("Kings Tomb").addToInventory(ring);
         findRoomInList("Queens Tomb").addToInventory(tiara);
+        findRoomInList("Treasure Room").addToInventory(purse);
         
         /*
         Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!");
