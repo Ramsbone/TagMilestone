@@ -58,11 +58,11 @@ public class CommandController {
             rc.enterRoom(player);
             
             boolean moveOn = false;
-            if (player.getHealth() > 0 && player.getCurrentRoom().getMonster() == null) {
-                ui.showRoom(player.getCurrentRoom());
-            }
             if (player.getCurrentRoom().getMonster() != null) {
                 moveOn = fc.fight(player);
+            }
+            if (player.getHealth() > 0 && moveOn == false) {
+                ui.showRoom(player.getCurrentRoom());
             }
 
 
