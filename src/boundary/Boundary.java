@@ -106,7 +106,7 @@ public class Boundary {
 
     public void showCombatStats(Monster monster, Player player) {
         String output = "***********************************************************************************"
-                + "\n" + player.getName() + " has " + player.getHealth() + " hp \t * \t" + monster.getName() + " has " + monster.getHealth() + " hp.";
+                + "\n" + player.getName() + " has " + player.getHealth() +  " / " + player.getHealthMaxSize() + "hp \t * \t" + monster.getName() + " has " + monster.getHealth() + " hp.";
         System.out.println(output);
         if (!player.isInventoryEmpty()) {
             showPlayerInventory(player);
@@ -333,11 +333,17 @@ public class Boundary {
 
     public void monsterAttack(Monster monster, int monsterhit, Player player) {
         String output = "***********************************************************************************"
-                + "\n" + monster.getName() + " attacks you and inflicts " + monsterhit + " damage. You have now " + player.getHealth() + " hp"
+                + "\n" + monster.getName() + " attacks you and inflicts " + monsterhit + " damage." + "You have now " + player.getHealth() +  " / " +player.getHealthMaxSize() +" hp"
                 + "\n***********************************************************************************";
         System.out.println(output);
-
     }
+     public void monsterAttackIfPlayerDead(Monster monster, int monsterhit, Player player) {
+        String output = "***********************************************************************************"
+                + "\n" + monster.getName() + " attacks you and inflicts " + monsterhit + " damage."
+                + "\n***********************************************************************************";
+        System.out.println(output);
+    }
+    
 
     public void outputWrongWay() {
         System.out.println("Sorry, this directions is blocked, try again.");
@@ -559,8 +565,13 @@ public class Boundary {
     }
 
     public void playerDefeated(Monster monster, Player player) {
+        String output = "Player " + player.getName() + " has been killed by " + monster.getName() + ".";
+        System.out.println(output);
+    }
+    
+    public void killCounterFeedBack(Player player){
         String output = "***********************************************************************************"
-                + "\nPlayer " + player.getName() + " has been killed by " + monster.getName() + ".";
+                + "\nYou have won the battle and gain a level, your maximum health increases to " + player.getHealthMaxSize() + " hp";
         System.out.println(output);
     }
 

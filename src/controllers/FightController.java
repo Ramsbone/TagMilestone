@@ -31,7 +31,11 @@ public class FightController {
             int monsterhit = calculateDamage(monster.getDamage(), player.getProtection());
             hit(monsterhit, player);
             
-            ui.monsterAttack(monster, monsterhit, player);
+            if(player.getHealth()>0){
+                ui.monsterAttack(monster, monsterhit, player);
+            }else{
+                ui.monsterAttackIfPlayerDead(monster, monsterhit, player);
+            }
 
             if (player.getHealth() > 0) {
                 boolean validMove = false;
@@ -79,6 +83,7 @@ public class FightController {
             monster.monsterDies(player);
             player.setKillCounter(player.getKillCounter()+1);
             ui.monsterDefeated(monster, player);
+            ui.killCounterFeedBack(player);
         } if(player.getHealth() <= 0){
             ui.playerDefeated(monster,player);
         }
