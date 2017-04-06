@@ -344,8 +344,8 @@ public class Boundary {
         System.out.println("You hold " + 
                 nameAndDamageIncreaseAnddefaultDamage.get(0) + 
                 " and your now inflict " + 
-                Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(1))+  
-                Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(2))+ 
+                (Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(1))+  
+                Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(2)))+ 
                 " damage points when attacking.");
         System.out.println("***********************************************************************************");
     
@@ -355,8 +355,8 @@ public class Boundary {
         System.out.println("You now wear " + 
                 nameAndProtectionIncreaseAnddefaultProtection.get(0)+
                 " as armour and has "+
-                Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(1))+
-                Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(2))+
+                (Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(1))+
+                Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(2)))+
                 " points in total protection."); 
         System.out.println("***********************************************************************************");
     

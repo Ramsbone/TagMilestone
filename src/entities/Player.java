@@ -27,7 +27,7 @@ public class Player extends Character{
         this.defaultInventorySize = 6;
         this.inventoryMaxSize = defaultInventorySize;
         this.killCounter = 0;
-        this.inventoryMaxSize = 5;
+        this.potionInventoryMaxSize = 5;
     }
     
     
