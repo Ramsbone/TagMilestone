@@ -172,7 +172,7 @@ public class Boundary {
     public void usedQuitCommand() {
 
         String output = "***********************************************************************************"
-                + "\nYou have chosen to quit the game. Come back and play TAG soon again.";
+                + "\nYou have chosen to quit the game.";
         System.out.println(output);
     }
 
