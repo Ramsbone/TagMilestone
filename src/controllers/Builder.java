@@ -363,7 +363,7 @@ public class Builder {
         this.findMonsterInList("Smaug").addToInventory(mpotion4);
         this.findMonsterInList("Ronnie").setWeapon(staff);
         
-        ArrayList<Room> tempRoomList = getUniqueRandomRooms(5, roomList);
+        ArrayList<Room> tempRoomList = getUniqueRandomRooms(4, roomList);
 
         tempRoomList.get(0).setTaxcollector(true);
         tempRoomList.get(0).setGold(0);
@@ -371,7 +371,6 @@ public class Builder {
         tempRoomList.get(1).setGold(0);
         tempRoomList.get(2).setBoobytrap(true);
         tempRoomList.get(3).setBoobytrap(true);
-        tempRoomList.get(4).setBoobytrap(true);
         
         tempRoomList = getUniqueRandomRooms(3, roomList);
 
