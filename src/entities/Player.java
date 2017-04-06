@@ -17,6 +17,9 @@ public class Player extends Character{
     private Room currentRoom;
     private String moveDirection;
     private int killCounter;
+    public ArrayList<Item> potionInventory;
+    private int potionInventoryMaxSize;
+    
     
     public Player(String name, Room currentRoom) {
         super(name, currentRoom);
@@ -24,6 +27,7 @@ public class Player extends Character{
         this.defaultInventorySize = 6;
         this.inventoryMaxSize = defaultInventorySize;
         this.killCounter = 0;
+        this.inventoryMaxSize = 5;
     }
     
     
@@ -51,7 +55,6 @@ public class Player extends Character{
         return (this.inventory.size() == inventoryMaxSize);
     }
     
-    
     public int getInventoryMaxSize() {
         return inventoryMaxSize;
     }
@@ -77,7 +80,28 @@ public class Player extends Character{
         super.setHealthMaxSize(super.getHealthMaxSize()+10);
     }
     
+        /**
+     * checks if character inventory is empty
+     */
+    public boolean isPotionInventoryEmpty() {
+        return this.inventory.isEmpty();
+    }
     
+    /**
+     * checks if character inventory exceeds the defined maximum
+     */
+    public boolean isPotionInventoryFull() {
+        return (this.inventory.size() == inventoryMaxSize);
+    }
+    
+    public void addToPotionInventory(Item i) {
+        inventory.add(i);
+    }
+
+    public void removeFromPotionInventory(Item i) {
+        inventory.remove(i);
+    }
+
 
 }
 
