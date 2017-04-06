@@ -82,7 +82,7 @@ public class FightController {
         if (monster.getHealth() <= 0) {
             int monsterGold = monster.monsterDies(player);
             player.setKillCounter(player.getKillCounter()+1);
-            ui.monsterDefeated(monster, player);
+            ui.monsterDefeated(monster, player, monsterGold);
             ui.killCounterFeedBack(player);
         } if(player.getHealth() <= 0){
             ui.playerDefeated(monster,player);

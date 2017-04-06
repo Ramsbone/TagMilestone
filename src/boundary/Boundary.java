@@ -592,9 +592,9 @@ public class Boundary {
         System.out.println(output);
     }
 
-    public void monsterDefeated(Monster monster, Player player) {
+    public void monsterDefeated(Monster monster, Player player, int monsterGold) {
         String output = "***********************************************************************************"
-                + "\nPlayer " + player.getName() + " has defeated " + monster.getName() + ".";
+                + "\nPlayer " + player.getName() + " has defeated " + monster.getName() + " and it drops " + monsterGold + " pieces of gold on the ground.";
         System.out.println(output);
     }
 
