@@ -267,15 +267,15 @@ public class Builder {
     
     private void initMonster(){
                 
-        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!", 20,4,4);
+        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!", 20,4,4,12);
         rat.setHealth(10);
-        Monster goblin = new Monster("Skarsnik", "An evil goblin",30,5,5);
-        Monster scoundrel = new Monster("Blackbeard", "Arrgh!",50,7,7);
-        Monster troll = new Monster("Troll", "Troll...",80,20,20);
-        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....",100,3,3);
-        Monster dragon = new Monster("Smaug", "Smaug....",120,10,30);
+        Monster goblin = new Monster("Skarsnik", "An evil goblin",30,5,5,21);
+        Monster scoundrel = new Monster("Blackbeard", "Arrgh!",50,7,7,23);
+        Monster troll = new Monster("Troll", "Troll...",80,20,20,35);
+        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....",100,3,3,47);
+        Monster dragon = new Monster("Smaug", "Smaug....",120,10,30,172);
         Monster boss = new Monster("Ronnie","You have encountered the mighty and legendary wizard, Ronnie the Black!"
-                + "\nYou has awaken him from his afternoon nap, and is now thirsty and angry.",200,20,20);
+                + "\nYou has awaken him from his afternoon nap, and is now thirsty and angry.",200,20,20,666);
         
         findRoomInList("Mining Tunnel").addMonster(rat);
         findRoomInList("Guards Quarter").addMonster(goblin);
