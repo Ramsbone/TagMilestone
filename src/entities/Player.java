@@ -55,6 +55,20 @@ public class Player extends Character{
         return (this.inventory.size() == inventoryMaxSize);
     }
     
+         /**
+     * checks if potion inventory is empty
+     */
+    public boolean isPotionInventoryEmpty() {
+        return this.potionInventory.isEmpty();
+    }
+    
+    /**
+     * checks if potion inventory exceeds the defined maximum
+     */
+    public boolean isPotionInventoryFull() {
+        return (this.potionInventory.size() == potionInventoryMaxSize);
+    }
+    
     public int getInventoryMaxSize() {
         return inventoryMaxSize;
     }
@@ -80,22 +94,6 @@ public class Player extends Character{
         super.setHealthMaxSize(super.getHealthMaxSize()+10);
     }
     
-        /**
-     * checks if character inventory is empty
-     */
-    public boolean isPotionInventoryEmpty() {
-        return this.potionInventory.isEmpty();
-    }
-    
-    /**
-     * checks if character inventory exceeds the defined maximum
-     */
-    public boolean isPotionInventoryFull() {
-        return (this.potionInventory.size() == potionInventoryMaxSize);
-    }
-
-
-
 
 }
 
