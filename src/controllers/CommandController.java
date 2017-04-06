@@ -186,7 +186,8 @@ public class CommandController {
         } else {
             Item item = player.getCurrentRoom().checkForItem(parameter);
             if (item != null) {
-                if (player.isInventoryFull()) {
+                if ((player.isInventoryFull() && !(item instanceof Potion)) 
+                        || (player.isPotionInventoryFull() && (item instanceof Potion))) {
                     ui.cantCarryMore();
                 } else {
                     if (item.isTakeable() == false) {
@@ -260,7 +261,7 @@ public class CommandController {
             if (item instanceof Potion) {
                 int value = ((Potion) item).getHealthChange();
                 item.changeHealth(player, value);
-                player.removeFromInventory(item);
+                player.removeFromPotionInventory(item);
                 if (value < 0) {
                     ui.drinkPoison(item.getName(), player.getHealth());
                 } else {
