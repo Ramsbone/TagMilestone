@@ -14,6 +14,7 @@ import entities.Room;
 import entities.Spell;
 import entities.Potion;
 import entities.Furniture;
+import entities.Portal;
 import entities.Weapon;
 
 public class Boundary {
@@ -400,74 +401,23 @@ public class Boundary {
 
     }
     
-//    public void showSpellEffect(Player player, Spell spell) {
-//
-//        String output = "***********************************************************************************"
-//                + "\nYou have read the " + spell.getName() + ", and following changes inflict on you"
-//                + "\n***********************************************************************************";
-//
-//        if (spell.getDamageChange() != 0) {
-//
-//            output += "\nYour damage without any weapons has been changed to " + (player.getDefaultDamage());
-//
-//        }
-//        if (spell.getProtectionChange() != 0) {
-//
-//            output += "\nYour protection without any armour has been changed to " + (player.getDefaultProtection());
-//
-//        }
-//        if (spell.getHealthChange() != 0) {
-//
-//            output += "\nYour maximum health has been changed to " + (player.getHealthMaxSize()) +" hp";
-//
-//        }
-//        output += "\n***********************************************************************************";
-//
-//        System.out.println(output);
-//
-//    }
     
-//    public void drinkHealth(String name, int value) {
-//
-//        System.out.println("You drink " + name + " and now has " + value + " hp.");
-//
-//    }
-//    
-//    public void drinkPoison(String name, int value) {
-//        if (value > 0) {
-//            System.out.println("You drink " + name + " and now has " + value + " hp.");
-//        }
-//    }
-    
-//    public void holdItem(String name, int value) {
-//        System.out.println("You hold " + name + " and your now inflict " + value + " damage points when attacking.");
-//        System.out.println("***********************************************************************************");
-//    }
-
-//    public void wearItem(String name, int value) {
-//        System.out.println("You now wear " + name + " as armour and has " + value + " points in total protection.");
-//    }
-
-    
-
-    
-    
-    public void portalUsed() {
-
+    public void useItem(Portal portal, ArrayList<Boolean> moveOn){
         String output = "***********************************************************************************"
                 + "\nYou are been pulled into a spiralling light and teleported to another place."
                 + "\nThe bright light and the fast movement makes you feel a little dizzy and confused.";
 
         System.out.println(output);
     }
+    
+    public void goldInChest(int i){
+        String output = "You found "+i+" gold and added it to your inventory";
+        System.out.println(output);
+    }
+    
 
     public void pickUpItemFirst() {
         System.out.println("You can't use this item before you carry it.");
-    }
-    
-    public void useFurniture() {
-        System.out.println("You have used this piece of furniture");
-        System.out.println("***********************************************************************************");
     }
     
     
@@ -669,9 +619,6 @@ public class Boundary {
         System.out.println(output);
     }
     
-     public void goldInChest(int i){
-        String output = "You found "+i+" gold and added it to your inventory";
-        System.out.println(output);
-    }
+     
 
 }
