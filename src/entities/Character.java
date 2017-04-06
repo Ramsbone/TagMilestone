@@ -32,6 +32,8 @@ public abstract class Character {
         this.weapon = null;
         this.armour = null;
         this.inventory = new ArrayList();
+        this.potionInventory = new ArrayList();
+
     }
     
     public Character(String name, 
@@ -45,6 +47,7 @@ public abstract class Character {
         this.defaultProtection = startProtection;
         this.protection = defaultProtection;
         this.inventory = new ArrayList();
+        this.potionInventory = new ArrayList();
         
     }
     
