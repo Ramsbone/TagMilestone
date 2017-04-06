@@ -27,15 +27,14 @@ public class Potion extends Item {
         ArrayList<String> output = new ArrayList<String>();
         output.add(this.getName());
 
-        int healthChange = this.getHealthChange();
         int characterHealth = c.getHealth();
         int characterMaxHealth = c.getHealthMaxSize();
-
-        if (characterHealth + healthChange > characterMaxHealth) {
-            healthChange = characterMaxHealth - characterHealth;
+        int newHealth = characterHealth + this.getHealthChange();
+        if (newHealth > characterMaxHealth) {
+            newHealth = characterMaxHealth;
         }
-        c.setHealth(characterHealth + healthChange);
-        output.add(Integer.toString(healthChange));
+        c.setHealth(newHealth);
+        output.add(Integer.toString(newHealth));
         c.removeFromPotionInventory(this);
         
         return output;
