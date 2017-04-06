@@ -341,6 +341,7 @@ public class Builder {
         findRoomInList("Pirates Hideout").addToInventory(portal1);
         findRoomInList("Priests Room").addToInventory(protection);
         findRoomInList("Pirates Hideout").addToInventory(badspell);
+        findRoomInList("Food Storage").addToInventory(cola);
         
         /*
         Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!");
@@ -376,6 +377,7 @@ public class Builder {
         tempRoomList.get(0).addToInventory(potion01);
         tempRoomList.get(1).addToInventory(potion02);
         tempRoomList.get(2).addToInventory(potion03);
+        
     }   
     
     
