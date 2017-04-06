@@ -13,6 +13,7 @@ import entities.Potion;
 import entities.Portal;
 import entities.Room;
 import entities.Spell;
+import entities.Treasure;
 import entities.Weapon;
 import entities.furniture.TreasureChest;
 import exceptions.InitiationException;
@@ -319,6 +320,7 @@ public class Builder {
         Potion mpotion2 = new Potion("Small bottle",25,"Drinkable potion in a glassbottle");
         Potion mpotion3 = new Potion("Golden bottle",50,"Drinkable potion in a glassbottle");
         Potion mpotion4 = new Potion("White bottle",100,"Drinkable potion in a glassbottle");
+        Potion cola = new Potion("Coca Cola",200,"The programmers prefered liquid");
         
         Spell fightSpell = new Spell("Fighting Spell","Improves your meelee skills and makes you stronger",5,10,0);
         Spell protection = new Spell("Protection Spell","Increases your protection against attacks",0,0,10);
@@ -326,6 +328,10 @@ public class Builder {
         
         TreasureChest chest = new TreasureChest("Luggage", "A large chest made of Sapient Pearwood. "
                 + "\nThere seems to be hundreds of little legs protruding from its underside.", 200);
+        
+        Treasure pearls = new Treasure("Pearl Necklace","Beautiful white pearls",25);
+        Treasure ring = new Treasure("Gold Ring","Simple golden ring, with ancient elven inscriptions",50);
+        Treasure tiara = new Treasure("Diamond Tiara","Golden tiara, jeweled with lots of diamonds and rubies.",80);
         
         findRoomInList("Mining Tunnel").addToInventory(stick);
         findRoomInList("Mining Tunnel").addToInventory(chest);
@@ -340,6 +346,10 @@ public class Builder {
         findRoomInList("Pirates Hideout").addToInventory(portal1);
         findRoomInList("Priests Room").addToInventory(protection);
         findRoomInList("Pirates Hideout").addToInventory(badspell);
+        findRoomInList("Food Storage").addToInventory(cola);
+        findRoomInList("Lovers Den").addToInventory(pearls);
+        findRoomInList("Kings Tomb").addToInventory(ring);
+        findRoomInList("Queens Tomb").addToInventory(tiara);
         
         /*
         Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!");
@@ -375,6 +385,7 @@ public class Builder {
         tempRoomList.get(0).addToInventory(potion01);
         tempRoomList.get(1).addToInventory(potion02);
         tempRoomList.get(2).addToInventory(potion03);
+        
     }   
     
     
