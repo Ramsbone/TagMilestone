@@ -319,6 +319,7 @@ public class Builder {
         Potion mpotion2 = new Potion("Small bottle",25,"Drinkable potion in a glassbottle");
         Potion mpotion3 = new Potion("Golden bottle",50,"Drinkable potion in a glassbottle");
         Potion mpotion4 = new Potion("White bottle",100,"Drinkable potion in a glassbottle");
+        Potion cola = new Potion("Coca Cola",200,"The programmers prefered liquid");
         
         Spell fightSpell = new Spell("Fighting Spell","Improves your meelee skills and makes you stronger",5,10,0);
         Spell protection = new Spell("Protection Spell","Increases your protection against attacks",0,0,10);
