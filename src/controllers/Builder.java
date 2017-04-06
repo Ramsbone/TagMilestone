@@ -283,7 +283,7 @@ public class Builder {
         findRoomInList("Prison Dungeon").addMonster(troll);
         findRoomInList("Gallery").addMonster(halfgiant);
         findRoomInList("Kings Tomb").addMonster(dragon);
-        findRoomInList("Wizards Valut").addMonster(boss);
+        findRoomInList("Wizards Vault").addMonster(boss);
         
     }
     
