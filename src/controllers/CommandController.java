@@ -253,39 +253,23 @@ public class CommandController {
         if (item != null) {
             if (item instanceof Weapon) {
                 ui.useItem((Weapon)item, ((Weapon) item).useItem(player));
-                //player.setWeapon((Weapon) item);
-//                ui.holdItem(item.getName(), player.getDamage());
             }
             if (item instanceof Armour) {
                 ui.useItem((Armour) item, ((Armour) item).useItem(player));
-//                player.setArmour((Armour) item);
-//                ui.wearItem(item.getName(), player.getProtection());
             }
             if (item instanceof Potion) {
                 ui.useItem((Potion) item, ((Potion) item).useItem(player));
-//                int value = ((Potion) item).getHealthChange();
-//                item.changeHealth(player, value);
-//                player.removeFromInventory(item);
-//                if (value < 0) {
-//                    ui.drinkPoison(item.getName(), player.getHealth());
-//                } else {
-//                    ui.drinkHealth(item.getName(), player.getHealth());
-//                }
             }
             if (item instanceof Spell) {
-                //((Spell) item).activateSpell(player);
                 ui.useItem((Spell) item, player, ((Spell) item).useItem(player));
-//ui.showSpellEffect(player, ((Spell) item));
             }
 
         } else {
             item = player.getCurrentRoom().checkForItem(parameter);
             if (item != null) {
                 if (item instanceof Portal) {
-                    Room newRoom = ((Portal) item).getRoomToEnter();
-                    player.setCurrentRoom(newRoom);
-                    moveOn = true;
-                    ui.portalUsed();
+                    moveOn = true; 
+                    ui.useItem((Portal) item, ((Portal) item).useItem(player));
                 }
                 if (item instanceof TreasureChest) {
                     int goldInChest = ((TreasureChest) item).getGoldReserve();
