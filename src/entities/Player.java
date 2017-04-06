@@ -14,11 +14,11 @@ public class Player extends Character{
 
     private int defaultInventorySize;
     private int inventoryMaxSize;
+    private int potionInventoryMaxSize;
     private Room currentRoom;
     private String moveDirection;
     private int killCounter;
-    public ArrayList<Item> potionInventory;
-    private int potionInventoryMaxSize;
+    
     
     
     public Player(String name, Room currentRoom) {
@@ -84,23 +84,17 @@ public class Player extends Character{
      * checks if character inventory is empty
      */
     public boolean isPotionInventoryEmpty() {
-        return this.inventory.isEmpty();
+        return this.potionInventory.isEmpty();
     }
     
     /**
      * checks if character inventory exceeds the defined maximum
      */
     public boolean isPotionInventoryFull() {
-        return (this.inventory.size() == inventoryMaxSize);
-    }
-    
-    public void addToPotionInventory(Item i) {
-        inventory.add(i);
+        return (this.potionInventory.size() == potionInventoryMaxSize);
     }
 
-    public void removeFromPotionInventory(Item i) {
-        inventory.remove(i);
-    }
+
 
 
 }
