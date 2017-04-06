@@ -18,6 +18,7 @@ import entities.Armour;
 import entities.Furniture;
 import entities.Portal;
 import entities.Potion;
+import entities.furniture.TreasureChest;
 
 public class CommandController {
 
@@ -286,9 +287,10 @@ public class CommandController {
                     moveOn = true;
                     ui.portalUsed();
                 }
-                if (item instanceof Furniture) {
-                    ((Furniture) item).use(player);
-                    ui.useFurniture();
+                if (item instanceof TreasureChest) {
+                    int goldInChest = ((TreasureChest) item).getGoldReserve();
+                    ((TreasureChest) item).use(player);
+                    ui.goldInChest(goldInChest);
                 } else {
                     ui.pickUpItemFirst();
                 }

@@ -667,5 +667,10 @@ public class Boundary {
         
         System.out.println(output);
     }
+    
+     public void goldInChest(int i){
+        String output = "You found "+i+" gold and added it to your inventory";
+        System.out.println(output);
+    }
 
 }
