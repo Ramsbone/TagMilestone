@@ -86,16 +86,28 @@ public abstract class Item {
      * Adds item to the player's inventory, and removes it from player's currentRoom inventory
      */
     public void pickUpItem(Player player) {
+        if (this instanceof Potion) {
+        player.addToPotionInventory(this);
+        player.getCurrentRoom().removeFromInventory(this);
+        }
+        else {
         player.addToInventory(this);
         player.getCurrentRoom().removeFromInventory(this);
+        }
     }
 
      /**
      * Removes item from the player's inventory, and adds it to player's currentRoom inventory 
      */
     public void DropItem(Player player) {
+        if (this instanceof Potion) {
+        player.getCurrentRoom().addToInventory(this);
+        player.removeFromPotionInventory(this);
+        }
+        else {
         player.getCurrentRoom().addToInventory(this);
         player.removeFromInventory(this);
+        }
     }
 
     public boolean isTakeable() {
