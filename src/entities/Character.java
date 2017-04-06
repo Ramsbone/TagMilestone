@@ -188,6 +188,13 @@ public abstract class Character {
             }
         }
 
+        for (Item item : potionInventory) {
+            String check = item.getName().replaceAll(" ", "");
+            if (name.equals(check.toLowerCase())) {
+                output = item;
+            }
+        }
+
         return output;
     }
 }
