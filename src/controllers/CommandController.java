@@ -188,7 +188,7 @@ public class CommandController {
             if (item != null) {
                 if ((player.isInventoryFull() && !(item instanceof Potion)) 
                         || (player.isPotionInventoryFull() && (item instanceof Potion))) {
-                    ui.cantCarryMore();
+                    ui.cantCarryMore(item);
                 } else {
                     if (item.isTakeable() == false) {
                         ui.cantPickUpObject();

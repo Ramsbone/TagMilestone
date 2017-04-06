@@ -11,6 +11,8 @@ import java.util.Scanner;
 import entities.Player;
 import entities.Room;
 import entities.Spell;
+import entities.Potion;
+import entities.Furniture;
 import entities.Weapon;
 
 public class Boundary {
@@ -324,8 +326,13 @@ public class Boundary {
         System.out.println("unknown respond - please type y or n.");
     }
 
-    public void cantCarryMore() {
-        System.out.println("You can't carry anymore.");
+    public void cantCarryMore(Item item) {
+        if (item instanceof Potion) {
+            System.out.println("You do not have room for more potions.");
+        } else
+        {
+            System.out.println("You can't carry anymore items.");
+        }
     }
 
     public void cantPickUpObject() {
