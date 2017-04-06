@@ -18,6 +18,7 @@ public abstract class Character {
     private Weapon weapon;
     private Armour armour;
     public ArrayList<Item> inventory;
+    public ArrayList<Item> potionInventory;
     
     public Character(String name, Room currentRoom) {
         this.name = name;
@@ -162,6 +163,15 @@ public abstract class Character {
         inventory.remove(i);
     }
 
+            
+    public void addToPotionInventory(Item i) {
+        potionInventory.add(i);
+    }
+
+    public void removeFromPotionInventory(Item i) {
+        potionInventory.remove(i);
+    }
+    
      /**
      * Checks if an item with a specific name is present in character inventory
      * 
