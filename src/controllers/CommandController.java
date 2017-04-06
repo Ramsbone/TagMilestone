@@ -84,9 +84,9 @@ public class CommandController {
                     case "help":
                         ui.showHelp();
                         break;
-                    case "gold":
-                        ui.showPlayerGold(player);
-                        break;
+//                    case "gold":
+//                        ui.showPlayerGold(player);
+//                        break;
                     case "quit":
                         moveOn = true;
                         break;
@@ -331,7 +331,7 @@ public class CommandController {
             String[] words = input.split(" ");
             switch (words[0]) {
                 case "help":
-                case "gold":
+//               case "gold":
                 case "quit":
                 case "new":
                 case "n":

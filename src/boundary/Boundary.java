@@ -84,7 +84,7 @@ public class Boundary {
         String output = "***********************************************************************************"
                 + "\nChoose from following commands:"
                 + "\n***********************************************************************************"
-                + "\n-'gold'\t\t\t\t: Shows how much gold is carried"
+//                + "\n-'gold'\t\t\t\t: Shows how much gold is carried"
                 + "\n-'help'\t\t\t\t: Shows the commands which can be typed"
                 + "\n-'status'\t\t\t: Shows the player statistics"
                 + "\n-'quit'\t\t\t\t: Quits the game, process will not be saved"
@@ -235,6 +235,7 @@ public class Boundary {
     public void showPlayerInventory(Player player) {
 
         String output = "***********************************************************************************"
+                + "\nGold amount      : " + (player.getGold()==0 ? "" : (player.getGold() + " pieces of gold."))
                 + "\nPlayer inventory : " + (player.isInventoryEmpty() ? "" : showItems(player.getInventory()))
                 + "\nPotion inventory : " + (player.isPotionInventoryEmpty() ? "" : showItems(player.getPotionInventory()))
                 + "\n***********************************************************************************";
