@@ -19,7 +19,7 @@ public class SaveAndLoad {
         String RoomMonsterItemString = "";
         
 //        
-//        PrintWriter out = new PrintWriter("./src/files/savegame.txt");
+//        PrintWriter out = new PrintWriter("./src/files/savegame01.txt");
 //  
 //        String temp;
 //        for (String[] item: this.highscore){ 

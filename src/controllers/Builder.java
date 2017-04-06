@@ -89,7 +89,8 @@ public class Builder {
             int ranInt = r.nextInt(rooms.size());
             if (!output.contains(rooms.get(ranInt))
                     && !rooms.get(ranInt).getName().equals("Blocked Tunnel")
-                    && !rooms.get(ranInt).getName().equals("Exit Point")) {
+                    && !rooms.get(ranInt).getName().equals("Exit Point")
+                    && !rooms.get(ranInt).getName().equals("Wizards Vault")) {
                 output.add(rooms.get(ranInt));
             }
         }

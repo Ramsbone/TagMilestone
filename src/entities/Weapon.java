@@ -4,6 +4,8 @@
 
 package entities;
 
+import java.util.ArrayList;
+
 public class Weapon extends Item {
 
     private final int damageIncrease;
@@ -21,6 +23,13 @@ public class Weapon extends Item {
 //        p.setWeapon((Weapon) item);
 //        return (Weapon) item;
 //    }
-    
+    public ArrayList<String> useItem(Character c){
+        ArrayList<String> output = new ArrayList<String>();
+        output.add(this.getName());
+        output.add(Integer.toString(this.getDamageIncrease()));
+        c.setWeapon(this);
+        output.add(Integer.toString(c.getDefaultDamage()));
+        return output;
+    }
     
 }

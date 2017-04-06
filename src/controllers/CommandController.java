@@ -186,8 +186,9 @@ public class CommandController {
         } else {
             Item item = player.getCurrentRoom().checkForItem(parameter);
             if (item != null) {
-                if (player.isInventoryFull()) {
-                    ui.cantCarryMore();
+                if ((player.isInventoryFull() && !(item instanceof Potion)) 
+                        || (player.isPotionInventoryFull() && (item instanceof Potion))) {
+                    ui.cantCarryMore(item);
                 } else {
                     if (item.isTakeable() == false) {
                         ui.cantPickUpObject();
@@ -248,21 +249,19 @@ public class CommandController {
         Item item = player.checkForItem(parameter);
         if (item != null) {
             if (item instanceof Weapon) {
-                //int value = ((Weapon) item).getDamageIncrease();
-                //item.changeDamage(player, value);
-                player.setWeapon((Weapon) item);
-                ui.holdItem(item.getName(), player.getDamage());
+                ui.useItem((Weapon)item, ((Weapon) item).useItem(player));
+                //player.setWeapon((Weapon) item);
+//                ui.holdItem(item.getName(), player.getDamage());
             }
             if (item instanceof Armour) {
-                //int value = ((Armour) item).getProtectionIncrease();
-                //item.changeProtection(player, value);
-                player.setArmour((Armour) item);
-                ui.wearItem(item.getName(), player.getProtection());
+                ui.useItem((Armour) item, ((Armour) item).useItem(player));
+//                player.setArmour((Armour) item);
+//                ui.wearItem(item.getName(), player.getProtection());
             }
             if (item instanceof Potion) {
                 int value = ((Potion) item).getHealthChange();
                 item.changeHealth(player, value);
-                player.removeFromInventory(item);
+                player.removeFromPotionInventory(item);
                 if (value < 0) {
                     ui.drinkPoison(item.getName(), player.getHealth());
                 } else {
@@ -285,7 +284,7 @@ public class CommandController {
                 }
                 if (item instanceof Furniture) {
                     ((Furniture) item).use(player);
-                    //her skal være en ui printout der afhænger af hvilket slags furniture der er tale om
+                    ui.useFurniture();
                 } else {
                     ui.pickUpItemFirst();
                 }

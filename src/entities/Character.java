@@ -61,6 +61,10 @@ public abstract class Character {
         return inventory;
     }
 
+    public ArrayList<Item> getPotionInventory() {
+        return potionInventory;
+    }
+
     public int getHealthMaxSize() {
         return healthMaxSize;
     }
@@ -182,6 +186,13 @@ public abstract class Character {
         Item output = null;
 
         for (Item item : inventory) {
+            String check = item.getName().replaceAll(" ", "");
+            if (name.equals(check.toLowerCase())) {
+                output = item;
+            }
+        }
+
+        for (Item item : potionInventory) {
             String check = item.getName().replaceAll(" ", "");
             if (name.equals(check.toLowerCase())) {
                 output = item;
