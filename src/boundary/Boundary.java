@@ -258,6 +258,7 @@ public class Boundary {
 
         String output = "***********************************************************************************"
                 + "\nPlayer inventory : " + (player.isInventoryEmpty() ? "" : showItems(player.getInventory()))
+                + "\nPotion inventory : " + (player.isPotionInventoryEmpty() ? "" : showItems(player.getPotionInventory()))
                 + "\n***********************************************************************************";
 
         System.out.println(output);

@@ -61,6 +61,10 @@ public abstract class Character {
         return inventory;
     }
 
+    public ArrayList<Item> getPotionInventory() {
+        return potionInventory;
+    }
+
     public int getHealthMaxSize() {
         return healthMaxSize;
     }

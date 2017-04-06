@@ -69,6 +69,7 @@ public class Player extends Character{
         return (this.potionInventory.size() == potionInventoryMaxSize);
     }
     
+    
     public int getInventoryMaxSize() {
         return inventoryMaxSize;
     }
