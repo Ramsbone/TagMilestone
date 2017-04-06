@@ -3,6 +3,8 @@
 */
 package entities;
 
+import java.util.ArrayList;
+
 
 public class Spell extends Item{
     
@@ -28,6 +30,19 @@ public class Spell extends Item{
 
     public int getProtectionChange() {
         return protectionChange;
+    }
+    
+    public ArrayList<String> useItem(Character c){
+        activateSpell((Player) c);
+        
+        ArrayList<String> output = new ArrayList<String>();
+        output.add(this.getName());
+        output.add(Integer.toString(this.getDamageChange()));
+        output.add(Integer.toString(this.getProtectionChange()));
+        output.add(Integer.toString(this.getHealthChange()));
+        
+        
+        return output;
     }
     
     /**

@@ -110,18 +110,20 @@ public class FightController {
                 //ui.wearItem(item.getName(), value);
             }
             if (item instanceof Potion) {
-                int value = ((Potion) item).getHealthChange();
-                item.changeHealth(player, value);
-                player.removeFromInventory(item);
-                if (value < 0) {
-                    ui.drinkPoison(item.getName(), player.getHealth());
-                } else {
-                    ui.drinkHealth(item.getName(), player.getHealth());
-                }
+                ui.useItem((Potion) item, ((Potion) item).useItem(player));
+//                int value = ((Potion) item).getHealthChange();
+//                item.changeHealth(player, value);
+//                player.removeFromInventory(item);
+//                if (value < 0) {
+//                    ui.drinkPoison(item.getName(), player.getHealth());
+//                } else {
+//                    ui.drinkHealth(item.getName(), player.getHealth());
+//                }
             }
             if (item instanceof Spell) {
-                ((Spell) item).activateSpell(player);
-                ui.showSpellEffect(player, ((Spell) item));
+                ui.useItem((Spell) item, player, ((Spell) item).useItem(player));
+                //((Spell) item).activateSpell(player);
+                //ui.showSpellEffect(player, ((Spell) item));
             }
 
         } else {

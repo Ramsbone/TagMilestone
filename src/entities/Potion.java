@@ -4,6 +4,8 @@
 
 package entities;
 
+import java.util.ArrayList;
+
 public class Potion extends Item {
     
     private final int healthChange;
@@ -18,5 +20,15 @@ public class Potion extends Item {
         return healthChange;
     }
     
+    
+    public ArrayList<String> useItem(Character c){
+                
+        ArrayList<String> output = new ArrayList<String>();
+        output.add(this.getName());
+        output.add(Integer.toString(this.getHealthChange()));
+        
+        
+        return output;
+    }
       
 }
