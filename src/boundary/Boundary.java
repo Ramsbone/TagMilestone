@@ -9,6 +9,7 @@ import entities.Monster;
 import java.util.ArrayList;
 import java.util.Scanner;
 import entities.Player;
+import entities.Potion;
 import entities.Room;
 import entities.Spell;
 import entities.Weapon;
@@ -351,10 +352,83 @@ public class Boundary {
                 Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(2))+
                 " points in total protection."); 
         System.out.println("***********************************************************************************");
+    }
     
+    public void useItem(Potion potion, ArrayList<String> nameAndHealthChangeValue){
+        System.out.println("You drink " + 
+                nameAndHealthChangeValue.get(0) + 
+                " and now has " + 
+                nameAndHealthChangeValue.get(1) + 
+                " hp.");
+    }
     
+    public void useItem(Spell spell, Player p, ArrayList<String> nameAndThreeAttributes){
+        String output = "***********************************************************************************"
+                + "\nYou have read the " + nameAndThreeAttributes.get(0) + ", and following changes inflict on you"
+                + "\n***********************************************************************************";
+        
+        if (nameAndThreeAttributes.get(1) != "0") {
+
+            output += "\nYour damage without any weapons has been changed to " + 
+                    p.getDefaultDamage();
+
+        }
+        if (nameAndThreeAttributes.get(2) != "0") {
+
+            output += "\nYour protection without any armour has been changed to " + 
+                    (p.getDefaultProtection());
+
+        }
+        if (nameAndThreeAttributes.get(3) != "0") {
+
+            output += "\nYour maximum health has been changed to " + 
+                    (p.getHealthMaxSize()) +" hp";
+
+        }
+        output += "\n***********************************************************************************";
+
+        System.out.println(output);
 
     }
+    
+//    public void showSpellEffect(Player player, Spell spell) {
+//
+//        String output = "***********************************************************************************"
+//                + "\nYou have read the " + spell.getName() + ", and following changes inflict on you"
+//                + "\n***********************************************************************************";
+//
+//        if (spell.getDamageChange() != 0) {
+//
+//            output += "\nYour damage without any weapons has been changed to " + (player.getDefaultDamage());
+//
+//        }
+//        if (spell.getProtectionChange() != 0) {
+//
+//            output += "\nYour protection without any armour has been changed to " + (player.getDefaultProtection());
+//
+//        }
+//        if (spell.getHealthChange() != 0) {
+//
+//            output += "\nYour maximum health has been changed to " + (player.getHealthMaxSize()) +" hp";
+//
+//        }
+//        output += "\n***********************************************************************************";
+//
+//        System.out.println(output);
+//
+//    }
+    
+//    public void drinkHealth(String name, int value) {
+//
+//        System.out.println("You drink " + name + " and now has " + value + " hp.");
+//
+//    }
+//    
+//    public void drinkPoison(String name, int value) {
+//        if (value > 0) {
+//            System.out.println("You drink " + name + " and now has " + value + " hp.");
+//        }
+//    }
     
 //    public void holdItem(String name, int value) {
 //        System.out.println("You hold " + name + " and your now inflict " + value + " damage points when attacking.");
@@ -365,17 +439,9 @@ public class Boundary {
 //        System.out.println("You now wear " + name + " as armour and has " + value + " points in total protection.");
 //    }
 
-    public void drinkHealth(String name, int value) {
+    
 
-        System.out.println("You drink " + name + " and now has " + value + " hp.");
-
-    }
-
-    public void drinkPoison(String name, int value) {
-        if (value > 0) {
-            System.out.println("You drink " + name + " and now has " + value + " hp.");
-        }
-    }
+    
     
     public void portalUsed() {
 
@@ -395,32 +461,7 @@ public class Boundary {
         System.out.println("***********************************************************************************");
     }
     
-    public void showSpellEffect(Player player, Spell spell) {
-
-        String output = "***********************************************************************************"
-                + "\nYou have read the " + spell.getName() + ", and following changes inflict on you"
-                + "\n***********************************************************************************";
-
-        if (spell.getDamageChange() != 0) {
-
-            output += "\nYour damage without any weapons has been changed to " + (player.getDefaultDamage());
-
-        }
-        if (spell.getProtectionChange() != 0) {
-
-            output += "\nYour protection without any armour has been changed to " + (player.getDefaultProtection());
-
-        }
-        if (spell.getHealthChange() != 0) {
-
-            output += "\nYour maximum health has been changed to " + (player.getHealthMaxSize()) +" hp";
-
-        }
-        output += "\n***********************************************************************************";
-
-        System.out.println(output);
-
-    }
+    
     
     //the following functions does not have to be changed --christian - 2017-04-06
     
