@@ -12,6 +12,8 @@ import entities.Player;
 import entities.Potion;
 import entities.Room;
 import entities.Spell;
+import entities.Potion;
+import entities.Furniture;
 import entities.Weapon;
 
 public class Boundary {
@@ -171,7 +173,7 @@ public class Boundary {
     public void usedQuitCommand() {
 
         String output = "***********************************************************************************"
-                + "\nYou have chosen to quit the game. Come back and play TAG soon again.";
+                + "\nYou have chosen to quit the game.";
         System.out.println(output);
     }
 
@@ -234,6 +236,7 @@ public class Boundary {
 
         String output = "***********************************************************************************"
                 + "\nPlayer inventory : " + (player.isInventoryEmpty() ? "" : showItems(player.getInventory()))
+                + "\nPotion inventory : " + (player.isPotionInventoryEmpty() ? "" : showItems(player.getPotionInventory()))
                 + "\n***********************************************************************************";
 
         System.out.println(output);
@@ -324,8 +327,13 @@ public class Boundary {
         System.out.println("unknown respond - please type y or n.");
     }
 
-    public void cantCarryMore() {
-        System.out.println("You can't carry anymore.");
+    public void cantCarryMore(Item item) {
+        if (item instanceof Potion) {
+            System.out.println("You do not have room for more potions.");
+        } else
+        {
+            System.out.println("You can't carry anymore items.");
+        }
     }
 
     public void cantPickUpObject() {
@@ -337,8 +345,8 @@ public class Boundary {
         System.out.println("You hold " + 
                 nameAndDamageIncreaseAnddefaultDamage.get(0) + 
                 " and your now inflict " + 
-                Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(1))+  
-                Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(2))+ 
+                (Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(1))+  
+                Integer.parseInt(nameAndDamageIncreaseAnddefaultDamage.get(2)))+ 
                 " damage points when attacking.");
         System.out.println("***********************************************************************************");
     
@@ -348,8 +356,8 @@ public class Boundary {
         System.out.println("You now wear " + 
                 nameAndProtectionIncreaseAnddefaultProtection.get(0)+
                 " as armour and has "+
-                Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(1))+
-                Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(2))+
+                (Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(1))+
+                Integer.parseInt(nameAndProtectionIncreaseAnddefaultProtection.get(2)))+
                 " points in total protection."); 
         System.out.println("***********************************************************************************");
     }

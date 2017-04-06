@@ -22,11 +22,11 @@ public class Potion extends Item {
     
     
     public ArrayList<String> useItem(Character c){
-                
+        
         ArrayList<String> output = new ArrayList<String>();
         output.add(this.getName());
         output.add(Integer.toString(this.getHealthChange()));
-        
+        c.removeFromPotionInventory(this);
         
         return output;
     }

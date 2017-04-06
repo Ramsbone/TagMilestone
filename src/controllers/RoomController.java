@@ -22,8 +22,7 @@ public class RoomController {
 
     //Used when new room is entered to show room info and to check for NPC's.
     public void enterRoom(Player player) {
-        
-
+    
         checkForBoobyTrap(player, player.getCurrentRoom());
         checkForTaxcollector(player, player.getCurrentRoom());
         checkForThief(player, player.getCurrentRoom());
