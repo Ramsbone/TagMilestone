@@ -270,8 +270,8 @@ public class Boundary {
     public void boobyTrapReleased(Player player) {
 
         String output = "***********************************************************************************"
-                + "You have encountered a boobytrap in the room and releases it by accident."
-                + "\nPlayer " + player.getName() + " has " + player.getHealth() + " hp.";
+                + "\nYou have encountered a boobytrap in the room and releases it by accident."
+                + "\nPlayer " + player.getName() + " has " + player.getHealth() + " / " + player.getHealthMaxSize()+ " hp.";
 
         System.out.println(output);
     }
@@ -279,7 +279,7 @@ public class Boundary {
     public void encounterThief(Player player) {
 
         String output = "***********************************************************************************"
-                + "You have encountered a thief that steals some of your gold."
+                + "\nYou have encountered a thief that steals some of your gold."
                 + "\nPlayer " + player.getName() + " has " + player.getGold() + " pieces of gold.";
         System.out.println(output);
 
@@ -288,7 +288,7 @@ public class Boundary {
     public void encounterTaxcollector(Player player) {
 
         String output = "***********************************************************************************"
-                + "You have encountered a taxcollector who collects some of your gold in tax."
+                + "\nYou have encountered a taxcollector who collects some of your gold in tax."
                 + "\nPlayer " + player.getName() + " has " + player.getGold() + " pieces of gold.";
         
         System.out.println(output);
