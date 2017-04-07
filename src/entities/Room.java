@@ -152,6 +152,10 @@ public class Room {
         return thief;
     }
     
+    public boolean isMonster() {
+        return (getMonster() != null);
+    }
+    
     public void addToInventory(Item i) {
         inventory.add(i);
     }

@@ -144,6 +144,7 @@ public class CommandController {
             restartGame = true;
 
         } else {
+            
             ui.showEndText(player.getGold());
             infoFromHighscore(player);
             writeToHighscoreDocument(player);

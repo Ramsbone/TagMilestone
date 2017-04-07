@@ -213,6 +213,17 @@ public class Boundary {
                 + "\n***********************************************************************************\n"
                 + item.getDescription()
                 + "\n***********************************************************************************";
+        if (item instanceof Weapon) {
+                output += "\nThis weapon will increase your damage with " + ((Weapon) item).getDamageIncrease() + " points."
+                + "\n***********************************************************************************";
+        }
+        if (item instanceof Armour) {
+                output += "\nThis armour will increase your protection with " + ((Armour) item).getProtectionIncrease() + " points."
+                + "\n***********************************************************************************";
+            
+        }
+        
+        
         System.out.println(output);
 
     }

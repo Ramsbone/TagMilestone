@@ -74,7 +74,8 @@ public class Builder {
         boolean output = false;
         boolean hasThief = r.isThief();
         boolean hasTaxcollector = r.isTaxcollector();
-        if (hasThief == false && hasTaxcollector == false) {
+        boolean hasMonster = r.isMonster();
+        if (hasThief == false && hasTaxcollector == false && hasMonster == false) {
             output = true;
         }
         return output;
