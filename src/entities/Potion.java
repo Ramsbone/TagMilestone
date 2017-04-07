@@ -23,8 +23,7 @@ public class Potion extends Item {
     
     
     public void useItem(Character c){
-        
-
+   
         int characterHealth = c.getHealth();
         int characterMaxHealth = c.getHealthMaxSize();
         int newHealth = characterHealth + this.getHealthChange();

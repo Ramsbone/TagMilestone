@@ -31,9 +31,7 @@ public class Spell extends Item{
     public int getProtectionChange() {
         return protectionChange;
     }
-    
 
-    
     /**
      * Applies changes to the player's damage, protection and health maximum, according to the values defined in the spell's attributes.
      */

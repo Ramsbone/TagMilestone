@@ -32,12 +32,6 @@ public class Monster extends Character{
         return description;
     }
     
-    public void setInventory(ArrayList<Item> itemsForMonster){
-    for (Item i: itemsForMonster){
-            this.addToInventory(i);
-        }
-    }
-    
     public int monsterDies(Player p){     //removes the first mnster in the list
         Room currentRoom = p.getCurrentRoom();
         int monsterGold = this.getGold();

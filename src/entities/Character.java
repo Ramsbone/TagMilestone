@@ -117,35 +117,29 @@ public abstract class Character {
     }
 
     public void setWeapon(Weapon weapon) {
-        //this.weapon = weapon;
-        //this.addToInventory(weapon);
-//        if (this.getWeapon() != null) {
-//            this.setDamage(this.getDamage()-this.getWeapon().getDamageIncrease());
-//        }
+
         if (weapon != null) {
             int value = ((Weapon) weapon).getDamageIncrease();
             weapon.changeDamage(this, value);
         }
         this.weapon = weapon;
-//        if (!this.inventory.contains(weapon)){
-//            this.addToInventory((Weapon)weapon);
-//        }
+        if (!this.inventory.contains(weapon)) {
+            this.addToInventory(weapon);
+        }
+        
     }
 
     public void setArmour(Armour armour) {
-        //this.armour = armour;
-        //this.addToInventory(armour);
-//        if (this.getArmour() != null) {
-//            this.setProtection(this.getProtection()-this.getArmour().getProtectionIncrease());
-//        }
+
         if (armour != null) {
             int value = ((Armour) armour).getProtectionIncrease();
             armour.changeProtection(this, value);
         }
         this.armour = armour;
-//        if (!this.inventory.contains(armour)){
-//            this.addToInventory((Armour)armour);
-//        }
+        if (!this.inventory.contains(armour)) {
+            this.addToInventory(armour);
+        }
+
     }
 
     public void setHealth(int health) {

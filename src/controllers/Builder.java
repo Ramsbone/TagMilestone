@@ -340,8 +340,7 @@ public class Builder {
         Treasure pearls = new Treasure("Pearl Necklace","Beautiful white pearls",25);
         Treasure ring = new Treasure("Gold Ring","Simple golden ring, with ancient elven inscriptions",50);
         Treasure tiara = new Treasure("Diamond Tiara","Golden tiara, jeweled with lots of diamonds and rubies.",80);
-        
-
+       
 
         findRoomInList("Mining Tunnel").addToInventory(stick);
         findRoomInList("Guards Quarter").addToInventory(fightSpell);
