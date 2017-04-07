@@ -225,7 +225,7 @@ public class CommandController {
                 if (item instanceof Weapon) {
                     Weapon weaponHolded = player.getWeapon();
                     if (weaponHolded != null) {
-                        if (weaponHolded.getName().toLowerCase().equals(parameter)) {
+                        if (weaponHolded.getName().replaceAll(" ", "").toLowerCase().equals(parameter)) {
                             player.setDamage(player.getDefaultDamage());
                             player.setWeapon(null);
                         }
