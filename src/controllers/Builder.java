@@ -290,7 +290,7 @@ public class Builder {
     //Initialize and place items in rooms.
     private void initItems() {
 
-        Weapon stick = new Weapon("Wooden Stick", 5,
+        Weapon stick = new Weapon("Stick", 5,
                 "A wooden stick, a bit heavy and have a good swing. "
                 + "\nIt is a simple weapon, but can offer more than the bare hands.");
         Weapon greatsword = new Weapon("Great Sword", 20,
