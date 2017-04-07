@@ -123,7 +123,7 @@ public class Boundary {
     public void showStat(Player player) {
 
         String output = "***********************************************************************************"
-                + "\nPlayer " + player.getName() + " has " + player.getHealth() + " hp."
+                + "\nPlayer " + player.getName() + " has " + player.getHealth() + " / " + player.getHealthMaxSize()+ " hp."
                 + "\nYou inflict " + player.getDamage() + " damage points and got " + player.getProtection() + " protection points.";
 
         if (player.getWeapon() != null) {
