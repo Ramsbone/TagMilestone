@@ -320,15 +320,17 @@ public class Builder {
         Portal portal2 = new Portal("Mirror Portal", findRoomInList("Narrow Path"), 
                                     "It seems that the mirror on the wall is a magical portal to another place");
         
-        Potion potion01 = new Potion("Green Bottle", 10, "Drinkable potion in a glassbottle");
-        Potion potion02 = new Potion("Yellow Bottle", 20, "Drinkable potion in a glassbottle");
-        Potion potion03 = new Potion("Red Bottle", -30, "Drinkable potion in a glassbottle");
-        Potion mpotion1 = new Potion("Black bottle",20,"Drinkable potion in a glassbottle");
-        Potion mpotion2 = new Potion("Small bottle",25,"Drinkable potion in a glassbottle");
-        Potion mpotion3 = new Potion("Golden bottle",50,"Drinkable potion in a glassbottle");
-        Potion mpotion4 = new Potion("White bottle",100,"Drinkable potion in a glassbottle");
+        Potion potion01 = new Potion("Green Bottle", 50, "Drinkable potion in a glassbottle");
+        Potion potion02 = new Potion("Yellow Bottle", 50, "Drinkable potion in a glassbottle");
+        Potion potion03 = new Potion("Red Bottle", -10, "Drinkable potion in a glassbottle");
+        Potion mpotion1 = new Potion("Black Bottle",50,"Drinkable potion in a glassbottle");
+        Potion mpotion2 = new Potion("Small Bottle",70,"Drinkable potion in a glassbottle");
+        Potion mpotion3 = new Potion("Golden Bottle",100,"Drinkable potion in a glassbottle");
+        Potion mpotion4 = new Potion("White Bottle",100,"Drinkable potion in a glassbottle");
         Potion cola = new Potion("Coca Cola",200,"The programmers prefered liquid");
-        Potion poison = new Potion("Pink bottle", -20, "Drinkable potion in a glassbottle");
+        Potion poison = new Potion("Pink Bottle", -50, "Drinkable potion in a glassbottle");
+        Potion potion04 = new Potion("Clear Bottle",50,"Drinkable potion in a glassbottle");
+        Potion potion05 = new Potion("Blue Bottle",50,"Drinkable potion in a glassbottle");
         
         Spell fightSpell = new Spell("Fighting Spell","Improves your meelee skills and makes you stronger",5,10,0);
         Spell protection = new Spell("Protection Spell","Increases your protection against attacks",0,0,10);
@@ -355,6 +357,8 @@ public class Builder {
         findRoomInList("Kings Tomb").addToInventory(ring);
         findRoomInList("Queens Tomb").addToInventory(tiara);
         findRoomInList("Treasure Room").addToInventory(chest);
+        findRoomInList("Tool Storage").addToInventory(potion04);
+        findRoomInList("Mining Area").addToInventory(potion05);
         
         this.findMonsterInList("Skarsnik").setWeapon(pickaxe);
         this.findMonsterInList("Skarsnik").setArmour(leather);
