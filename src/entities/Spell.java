@@ -32,18 +32,7 @@ public class Spell extends Item{
         return protectionChange;
     }
     
-    public ArrayList<String> useItem(Character c){
-        activateSpell((Player) c);
-        
-        ArrayList<String> output = new ArrayList<String>();
-        output.add(this.getName());
-        output.add(Integer.toString(this.getDamageChange()));
-        output.add(Integer.toString(this.getProtectionChange()));
-        output.add(Integer.toString(this.getHealthChange()));
-        
-        
-        return output;
-    }
+
     
     /**
      * Applies changes to the player's damage, protection and health maximum, according to the values defined in the spell's attributes.

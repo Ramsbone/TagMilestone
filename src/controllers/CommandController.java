@@ -235,7 +235,7 @@ public class CommandController {
                 if (item instanceof Armour) {
                     Armour armourWeared = player.getArmour();
                     if (armourWeared != null) {
-                        if (armourWeared.getName().toLowerCase().equals(parameter)) {
+                        if (armourWeared.getName().replaceAll(" ", "").toLowerCase().equals(parameter)) {
                             player.setProtection(player.getDefaultProtection());
                             player.setArmour(null);
                         }
@@ -256,13 +256,16 @@ public class CommandController {
                 ui.useItem((Weapon)item, player);
             }
             if (item instanceof Armour) {
-                ui.useItem((Armour) item, ((Armour) item).useItem(player));
+                player.setArmour((Armour) item);
+                ui.useItem((Armour) item, player);
             }
             if (item instanceof Potion) {
-                ui.useItem((Potion) item, ((Potion) item).useItem(player));
+                ((Potion) item).useItem(player);
+                ui.useItem((Potion) item, player);
             }
             if (item instanceof Spell) {
-                ui.useItem((Spell) item, player, ((Spell) item).useItem(player));
+                ((Spell) item).activateSpell(player);
+                ui.useItem((Spell) item, player);
             }
 
         } else {

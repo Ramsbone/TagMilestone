@@ -19,11 +19,11 @@ public class Armour extends Item {
         return protectionIncrease;
     }
     
-   public ArrayList<String> useItem(Character c){
-        ArrayList<String> output = new ArrayList<String>();
-        output.add(this.getName());
-        c.setArmour(this);
-        output.add(Integer.toString(c.getProtection()));
-        return output;
-    }    
+//   public ArrayList<String> useItem(Character c){
+//        ArrayList<String> output = new ArrayList<String>();
+//        output.add(this.getName());
+//        c.setArmour(this);
+//        output.add(Integer.toString(c.getProtection()));
+//        return output;
+//    }    
 }

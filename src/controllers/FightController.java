@@ -100,18 +100,18 @@ public class FightController {
                 item.changeDamage(player, value);
                 player.setWeapon((Weapon) item);
                 ui.useItem((Weapon)item, player);                
-//                ui.useItem((Weapon)item, ((Weapon) item).useItem(player));
                 //ui.holdItem(item.getName(), player.getDamage());
             }
             if (item instanceof Armour) {
                 int value = ((Armour) item).getProtectionIncrease();
                 item.changeProtection(player, value);
                 player.setArmour((Armour) item);
-                ui.useItem((Armour) item, ((Armour) item).useItem(player));
+                ui.useItem((Armour) item, player);
                 //ui.wearItem(item.getName(), value);
             }
             if (item instanceof Potion) {
-                ui.useItem((Potion) item, ((Potion) item).useItem(player));
+                ((Potion) item).useItem(player);
+                ui.useItem((Potion) item, player);
 //                int value = ((Potion) item).getHealthChange();
 //                item.changeHealth(player, value);
 //                player.removeFromInventory(item);
@@ -122,7 +122,9 @@ public class FightController {
 //                }
             }
             if (item instanceof Spell) {
-                ui.useItem((Spell) item, player, ((Spell) item).useItem(player));
+                ((Spell) item).activateSpell(player);
+                ui.useItem((Spell) item, player);                
+//                ui.useItem((Spell) item, player, ((Spell) item).useItem(player));
                 //((Spell) item).activateSpell(player);
                 //ui.showSpellEffect(player, ((Spell) item));
             }

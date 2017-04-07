@@ -22,10 +22,8 @@ public class Potion extends Item {
     }
     
     
-    public ArrayList<String> useItem(Character c){
+    public void useItem(Character c){
         
-        ArrayList<String> output = new ArrayList<String>();
-        output.add(this.getName());
 
         int characterHealth = c.getHealth();
         int characterMaxHealth = c.getHealthMaxSize();
@@ -34,10 +32,8 @@ public class Potion extends Item {
             newHealth = characterMaxHealth;
         }
         c.setHealth(newHealth);
-        output.add(Integer.toString(newHealth));
         c.removeFromPotionInventory(this);
         
-        return output;
     }
       
 }

@@ -353,41 +353,41 @@ public class Boundary {
     
     }
     
-    public void useItem(Armour armour, ArrayList<String> nameAndProtectionIncreaseAnddefaultProtection){
+    public void useItem(Armour armour, Player player){
         System.out.println("You now wear " + 
-                nameAndProtectionIncreaseAnddefaultProtection.get(0)+
+                armour.getName()+
                 " as armour and has "+
-                nameAndProtectionIncreaseAnddefaultProtection.get(1)+
+                player.getProtection()+
                 " points in total protection."); 
         System.out.println("***********************************************************************************");
     }
     
-    public void useItem(Potion potion, ArrayList<String> nameAndHealthChangeValue){
+    public void useItem(Potion potion, Player player){
         System.out.println("You drink " + 
-                nameAndHealthChangeValue.get(0) + 
+                potion.getName() + 
                 " and now has " + 
-                nameAndHealthChangeValue.get(1) + 
+                player.getHealth() + 
                 " hp.");
     }
     
-    public void useItem(Spell spell, Player p, ArrayList<String> nameAndThreeAttributes){
+    public void useItem(Spell spell, Player p){
         String output = "***********************************************************************************"
-                + "\nYou have read the " + nameAndThreeAttributes.get(0) + ", and following changes inflict on you"
+                + "\nYou have read the " + spell.getName() + ", and following changes inflict on you"
                 + "\n***********************************************************************************";
         
-        if (nameAndThreeAttributes.get(1) != "0") {
+        if (spell.getDamageChange() != 0) {
 
             output += "\nYour damage without any weapons has been changed to " + 
                     p.getDefaultDamage();
 
         }
-        if (nameAndThreeAttributes.get(2) != "0") {
+        if (spell.getProtectionChange() != 0) {
 
             output += "\nYour protection without any armour has been changed to " + 
                     (p.getDefaultProtection());
 
         }
-        if (nameAndThreeAttributes.get(3) != "0") {
+        if (spell.getHealthChange() != 0) {
 
             output += "\nYour maximum health has been changed to " + 
                     (p.getHealthMaxSize()) +" hp";
