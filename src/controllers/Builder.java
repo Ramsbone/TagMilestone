@@ -275,7 +275,7 @@ public class Builder {
         Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....",100,3,3,47);
         Monster dragon = new Monster("Smaug", "Smaug....",120,10,30,172);
         Monster boss = new Monster("Ronnie","You have encountered the mighty and legendary wizard, Ronnie the Black!"
-                + "\nYou has awaken him from his afternoon nap, and is now thirsty and angry.",200,20,20,666);
+                + "\nYou has awaken him from his afternoon nap, and he is now thirsty and angry.",200,20,20,666);
         
         findRoomInList("Mining Tunnel").addMonster(rat);
         findRoomInList("Guards Quarter").addMonster(goblin);

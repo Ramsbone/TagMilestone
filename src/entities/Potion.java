@@ -14,6 +14,7 @@ public class Potion extends Item {
         super(name, description);
         this.healthChange = healthChange;
         
+        
     }
 
     public int getHealthChange() {
@@ -25,7 +26,15 @@ public class Potion extends Item {
         
         ArrayList<String> output = new ArrayList<String>();
         output.add(this.getName());
-        output.add(Integer.toString(this.getHealthChange()));
+
+        int characterHealth = c.getHealth();
+        int characterMaxHealth = c.getHealthMaxSize();
+        int newHealth = characterHealth + this.getHealthChange();
+        if (newHealth > characterMaxHealth) {
+            newHealth = characterMaxHealth;
+        }
+        c.setHealth(newHealth);
+        output.add(Integer.toString(newHealth));
         c.removeFromPotionInventory(this);
         
         return output;

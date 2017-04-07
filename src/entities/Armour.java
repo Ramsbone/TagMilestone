@@ -22,9 +22,8 @@ public class Armour extends Item {
    public ArrayList<String> useItem(Character c){
         ArrayList<String> output = new ArrayList<String>();
         output.add(this.getName());
-        output.add(Integer.toString(this.getProtectionIncrease()));
         c.setArmour(this);
-        output.add(Integer.toString(c.getDefaultProtection()));
+        output.add(Integer.toString(c.getProtection()));
         return output;
     }    
 }

@@ -6,7 +6,7 @@ package entities;
 import java.util.ArrayList;
 
 public abstract class Character {
-    
+
     private String name;
     private int gold;
     private int health;
@@ -19,7 +19,7 @@ public abstract class Character {
     private Armour armour;
     public ArrayList<Item> inventory;
     public ArrayList<Item> potionInventory;
-    
+
     public Character(String name, Room currentRoom) {
         this.name = name;
         this.gold = 0;
@@ -35,8 +35,8 @@ public abstract class Character {
         this.potionInventory = new ArrayList();
 
     }
-    
-    public Character(String name, 
+
+    public Character(String name,
             String description, int startHealth, int startDamage, int startProtection, int startGold) {
         this.name = name;
         this.gold = startGold;
@@ -48,10 +48,9 @@ public abstract class Character {
         this.protection = defaultProtection;
         this.inventory = new ArrayList();
         this.potionInventory = new ArrayList();
-        
+
     }
-    
-    
+
     public int getGold() {
         return gold;
     }
@@ -59,7 +58,7 @@ public abstract class Character {
     public void setGold(int gold) {
         this.gold = gold;
     }
-    
+
     public ArrayList<Item> getInventory() {
         return inventory;
     }
@@ -75,10 +74,10 @@ public abstract class Character {
     public void setHealthMaxSize(int healthMaxSize) {
         int oldMax = this.healthMaxSize;
         this.healthMaxSize = healthMaxSize;
-        if(this.health == oldMax){
+        if (this.health == oldMax) {
             this.health = this.healthMaxSize;
         }
-        
+
     }
 
     public int getDefaultDamage() {
@@ -97,7 +96,6 @@ public abstract class Character {
         this.defaultProtection = defaultProtection;
     }
 
-    
     public Weapon getWeapon() {
         return weapon;
     }
@@ -121,29 +119,33 @@ public abstract class Character {
     public void setWeapon(Weapon weapon) {
         //this.weapon = weapon;
         //this.addToInventory(weapon);
-        if (this.getWeapon() != null) {
-            this.setDamage(this.getDamage()-this.getWeapon().getDamageIncrease());
+//        if (this.getWeapon() != null) {
+//            this.setDamage(this.getDamage()-this.getWeapon().getDamageIncrease());
+//        }
+        if (weapon != null) {
+            int value = ((Weapon) weapon).getDamageIncrease();
+            weapon.changeDamage(this, value);
         }
-        int value = ((Weapon) weapon).getDamageIncrease();
-        weapon.changeDamage(this, value);
         this.weapon = weapon;
-        if (!this.inventory.contains(weapon)){
-            this.addToInventory((Weapon)weapon);
-        }
+//        if (!this.inventory.contains(weapon)){
+//            this.addToInventory((Weapon)weapon);
+//        }
     }
 
     public void setArmour(Armour armour) {
         //this.armour = armour;
         //this.addToInventory(armour);
-        if (this.getArmour() != null) {
-            this.setProtection(this.getProtection()-this.getArmour().getProtectionIncrease());
+//        if (this.getArmour() != null) {
+//            this.setProtection(this.getProtection()-this.getArmour().getProtectionIncrease());
+//        }
+        if (armour != null) {
+            int value = ((Armour) armour).getProtectionIncrease();
+            armour.changeProtection(this, value);
         }
-        int value = ((Armour) armour).getProtectionIncrease();
-        armour.changeProtection(this, value);
         this.armour = armour;
-        if (!this.inventory.contains(armour)){
-            this.addToInventory((Armour)armour);
-        }
+//        if (!this.inventory.contains(armour)){
+//            this.addToInventory((Armour)armour);
+//        }
     }
 
     public void setHealth(int health) {
@@ -157,7 +159,7 @@ public abstract class Character {
     public void setProtection(int protection) {
         this.protection = protection;
     }
-   
+
     public String getName() {
         return name;
     }
@@ -170,7 +172,6 @@ public abstract class Character {
         inventory.remove(i);
     }
 
-            
     public void addToPotionInventory(Item i) {
         potionInventory.add(i);
     }
@@ -178,12 +179,13 @@ public abstract class Character {
     public void removeFromPotionInventory(Item i) {
         potionInventory.remove(i);
     }
-    
-     /**
+
+    /**
      * Checks if an item with a specific name is present in character inventory
-     * 
+     *
      * @param name the name searched for in inventory
-     * @return if Item with name is found then returns the item, else null is returned
+     * @return if Item with name is found then returns the item, else null is
+     * returned
      */
     public Item checkForItem(String name) {
         Item output = null;
