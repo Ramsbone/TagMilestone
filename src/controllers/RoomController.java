@@ -1,6 +1,6 @@
 /*
 * Room Controller class of the program. 
-*/
+ */
 package controllers;
 
 import boundary.Boundary;
@@ -14,7 +14,7 @@ public class RoomController {
     private final Builder build = new Builder();
     private final Boundary ui = new Boundary();
     private ArrayList<Room> roomList = new ArrayList<Room>();
-    
+
     //Build adventure using build-controller
     public void roomBuilder(Player player) {
         roomList = build.buildAdventure(player);
@@ -22,7 +22,7 @@ public class RoomController {
 
     //Used when new room is entered to show room info and to check for NPC's.
     public void enterRoom(Player player) {
-    
+
         checkForBoobyTrap(player, player.getCurrentRoom());
         checkForTaxcollector(player, player.getCurrentRoom());
         checkForThief(player, player.getCurrentRoom());
@@ -48,6 +48,11 @@ public class RoomController {
             player.setHealth(player.getHealth() - randomHealthRemoved);
             r.setBoobytrap(false);
             ui.boobyTrapReleased(player);
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
@@ -62,6 +67,11 @@ public class RoomController {
             newRoomForNPC.setGold(0);
             r.setThief(false);
             ui.aNPCsneaksAway();
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
         if (r.isThief()) {
             randomGoldRemoved = randomInt(//you will lose at least half of your gold:
@@ -71,6 +81,11 @@ public class RoomController {
             player.setGold(player.getGold() - randomGoldRemoved);
             r.setThief(false);
             ui.encounterThief(player);
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
@@ -85,6 +100,11 @@ public class RoomController {
             newRoomForNPC.setGold(0);
             r.setTaxcollector(false);
             ui.aNPCsneaksAway();
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
         if (r.isTaxcollector()) {
             randomGoldRemoved = randomInt(//you might lose as much as half of your gold:
@@ -94,6 +114,11 @@ public class RoomController {
             player.setGold(player.getGold() - randomGoldRemoved);
             r.setTaxcollector(false);
             ui.encounterTaxcollector(player);
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
