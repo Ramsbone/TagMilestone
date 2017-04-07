@@ -85,7 +85,6 @@ public class Boundary {
         String output = "***********************************************************************************"
                 + "\nChoose from following commands:"
                 + "\n***********************************************************************************"
-//                + "\n-'gold'\t\t\t\t: Shows how much gold is carried"
                 + "\n-'help'\t\t\t\t: Shows the commands which can be typed"
                 + "\n-'status'\t\t\t: Shows the player statistics"
                 + "\n-'quit'\t\t\t\t: Quits the game, process will not be saved"
@@ -95,6 +94,7 @@ public class Boundary {
                 + "\n-'drop gold'\t\t\t: Drops some or all gold in the current room"
                 + "\n-'drop <item>'\t\t\t: Drops item in the current room"
                 + "\n-'use <item>'\t\t\t: Hold/wear/drink the item"
+                + "\n-'inventory'\t\t\t: Shows players inventory and "
                 + "\n-'look'\t\t\t\t: Shows room info"
                 + "\n-'look <item>'\t\t\t: Shows item info"
                 + "\n***********************************************************************************";
@@ -269,29 +269,28 @@ public class Boundary {
 
     public void boobyTrapReleased(Player player) {
 
-        String output = "You have encountered a boobytrap in the room and releases it by accident."
-                + "\nPlayer " + player.getName() + " has " + player.getHealth() + " hp."
-                + "\n***********************************************************************************";
+        String output = "***********************************************************************************"
+                + "You have encountered a boobytrap in the room and releases it by accident."
+                + "\nPlayer " + player.getName() + " has " + player.getHealth() + " hp.";
 
         System.out.println(output);
     }
 
     public void encounterThief(Player player) {
 
-        String output = "You have encountered a thief that steals some of your gold."
-                + "\nPlayer " + player.getName() + " has " + player.getGold() + " pieces of gold."
-                + "\n***********************************************************************************";
-
+        String output = "***********************************************************************************"
+                + "You have encountered a thief that steals some of your gold."
+                + "\nPlayer " + player.getName() + " has " + player.getGold() + " pieces of gold.";
         System.out.println(output);
 
     }
 
     public void encounterTaxcollector(Player player) {
 
-        String output = "You have encountered a taxcollector who collects some of your gold in tax."
-                + "\nPlayer " + player.getName() + " has " + player.getGold() + " pieces of gold."
-                + "\n***********************************************************************************";
-
+        String output = "***********************************************************************************"
+                + "You have encountered a taxcollector who collects some of your gold in tax."
+                + "\nPlayer " + player.getName() + " has " + player.getGold() + " pieces of gold.";
+        
         System.out.println(output);
 
     }
@@ -304,8 +303,7 @@ public class Boundary {
     }
 
     public void monsterAttack(Monster monster, int monsterhit, Player player) {
-        String output = "***********************************************************************************"
-                + "\n" + monster.getName() + " attacks you and inflicts " + monsterhit + " damage." + "You have now " + player.getHealth() +  " / " +player.getHealthMaxSize() +" hp"
+        String output = monster.getName() + " attacks you and inflicts " + monsterhit + " damage." + "You have now " + player.getHealth() +  " / " +player.getHealthMaxSize() +" hp"
                 + "\n***********************************************************************************";
         System.out.println(output);
     }
