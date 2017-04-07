@@ -99,7 +99,8 @@ public class FightController {
                 int value = ((Weapon) item).getDamageIncrease();
                 item.changeDamage(player, value);
                 player.setWeapon((Weapon) item);
-                ui.useItem((Weapon)item, ((Weapon) item).useItem(player));
+                ui.useItem((Weapon)item, player);                
+//                ui.useItem((Weapon)item, ((Weapon) item).useItem(player));
                 //ui.holdItem(item.getName(), player.getDamage());
             }
             if (item instanceof Armour) {

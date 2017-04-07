@@ -23,13 +23,13 @@ public class Weapon extends Item {
 //        p.setWeapon((Weapon) item);
 //        return (Weapon) item;
 //    }
-    public ArrayList<String> useItem(Character c){
-        ArrayList<String> output = new ArrayList<String>();
-        output.add(this.getName());
+//    public void useItem(Character c){
+//        ArrayList<String> output = new ArrayList<String>();
+//        output.add(this.getName());
 //        output.add(Integer.toString(this.getDamageIncrease()));
-        c.setWeapon(this);
-        output.add(Integer.toString(c.getDamage()));
-        return output;
-    }
+//        c.setWeapon(this);
+//        output.add(Integer.toString(c.getDamage()));
+//        return output;
+//    }
     
 }

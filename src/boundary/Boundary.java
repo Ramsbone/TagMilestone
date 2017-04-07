@@ -343,11 +343,11 @@ public class Boundary {
     }
     
     
-    public void useItem(Weapon weapon, ArrayList<String> nameAndDamageIncreaseAnddefaultDamage){
+    public void useItem(Weapon weapon, Player player){
         System.out.println("You hold " + 
-                nameAndDamageIncreaseAnddefaultDamage.get(0) + 
+                weapon.getName() + 
                 " and your now inflict " + 
-                nameAndDamageIncreaseAnddefaultDamage.get(1)+  
+                player.getDamage()+  
                 " damage points when attacking.");
         System.out.println("***********************************************************************************");
     

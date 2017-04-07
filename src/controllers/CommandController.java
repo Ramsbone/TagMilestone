@@ -252,7 +252,8 @@ public class CommandController {
         Item item = player.checkForItem(parameter);
         if (item != null) {
             if (item instanceof Weapon) {
-                ui.useItem((Weapon)item, ((Weapon) item).useItem(player));
+                player.setWeapon((Weapon) item);
+                ui.useItem((Weapon)item, player);
             }
             if (item instanceof Armour) {
                 ui.useItem((Armour) item, ((Armour) item).useItem(player));
