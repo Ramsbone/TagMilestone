@@ -342,7 +342,7 @@ public class Builder {
         Treasure tiara = new Treasure("Diamond Tiara","Golden tiara, jeweled with lots of diamonds and rubies.",80);
        
 
-        findRoomInList("Mining Tunnel").addToInventory(stick);
+        findRoomInList("Weapons Room").addToInventory(stick);
         findRoomInList("Guards Quarter").addToInventory(fightSpell);
         findRoomInList("Lovers Den").addToInventory(poison);
         findRoomInList("Cathedral South").addToInventory(heavy);

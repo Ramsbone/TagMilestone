@@ -15,9 +15,5 @@ public class Treasure extends Item {
     public int getValue() {
         return value;
     }
-    
-//    public void convert(Player player){
-//        player.setGold(value);
-//    }
-    
+
 }
