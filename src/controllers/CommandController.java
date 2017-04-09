@@ -276,11 +276,13 @@ public class CommandController {
                     moveOn = true; 
                     ui.useItem((Portal) item, ((Portal) item).useItem(player));
                 }
-                if (item instanceof TreasureChest) {
+                else if (item instanceof TreasureChest) {
                     int goldInChest = ((TreasureChest) item).getGoldReserve();
                     ((TreasureChest) item).use(player);
                     ui.goldInChest(goldInChest);
-                } else {
+                } 
+                
+                else {
                     ui.pickUpItemFirst();
                 }
             } else {

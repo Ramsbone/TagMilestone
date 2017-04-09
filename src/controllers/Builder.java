@@ -91,7 +91,9 @@ public class Builder {
             if (!output.contains(rooms.get(ranInt))
                     && !rooms.get(ranInt).getName().equals("Blocked Tunnel")
                     && !rooms.get(ranInt).getName().equals("Exit Point")
-                    && !rooms.get(ranInt).getName().equals("Wizards Vault")) {
+                    && !rooms.get(ranInt).getName().equals("Wizards Vault")
+                    && !rooms.get(ranInt).isMonster() == true)
+                        {
                 output.add(rooms.get(ranInt));
             }
         }
@@ -311,7 +313,7 @@ public class Builder {
                 + "\nLight and flexible.");
         Armour heavy = new Armour("Heavy Armour", 20,
                 "A very heavy but effective armour, with great protection. "
-                + "The metal is dark, almost black, and probably used to belong to "
+                + "\nThe metal is dark, almost black, and probably used to belong to "
                 + "\na great warrior");
 
  
@@ -596,7 +598,6 @@ public class Builder {
         Room room24 = new Room("Treasure Room",
                 "\nLeaving the bridge, you are now inside a small treasure room."
                 + "\nInside the room you see chests full of gold."
-                + "\nOn one of the walls you see a pirate flag hanging."
                 + "\nUnderneath it lies a couple of oars."
                 + "\nTo the north is an archway leading to another room."
                 + "\nIf you go west you will enter the bridge again.",
@@ -608,6 +609,7 @@ public class Builder {
                 + "\nThe room is characterized by a lot of fights."
                 + "\nThe tables are full of marks from daggers, and a "
                 + "\ncouple of female names is scratched into one of them."
+                + "\nOn one of the walls you see a pirate flag hanging."
                 + "\nSouth is back into the Treasure Room.",
                 10);
         
