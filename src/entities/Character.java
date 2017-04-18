@@ -123,7 +123,7 @@ public abstract class Character {
             weapon.changeDamage(this, value);
         }
         this.weapon = weapon;
-        if (!this.inventory.contains(weapon)) {
+        if (!this.inventory.contains(weapon) && weapon!=null) {
             this.addToInventory(weapon);
         }
         
@@ -136,7 +136,7 @@ public abstract class Character {
             armour.changeProtection(this, value);
         }
         this.armour = armour;
-        if (!this.inventory.contains(armour)) {
+        if (!this.inventory.contains(armour) && armour!=null) {
             this.addToInventory(armour);
         }
 
