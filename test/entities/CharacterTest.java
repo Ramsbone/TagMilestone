@@ -17,6 +17,8 @@ import static org.junit.Assert.*;
 public class CharacterTest {
     
     Character tp1,tp2;
+    Potion pot = new Potion("TestPotion", 10,"Den er go'");
+    Weapon wea = new Weapon("TestWeapon", 10, "Den er skarp");
     
     public CharacterTest() {
     }
@@ -26,6 +28,8 @@ public class CharacterTest {
         tp1 = new Player("TestPerson", null);
         tp2 = new Player("TestPerson", null);
         tp2.setHealth(50);
+        tp2.addToInventory(wea);
+        tp2.addToPotionInventory(pot);
         
     }
 
@@ -95,16 +99,45 @@ public class CharacterTest {
 
 
     
-//    @Test
-//    public void testCheckForItem() {
-//        System.out.println("checkForItem");
-//        String name = "";
-//        Character instance = null;
-//        Item expResult = null;
-//        Item result = instance.checkForItem(name);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testEmptyInventoriesCheckForItem() {
+        String name = "TestWeapon";
+        Character instance = tp1;
+        Item expResult = null;
+        Item result = instance.checkForItem(name);
+        assertEquals(expResult, result);
+        //fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testEmptyPotionInventoriesCheckForItem() {
+        String name = "TestPotion";
+        Character instance = tp1;
+        Item expResult = null;
+        Item result = instance.checkForItem(name);
+        assertEquals(expResult, result);
+        //fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testWithWeaponCheckForItem() {
+        String name = "TestWeapon".toLowerCase();
+        Character instance = tp2;
+        Item expResult = wea;
+        Item result = instance.checkForItem(name);
+        assertEquals(expResult, result);
+        //fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testWithPotionCheckForItem() {
+        String name = "TestPotion".toLowerCase();
+        Character instance = tp2;
+        Item expResult = pot;
+        Item result = instance.checkForItem(name);
+        assertEquals(expResult, result);
+        //fail("The test case is a prototype.");
+    }
 
     
 }
