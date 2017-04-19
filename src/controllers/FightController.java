@@ -184,7 +184,7 @@ public class FightController {
         return damage;
     }
 
-    private boolean flee(Player player) {
+    public boolean flee(Player player) {
         boolean succes = false;
         String direction = player.getMoveDirection();
         Room fleeRoom = null;
