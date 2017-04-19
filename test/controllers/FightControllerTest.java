@@ -77,27 +77,6 @@ public class FightControllerTest {
         //fail("The test case is a prototype.");
     }
 
-//    @Test
-//    public void testIsValidCommand() {
-//        System.out.println("isValidCommand");
-//        FightController instance = new FightController();
-//        String expResult = "";
-//        String result = instance.isValidCommand();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-
-//    @Test
-//    public void testWordReplacer() {
-//        System.out.println("wordReplacer");
-//        String input = "";
-//        FightController instance = new FightController();
-//        String expResult = "";
-//        String result = instance.wordReplacer(input);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-
 
     @Test
     public void testPossibleFlee() {

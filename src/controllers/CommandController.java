@@ -18,6 +18,7 @@ import entities.Armour;
 import entities.Furniture;
 import entities.Portal;
 import entities.Potion;
+import entities.Treasure;
 import entities.furniture.TreasureChest;
 
 public class CommandController {
@@ -267,6 +268,9 @@ public class CommandController {
             if (item instanceof Spell) {
                 ((Spell) item).activateSpell(player);
                 ui.useItem((Spell) item, player);
+            }
+            if (item instanceof Treasure) {
+                ui.useItem((Treasure) item);
             }
 
         } else {

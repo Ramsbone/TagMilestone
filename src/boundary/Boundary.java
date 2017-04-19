@@ -15,6 +15,7 @@ import entities.Spell;
 import entities.Potion;
 import entities.Furniture;
 import entities.Portal;
+import entities.Treasure;
 import entities.Weapon;
 
 public class Boundary {
@@ -220,6 +221,10 @@ public class Boundary {
         if (item instanceof Armour) {
                 output += "\nThis armour will increase your protection with " + ((Armour) item).getProtectionIncrease() + " points."
                 + "\n***********************************************************************************";
+        }
+        if (item instanceof Treasure) {
+                output += "\nThis treasure have a value of " + ((Treasure) item).getValue() + " gold pieces."
+                + "\n***********************************************************************************";
             
         }
         
@@ -408,6 +413,10 @@ public class Boundary {
 
         System.out.println(output);
 
+    }
+    
+    public void useItem(Treasure treasure){
+        System.out.println(treasure.getName() + " cannot be used right now but is worth " + treasure.getValue() + " gold pieces.");
     }
     
     
