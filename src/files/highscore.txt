@@ -1,28 +1,29 @@
- 1, G        , 1573
- 2, Gert     , 1273
- 3, Gert     ,  339
- 4, Lene     ,  336
- 5, gert     ,  106
- 6, unknown01,  105
- 7, unknown02,  100
- 8, unknown03,   95
- 9, unknown04,   90
-10, unknown05,   85
-11, unknown06,   80
-12, unknown07,   75
-13, unknown08,   70
-14, unknown09,   65
-15, unknown10,   60
-16, unknown11,   55
-17, unknown12,   50
-18, unknown13,   45
-19, bob      ,   40
-20, unknown14,   40
-21, Gert     ,   39
-22, unknown15,   35
-23, unknown16,   30
-24, unknown17,   25
-25, unknown18,   20
-26, unknown19,   15
-27, unknown20,   10
-28, unknown21,    5
+ 1, G              , 1573
+ 2, Gert the Mighty, 1456
+ 3, Gert           , 1273
+ 4, Gert           ,  339
+ 5, Lene           ,  336
+ 6, gert           ,  106
+ 7, unknown01      ,  105
+ 8, unknown02      ,  100
+ 9, unknown03      ,   95
+10, unknown04      ,   90
+11, unknown05      ,   85
+12, unknown06      ,   80
+13, unknown07      ,   75
+14, unknown08      ,   70
+15, unknown09      ,   65
+16, unknown10      ,   60
+17, unknown11      ,   55
+18, unknown12      ,   50
+19, unknown13      ,   45
+20, unknown14      ,   40
+21, bob            ,   40
+22, Gert           ,   39
+23, unknown15      ,   35
+24, unknown16      ,   30
+25, unknown17      ,   25
+26, unknown18      ,   20
+27, unknown19      ,   15
+28, unknown20      ,   10
+29, unknown21      ,    5
