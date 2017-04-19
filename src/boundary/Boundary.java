@@ -386,14 +386,14 @@ public class Boundary {
         
         if (spell.getDamageChange() != 0) {
 
-            output += "\nYour damage without any weapons has been changed to " + 
-                    p.getDefaultDamage();
+            output += "\nYour damage has been changed to " + 
+                    p.getDamage();
 
         }
         if (spell.getProtectionChange() != 0) {
 
-            output += "\nYour protection without any armour has been changed to " + 
-                    (p.getDefaultProtection());
+            output += "\nYour protection has been changed to " + 
+                    (p.getProtection());
 
         }
         if (spell.getHealthChange() != 0) {
@@ -402,6 +402,8 @@ public class Boundary {
                     (p.getHealthMaxSize()) +" hp";
 
         }
+        output += "\n***********************************************************************************";
+        output += "\nAfter reading the spell it vanishes into to the air.";
         output += "\n***********************************************************************************";
 
         System.out.println(output);

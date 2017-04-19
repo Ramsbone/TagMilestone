@@ -36,21 +36,23 @@ public class Spell extends Item{
      * Applies changes to the player's damage, protection and health maximum, according to the values defined in the spell's attributes.
      */
     public void activateSpell(Player player){
-        int damage = player.getDamage();
-        int protection = player.getProtection();
-        
-        if(damage < player.getDefaultDamage()+damageChange ){
-            player.setDamage(player.getDefaultDamage()+damageChange);
-        }
-        if(protection < player.getDefaultProtection()+protectionChange){
-            player.setProtection(player.getDefaultProtection()+protectionChange);
-        }
-        
+//        int damage = player.getDamage();
+//        int protection = player.getProtection();
+//        
+//        if(damage < player.getDefaultDamage()+damageChange ){
+//            player.setDamage(player.getDefaultDamage()+damageChange);
+//        }
+//        if(protection < player.getDefaultProtection()+protectionChange){
+//            player.setProtection(player.getDefaultProtection()+protectionChange);
+//        }
+//        
         player.setDefaultProtection(player.getDefaultProtection()+protectionChange);
         player.setProtection(player.getProtection()+protectionChange);
         player.setDefaultDamage(player.getDefaultDamage()+damageChange);
         player.setDamage(player.getDamage()+damageChange);
         player.setHealthMaxSize(player.getHealthMaxSize() + healthChange);
+        
+        player.removeFromInventory(this);
     }
     
     
