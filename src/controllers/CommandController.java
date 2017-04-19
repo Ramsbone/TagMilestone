@@ -145,8 +145,8 @@ public class CommandController {
             restartGame = true;
 
         } else {
-            
-            ui.showEndText(player.getGold());
+            int treasureValue = checkForTreasures(player);
+            ui.showEndText(player.getGold(),treasureValue);
             infoFromHighscore(player);
             writeToHighscoreDocument(player);
             restartGame = restartRequest();
@@ -383,6 +383,22 @@ public class CommandController {
         return input;
     }
 
+    //Checks if player collected any treasures and trades it for gold
+    private int checkForTreasures(Player player) {
+        int value = 0;
+        if (!player.isInventoryEmpty()) {
+            ArrayList<Item> inventory = player.getInventory();
+            for (Item item : inventory) {
+                if (item instanceof Treasure) {
+                    value += ((Treasure) item).getValue();
+                }
+            }
+        }
+        player.setGold(player.getGold()+value);
+        return value;
+    }
+    
+    //returns true or false depending on if player wants to restart
     private boolean restartRequest() {
         char requestChar = ' ';
             requestChar = ui.inputRestartRequest().toLowerCase().charAt(0);

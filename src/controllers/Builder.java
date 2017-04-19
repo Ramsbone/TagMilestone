@@ -615,7 +615,7 @@ public class Builder {
         
         Room room26 = new Room("Wizards Vault",
                 "You have entered the Wizards Vault."
-                + "\nYou entering the room makes the ceiling collapse."
+                + "\nYou entering the room made the ceiling collapse."
                 + "\nRubble from the ceiling blocks your way back."
                 + "\nThis is where the wizard designs and codes his spells."
                 + "\nAll over the wall different UML scrolls are attached."

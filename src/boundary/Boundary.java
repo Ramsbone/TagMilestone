@@ -67,7 +67,7 @@ public class Boundary {
         System.out.println(output);
     }
 
-    public void showEndText(int gold) {
+    public void showEndText(int gold, int treasureValue) {
 
         String output = "***********************************************************************************"
                 + "\nThe sunlight blinds you, as you step outside."
@@ -75,9 +75,13 @@ public class Boundary {
                 + "\nBehind you is a great adventure, dangers and propably still unfound treasure."
                 + "\nBut for now you are pleased to see the sun again, and more adventure must wait "
                 + "\nfor another day."
-                + "\n***********************************************************************************"
-                + "\nYou have collected " + gold + " gold"
                 + "\n***********************************************************************************";
+
+        if (treasureValue > 0) {
+            output += "\nYou have traded your treasures and recieves " + treasureValue + " pieces of gold. ";
+        }
+
+        output += "\nYou have totally collected " + gold + " pieces of gold";
         System.out.println(output);
     }
 
