@@ -610,7 +610,7 @@ public class Builder {
                 + "\nAll over the wall different UML scrolls are attached."
                 + "\nThe room is cold and gloomy. And you shiver a little. "
                 + "\nOnly way out of the vault is south.",
-                10);
+                0);
 
         Room roomEnd = new Room("Exit Point", "", 0);
 
