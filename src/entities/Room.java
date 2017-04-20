@@ -23,7 +23,6 @@ public class Room {
     private ArrayList<Item> inventory;
     private ArrayList<Monster> monsterList = new ArrayList<Monster>();
 
-
     public Room(String name, String description, int goldchance) {
         this.name = name;
         this.description = description;
@@ -68,9 +67,7 @@ public class Room {
     public void setMonsterList(ArrayList<Monster> monsterList) {
         this.monsterList = monsterList;
     }
-    
-    
-    
+        
     public boolean isInventoryEmpty(){
         return this.inventory.isEmpty();
     }
@@ -78,8 +75,7 @@ public class Room {
     public ArrayList<Item> getInventory() {
         return inventory;
     }
-    
-    
+       
     public String getName() {
         return name;
     }
@@ -179,7 +175,6 @@ public class Room {
                 output = item;
             }
         }
-
         return output;
     }
     

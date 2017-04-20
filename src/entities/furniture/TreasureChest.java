@@ -1,18 +1,17 @@
 
 package entities.furniture;
 
-import entities.Furniture;
+import entities.Item;
 import entities.Player;
 
-
-
-public class TreasureChest extends Furniture{
+public class TreasureChest extends Item{
     
     private int goldReserve;
     
     public TreasureChest(String name, String description, int gold){
         super(name, description);
         this.goldReserve = gold;
+        this.setTakeable(false);
     }
     
     public boolean use(Player p){

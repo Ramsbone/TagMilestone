@@ -44,7 +44,5 @@ public class Monster extends Character{
         p.getCurrentRoom().getMonsterList().remove(this);
     return monsterGold;
     }
-    
-    
-    
+   
 }

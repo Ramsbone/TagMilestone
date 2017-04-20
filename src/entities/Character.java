@@ -20,7 +20,7 @@ public abstract class Character {
     public ArrayList<Item> inventory;
     public ArrayList<Item> potionInventory;
 
-    public Character(String name, Room currentRoom) {
+    public Character(String name) {
         this.name = name;
         this.gold = 0;
         this.health = 100;
@@ -33,7 +33,6 @@ public abstract class Character {
         this.armour = null;
         this.inventory = new ArrayList();
         this.potionInventory = new ArrayList();
-
     }
 
     public Character(String name,
@@ -77,7 +76,6 @@ public abstract class Character {
         if (this.health == oldMax) {
             this.health = this.healthMaxSize;
         }
-
     }
 
     public int getDefaultDamage() {
@@ -117,7 +115,6 @@ public abstract class Character {
     }
 
     public void setWeapon(Weapon weapon) {
-
         if (weapon != null) {
             int value = ((Weapon) weapon).getDamageIncrease();
             weapon.changeDamage(this, value);
@@ -126,7 +123,6 @@ public abstract class Character {
         if (!this.inventory.contains(weapon) && weapon!=null) {
             this.addToInventory(weapon);
         }
-        
     }
 
     public void setArmour(Armour armour) {
@@ -139,7 +135,6 @@ public abstract class Character {
         if (!this.inventory.contains(armour) && armour!=null) {
             this.addToInventory(armour);
         }
-
     }
 
     public void setHealth(int health) {
@@ -183,21 +178,18 @@ public abstract class Character {
      */
     public Item checkForItem(String name) {
         Item output = null;
-
         for (Item item : inventory) {
             String check = item.getName().replaceAll(" ", "");
             if (name.equals(check.toLowerCase())) {
                 output = item;
             }
         }
-
         for (Item item : potionInventory) {
             String check = item.getName().replaceAll(" ", "");
             if (name.equals(check.toLowerCase())) {
                 output = item;
             }
         }
-
         return output;
     }
 }

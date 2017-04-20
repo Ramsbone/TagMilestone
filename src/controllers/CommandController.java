@@ -15,7 +15,6 @@ import entities.Item;
 import entities.Spell;
 import entities.Weapon;
 import entities.Armour;
-import entities.Furniture;
 import entities.Portal;
 import entities.Potion;
 import entities.Treasure;
@@ -31,7 +30,6 @@ public class CommandController {
 
     //Launch the game.
     public void start() {
-
         boolean restartGame = true;
 
         while (restartGame) {
@@ -42,7 +40,6 @@ public class CommandController {
             restartGame = commandControl(player, rc);
         }
         ui.comeBack();
-
     }
 
     //Handles the different commands from the player.
@@ -151,7 +148,6 @@ public class CommandController {
             writeToHighscoreDocument(player);
             restartGame = restartRequest();
         }
-
         return restartGame;
     }
 
@@ -285,7 +281,6 @@ public class CommandController {
                     ((TreasureChest) item).use(player);
                     ui.goldInChest(goldInChest);
                 } 
-                
                 else {
                     ui.pickUpItemFirst();
                 }
@@ -413,10 +408,10 @@ public class CommandController {
         try {
             hs.writeToHighscoreDocument(player.getName(), player.getGold());
         } catch (FileNotFoundException ex) {
-            System.out.println("Highscore.java: writeToHighscoreDocument: " + ex);
-            //Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            ui.ErrorTextWriteHighScore(ex);
+            
         } catch (IOException ex) {
-            System.out.println("Highscore.java: writeToHighscoreDocument: " + ex);
+            ui.ErrorTextWriteHighScore(ex);
             //Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -426,10 +421,8 @@ public class CommandController {
         try {
             highscoreOutput = hs.endGameHighscore(player.getName(), player.getGold());
         } catch (IOException ex) {
-            System.out.println("Highscore.java: quitGameHighscore: " + ex);
-            //Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            ui.ErrorTextInfoFromHighScore(ex);
         }
-
         ui.printInfoFromHighscore(highscoreOutput);
     }
 

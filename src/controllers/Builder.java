@@ -1,9 +1,7 @@
 /*
 * Controller class which builds the game (creates and places rooms and items)
-*/
-
+ */
 package controllers;
-
 
 import entities.Armour;
 import entities.Item;
@@ -19,9 +17,7 @@ import entities.furniture.TreasureChest;
 import exceptions.InitiationException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class Builder {
 
@@ -30,28 +26,28 @@ public class Builder {
     private ArrayList<Monster> monsterList = new ArrayList<Monster>();
 
     public ArrayList<Room> buildAdventure(Player player) {
-        
+
         //Creates all the rooms and sets room-connections: 
         initRooms(player);
-        
+
         //Creates a roomList, check for identical names and sort list by name.
         createRoomListFromPlayer(player, roomList);
         checkRoomNamesElseThrowExcept(roomList);
         sortRoomListByName(roomList);
-        
+
         //creates a monsterList, check for identical names.
         initMonster();
         this.createMonsterListFromRooms(roomList);
         this.checkMonsterNamesElseThrowExcept(monsterList);
-        
+
         //Creates and distribues Items, Traps and NonPlayableCaracters into rooms and monster:
         initItems();
-        
+
         //Creates an itemList from the roomList 
         //Check itemList for identical names: (mostly for debugging purposes).
         createItemListFromRoomsAndMonster(roomList);
-        checkItemNamesElseThrowExcept(this.itemList);  
-        
+        checkItemNamesElseThrowExcept(this.itemList);
+
         //Removes doors to secret rooms after roomList has been builded:
         findRoomInList("Bedroom").setDoors(findRoomInList("Hallway"), null, null, null);
 
@@ -92,12 +88,10 @@ public class Builder {
                     && !rooms.get(ranInt).getName().equals("Blocked Tunnel")
                     && !rooms.get(ranInt).getName().equals("Exit Point")
                     && !rooms.get(ranInt).getName().equals("Wizards Vault")
-                    && !rooms.get(ranInt).isMonster() == true)
-                        {
+                    && !rooms.get(ranInt).isMonster() == true) {
                 output.add(rooms.get(ranInt));
             }
         }
-
         return output;
     }
 
@@ -152,79 +146,73 @@ public class Builder {
                     }
                 }
             }
-            
+
         }
     }
-    
-    private void checkRoomNamesElseThrowExcept(ArrayList<Room> rooms){
+
+    private void checkRoomNamesElseThrowExcept(ArrayList<Room> rooms) {
         ArrayList<String> tempArrayList = new ArrayList<String>();
-        for (Room r: rooms) {
+        for (Room r : rooms) {
             tempArrayList.add(r.getName());
         }
-        
-        checkListOfStrings(tempArrayList, 
+        checkListOfStrings(tempArrayList,
                 "class: Builder: checkRoomNamesElseThrowExcept: "
-                    + "some Rooms have the same name!");
+                + "some Rooms have the same name!");
     }
-    
-    
-    private void checkItemNamesElseThrowExcept(ArrayList<Item> itemList){        
+
+    private void checkItemNamesElseThrowExcept(ArrayList<Item> itemList) {
         ArrayList<String> tempArrayList = new ArrayList<String>();
-        for (Item i: itemList) {
+        for (Item i : itemList) {
             tempArrayList.add(i.getName());
         }
-        
-        checkListOfStrings(tempArrayList, 
+        checkListOfStrings(tempArrayList,
                 "class: Builder: checkItemNamesElseThrowExcept: "
-                    + "some Items have the same name!");
+                + "some Items have the same name!");
     }
-    
-    private void checkMonsterNamesElseThrowExcept(ArrayList<Monster> monsterList){        
+
+    private void checkMonsterNamesElseThrowExcept(ArrayList<Monster> monsterList) {
         ArrayList<String> tempArrayList = new ArrayList<String>();
-        for (Monster m: monsterList) {
+        for (Monster m : monsterList) {
             tempArrayList.add(m.getName());
         }
-        
-        checkListOfStrings(tempArrayList, 
+
+        checkListOfStrings(tempArrayList,
                 "class: Builder: checkMonsterNamesElseThrowExcept: "
-                    + "some Monsters have the same name!");
+                + "some Monsters have the same name!");
     }
-    
-    private void checkListOfStrings(ArrayList<String> itemList, String errorString){
+
+    private void checkListOfStrings(ArrayList<String> itemList, String errorString) {
         boolean mistakesFound = false;
-        for (String s: itemList) {
+        for (String s : itemList) {
             int a = itemList.lastIndexOf(s);
             int b = itemList.indexOf(s);
-            if (b!=a) {
+            if (b != a) {
                 System.out.println(itemList.get(a));
                 mistakesFound = true;
             }
-
         }
-        if (mistakesFound == true){
+        if (mistakesFound == true) {
             throw new InitiationException(errorString);
         }
     }
-    
-    private Monster findMonsterInList(String monsterName){
-        
+
+    private Monster findMonsterInList(String monsterName) {
+
         Monster output;
         int findIndex = 0;
         Monster testMonster = monsterList.get(findIndex);
         while (!testMonster.getName().equals(monsterName)) {
             findIndex++;
-            if (findIndex == monsterList.size()){
-                throw new InitiationException("class: Builder: findMonsterInList: Room " 
+            if (findIndex == monsterList.size()) {
+                throw new InitiationException("class: Builder: findMonsterInList: Room "
                         + monsterName + " does not exist!");
             }
             testMonster = monsterList.get(findIndex);
         }
-        
-            output = monsterList.get(findIndex);
-        
+        output = monsterList.get(findIndex);
         return output;
     }
-    
+
     //Finds a specific room in roomList
     private Room findRoomInList(String roomName) {
 
@@ -233,53 +221,49 @@ public class Builder {
         Room testRoom = roomList.get(findIndex);
         while (!testRoom.getName().equals(roomName)) {
             findIndex++;
-            if (findIndex == roomList.size()){
-                throw new InitiationException("class: Builder: findRoomInList: Room " 
+            if (findIndex == roomList.size()) {
+                throw new InitiationException("class: Builder: findRoomInList: Room "
                         + roomName + " does not exist!");
             }
             testRoom = roomList.get(findIndex);
         }
-        
-            output = roomList.get(findIndex);
-        
+        output = roomList.get(findIndex);
         return output;
     }
-    
-    private void createMonsterListFromRooms(ArrayList<Room> roomList){
-        for (Room r: roomList) {
-            for (Monster m: r.getMonsterList()) {
+
+    private void createMonsterListFromRooms(ArrayList<Room> roomList) {
+        for (Room r : roomList) {
+            for (Monster m : r.getMonsterList()) {
                 this.monsterList.add(m);
             }
         }
     }
-    
-    private void createItemListFromRoomsAndMonster(ArrayList<Room> roomList){
+
+    private void createItemListFromRoomsAndMonster(ArrayList<Room> roomList) {
         //ArrayList<Item> tempItemList = new ArrayList<Item>();
-        for (Room r: roomList) {
-            for (Item i: r.getInventory()) {
+        for (Room r : roomList) {
+            for (Item i : r.getInventory()) {
                 this.itemList.add(i);
             }
-            for (Monster m: r.getMonsterList()) {
-                for (Item it: m.getInventory()) {
+            for (Monster m : r.getMonsterList()) {
+                for (Item it : m.getInventory()) {
                     this.itemList.add(it);
                 }
             }
-        }      
-        
+        }
     }
-    
-    private void initMonster(){
-                
-        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!", 20,4,4,12);
-        rat.setHealth(10);
-        Monster goblin = new Monster("Skarsnik", "An evil goblin",30,5,5,21);
-        Monster scoundrel = new Monster("Blackbeard", "Arrgh!",50,7,7,23);
-        Monster troll = new Monster("Troll", "Troll...",80,20,20,35);
-        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....",100,3,3,47);
-        Monster dragon = new Monster("Smaug", "Smaug....",120,10,30,172);
-        Monster boss = new Monster("Ronnie","You have encountered the mighty and legendary wizard, Ronnie the Black!"
-                + "\nYou has awaken him from his afternoon nap, and he is now thirsty and angry.",200,20,20,666);
-        
+
+    private void initMonster() {
+
+        Monster rat = new Monster("Mr.Rat", "Squeeeeeq!!!", 20, 4, 4, 12);
+        Monster goblin = new Monster("Skarsnik", "An evil goblin", 30, 5, 5, 21);
+        Monster scoundrel = new Monster("Blackbeard", "Arrgh!", 50, 7, 7, 23);
+        Monster troll = new Monster("Troll", "Troll...", 80, 20, 20, 35);
+        Monster halfgiant = new Monster("Gorgorbey", "Gorgorbey.....", 100, 3, 3, 47);
+        Monster dragon = new Monster("Smaug", "Smaug....", 120, 10, 30, 172);
+        Monster boss = new Monster("Ronnie", "You have encountered the mighty and legendary wizard, Ronnie the Black!"
+                + "\nYou has awaken him from his afternoon nap, and he is now thirsty and angry.", 200, 20, 20, 666);
+
         findRoomInList("Mining Tunnel").addMonster(rat);
         findRoomInList("Guards Quarter").addMonster(goblin);
         findRoomInList("Treasure Room").addMonster(scoundrel);
@@ -287,9 +271,9 @@ public class Builder {
         findRoomInList("Gallery").addMonster(halfgiant);
         findRoomInList("Kings Tomb").addMonster(dragon);
         findRoomInList("Wizards Vault").addMonster(boss);
-        
+
     }
-    
+
     //Initialize and place items in rooms.
     private void initItems() {
 
@@ -303,8 +287,8 @@ public class Builder {
         Weapon pickaxe = new Weapon("Axe", 10,
                 "A simple pick axe, more a tool than a weapon, but can easily "
                 + "\nbe used as such.");
-        Weapon staff = new Weapon("Wizard Staff",20,"ancient, magic wooden staff.");
-        
+        Weapon staff = new Weapon("Wizard Staff", 20, "ancient, magic wooden staff.");
+
         Armour leather = new Armour("Leather Shirt", 5,
                 "An old shirt of thick leather, offers protection from basic hits, "
                 + "\nand is comfortable to wear");
@@ -316,62 +300,68 @@ public class Builder {
                 + "\nThe metal is dark, almost black, and probably used to belong to "
                 + "\na great warrior");
 
- 
-        
-        Portal portal1 = new Portal("Pirate Portal", findRoomInList("Lovers Den"), 
-                                    "The pirate flag on the wall seems to function as a magical portal to another place");
-        Portal portal2 = new Portal("Mirror Portal", findRoomInList("Narrow Path"), 
-                                    "It seems that the mirror on the wall is a magical portal to another place");
-        
+        Portal portal1 = new Portal("Pirate Portal", findRoomInList("Lovers Den"),
+                "The pirate flag on the wall seems to function as a magical portal to another place");
+        Portal portal2 = new Portal("Mirror Portal", findRoomInList("Narrow Path"),
+                "It seems that the mirror on the wall is a magical portal to another place");
+        //potions laying in rooms
         Potion potion01 = new Potion("Green Bottle", 50, "Drinkable potion in a glassbottle");
         Potion potion02 = new Potion("Yellow Bottle", 50, "Drinkable potion in a glassbottle");
-        Potion potion03 = new Potion("Red Bottle", -10, "Drinkable potion in a glassbottle");
-        Potion mpotion1 = new Potion("Black Bottle",50,"Drinkable potion in a glassbottle");
-        Potion mpotion2 = new Potion("Small Bottle",70,"Drinkable potion in a glassbottle");
-        Potion mpotion3 = new Potion("Golden Bottle",100,"Drinkable potion in a glassbottle");
-        Potion mpotion4 = new Potion("White Bottle",100,"Drinkable potion in a glassbottle");
-        Potion cola = new Potion("Coca Cola",200,"The programmers prefered liquid");
-        Potion poison = new Potion("Pink Bottle", -50, "Drinkable potion in a glassbottle");
-        Potion potion04 = new Potion("Clear Bottle",50,"Drinkable potion in a glassbottle");
-        Potion potion05 = new Potion("Blue Bottle",50,"Drinkable potion in a glassbottle");
-        
-        Spell fightSpell = new Spell("Fighting Spell","Improves your meelee skills and makes you stronger",5,10,0);
-        Spell protection = new Spell("Protection Spell","Increases your protection against attacks",0,0,10);
-        Spell badspell = new Spell("Captains Spell","Scroll with scriplings in an ancient language",-5,-15,0);
-        
+        Potion potion03 = new Potion("Clear Bottle", 50, "Drinkable potion in a glassbottle");
+        Potion potion04 = new Potion("Blue Bottle", 50, "Drinkable potion in a glassbottle");
+        //potion carried by monsters
+        Potion mpotion1 = new Potion("Black Bottle", 50, "Drinkable potion in a glassbottle");
+        Potion mpotion2 = new Potion("Small Bottle", 70, "Drinkable potion in a glassbottle");
+        Potion mpotion3 = new Potion("Golden Bottle", 100, "Drinkable potion in a glassbottle");
+        Potion mpotion4 = new Potion("White Bottle", 100, "Drinkable potion in a glassbottle");
+        //special potion
+        Potion cola = new Potion("Coca Cola", 200, "The programmers prefered liquid");
+        //poison
+        Potion poison01 = new Potion("Pink Bottle", -50, "Drinkable potion in a glassbottle");
+        Potion poison02 = new Potion("Red Bottle", -10, "Drinkable potion in a glassbottle");
+ 
+        Spell fightSpell = new Spell("Fighting Spell", "Improves your meelee skills and makes you stronger", 5, 10, 0);
+        Spell protectionSpell = new Spell("Protection Spell", "Increases your protection against attacks", 0, 0, 10);
+        Spell badSpell = new Spell("Captains Spell", "Scroll with scriplings in an ancient language", -5, -15, 0);
+
         TreasureChest chest = new TreasureChest("Luggage", "A large chest made of Sapient Pearwood. "
                 + "\nThere seems to be hundreds of little legs protruding from its underside.", 200);
-        
-        Treasure pearls = new Treasure("Pearl Necklace","Beautiful white pearls",25);
-        Treasure ring = new Treasure("Gold Ring","Simple golden ring, with ancient elven inscriptions",50);
-        Treasure tiara = new Treasure("Diamond Tiara","Golden tiara, jeweled with lots of diamonds and rubies.",80);
-       
+
+        Treasure pearls = new Treasure("Pearl Necklace", "Beautiful white pearls", 25);
+        Treasure ring = new Treasure("Gold Ring", "Simple golden ring, with ancient elven inscriptions", 50);
+        Treasure tiara = new Treasure("Diamond Tiara", "Golden tiara, jeweled with lots of diamonds and rubies.", 80);
 
         findRoomInList("Weapons Room").addToInventory(stick);
-        findRoomInList("Guards Quarter").addToInventory(fightSpell);
-        findRoomInList("Lovers Den").addToInventory(poison);
         findRoomInList("Cathedral South").addToInventory(heavy);
-        findRoomInList("Bedroom").addToInventory(portal2);
-        findRoomInList("Pirates Hideout").addToInventory(portal1);
-        findRoomInList("Priests Room").addToInventory(protection);
-        findRoomInList("Pirates Hideout").addToInventory(badspell);
+
+        findRoomInList("Lovers Den").addToInventory(poison01);
+        findRoomInList("Tool Storage").addToInventory(potion03);
+        findRoomInList("Mining Area").addToInventory(potion04);
         findRoomInList("Food Storage").addToInventory(cola);
+
+        findRoomInList("Guards Quarter").addToInventory(fightSpell);
+        findRoomInList("Priests Room").addToInventory(protectionSpell);
+        findRoomInList("Pirates Hideout").addToInventory(badSpell);
+        
+        findRoomInList("Pirates Hideout").addToInventory(portal1);
+        findRoomInList("Bedroom").addToInventory(portal2);
+
         findRoomInList("Lovers Den").addToInventory(pearls);
         findRoomInList("Kings Tomb").addToInventory(ring);
         findRoomInList("Queens Tomb").addToInventory(tiara);
+
         findRoomInList("Treasure Room").addToInventory(chest);
-        findRoomInList("Tool Storage").addToInventory(potion04);
-        findRoomInList("Mining Area").addToInventory(potion05);
         
-        this.findMonsterInList("Skarsnik").setWeapon(pickaxe);
-        this.findMonsterInList("Skarsnik").setArmour(leather);
-        this.findMonsterInList("Blackbeard").setWeapon(greatsword);
-        this.findMonsterInList("Blackbeard").setArmour(chainmail);
-        this.findMonsterInList("Blackbeard").addToInventory(mpotion1);
-        this.findMonsterInList("Troll").addToInventory(mpotion2);
-        this.findMonsterInList("Gorgorbey").addToInventory(mpotion3);
-        this.findMonsterInList("Smaug").addToInventory(mpotion4);
-        this.findMonsterInList("Ronnie").setWeapon(staff);
+        findMonsterInList("Skarsnik").setWeapon(pickaxe);
+        findMonsterInList("Skarsnik").setArmour(leather);
+        findMonsterInList("Blackbeard").setWeapon(greatsword);
+        findMonsterInList("Blackbeard").setArmour(chainmail);
+        findMonsterInList("Ronnie").setWeapon(staff);
+
+        findMonsterInList("Blackbeard").addToInventory(mpotion1);
+        findMonsterInList("Troll").addToInventory(mpotion2);
+        findMonsterInList("Gorgorbey").addToInventory(mpotion3);
+        findMonsterInList("Smaug").addToInventory(mpotion4);
         
         ArrayList<Room> tempRoomList = getUniqueRandomRooms(4, roomList);
 
@@ -381,16 +371,15 @@ public class Builder {
         tempRoomList.get(1).setGold(0);
         tempRoomList.get(2).setBoobytrap(true);
         tempRoomList.get(3).setBoobytrap(true);
-        
+
         tempRoomList = getUniqueRandomRooms(3, roomList);
 
         tempRoomList.get(0).addToInventory(potion01);
         tempRoomList.get(1).addToInventory(potion02);
-        tempRoomList.get(2).addToInventory(potion03);
-        
-    }   
-    
-    
+        tempRoomList.get(2).addToInventory(poison02);
+
+    }
+
     //Initialize rooms and set room-connections.
     private void initRooms(Player p) {
 
@@ -612,7 +601,7 @@ public class Builder {
                 + "\nOn one of the walls you see a pirate flag hanging."
                 + "\nSouth is back into the Treasure Room.",
                 10);
-        
+
         Room room26 = new Room("Wizards Vault",
                 "\nYou have entered the Wizards Vault."
                 + "\nYou entering the room made the ceiling collapse."
@@ -622,68 +611,40 @@ public class Builder {
                 + "\nThe room is cold and gloomy. And you shiver a little. "
                 + "\nOnly way out of the vault is south.",
                 10);
-        
+
         Room roomEnd = new Room("Exit Point", "", 0);
 
         roomStart.setDoors(null, room1, null, null);
-
         room1.setDoors(roomStart, null, room2, room5);
-
         room2.setDoors(null, room3, null, room1);
-
         room3.setDoors(room2, null, room4, null);
-
         room4.setDoors(null, null, null, room3);
-
         room5.setDoors(null, room6, room1, null);
-
         room6.setDoors(room5, room7, null, null);
-
         room7.setDoors(room6, null, room9, room8);
-
         room8.setDoors(null, null, room7, null);
-
         room9.setDoors(null, room10, null, room7);
-
         room10.setDoors(room9, room14, room11, null);
-
         room11.setDoors(null, null, room12, room10);
-
         room12.setDoors(room4, room13, null, room11);
-
         room13.setDoors(room12, null, null, null);
-
         room14.setDoors(room10, room15, null, room16);
-
         room15.setDoors(room14, null, null, null);
-
         room16.setDoors(null, room18, room14, room17);
-
         room17.setDoors(room8, null, room16, null);
-
         room18.setDoors(room16, room19, null, null);
-
         room19.setDoors(room18, room20, null, room21);
-
         room20.setDoors(room19, null, null, room22);
-
         room21.setDoors(null, room26, room19, null);
-
         room22.setDoors(null, null, room23, null);
-
         room23.setDoors(null, null, room24, room22);
-
         room24.setDoors(room25, null, null, room23);
-
         room25.setDoors(null, room24, null, null);
-
         room26.setDoors(null, roomEnd, null, null);
-
         roomEnd.setDoors(room21, null, null, null);
 
         p.setCurrentRoom(roomStart);
-        
-        
+
     }
 
 }

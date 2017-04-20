@@ -125,7 +125,6 @@ public class FightController {
 
     public void hit(int damage, Character character) { //calculated damage and the character which is victim
         character.setHealth(character.getHealth() - damage);
-
     }
 
     public String isValidCommand() {
@@ -147,7 +146,6 @@ public class FightController {
                     ui.unknownCommand();
             }
         }
-
         return input;
     }
 
@@ -157,7 +155,6 @@ public class FightController {
             input = input.replace("  ", " ");
         }
         input = input.replaceAll("attack", "a");
-
         return input;
     }
 
@@ -169,18 +166,14 @@ public class FightController {
         double dmg = damage;
 
         dmg = dmg*(1-n/10.0);
-
         dmg = dmg - ((protection / 100) * dmg);
-
         damage = (int) dmg;
 
         //critical strike
         int x = r.nextInt(100);
-
         if (x <= 5) {
             damage = damage * 2;
         }
-
         return damage;
     }
 
