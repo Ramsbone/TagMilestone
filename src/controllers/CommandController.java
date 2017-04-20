@@ -42,6 +42,7 @@ public class CommandController {
         ui.comeBack();
     }
 
+    
     //Handles the different commands from the player.
     private boolean commandControl(Player player, RoomController rc) {
         String userInput = "";
