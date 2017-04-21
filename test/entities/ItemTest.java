@@ -126,7 +126,7 @@ public class ItemTest {
         Item instance = w1;
         instance.dropItem(player);
         boolean expected = true;
-        boolean result = p1.isInventoryEmpty();
+        boolean result = p2.isInventoryEmpty();
         assertTrue("Expected: " + expected + "    Found: " + result, result == expected);
 
     }
@@ -137,7 +137,7 @@ public class ItemTest {
         Item instance = potion;
         instance.dropItem(player);
         boolean expected = true;
-        boolean result = p1.isInventoryEmpty();
+        boolean result = p3.isPotionInventoryEmpty();
         assertTrue("Expected: " + expected + "    Found: " + result, result == expected);
 
     }
