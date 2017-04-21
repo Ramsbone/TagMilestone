@@ -18,7 +18,7 @@ import entities.Armour;
 import entities.Portal;
 import entities.Potion;
 import entities.Treasure;
-import entities.furniture.TreasureChest;
+import entities.TreasureChest;
 
 public class CommandController {
 

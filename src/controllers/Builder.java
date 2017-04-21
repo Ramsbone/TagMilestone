@@ -13,7 +13,7 @@ import entities.Room;
 import entities.Spell;
 import entities.Treasure;
 import entities.Weapon;
-import entities.furniture.TreasureChest;
+import entities.TreasureChest;
 import exceptions.InitiationException;
 import java.util.ArrayList;
 import java.util.Collections;

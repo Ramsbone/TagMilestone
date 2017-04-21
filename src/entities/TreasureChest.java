@@ -1,5 +1,5 @@
 
-package entities.furniture;
+package entities;
 
 import entities.Item;
 import entities.Player;
