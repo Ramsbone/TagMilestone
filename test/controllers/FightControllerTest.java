@@ -98,6 +98,24 @@ public class FightControllerTest {
         //fail("The test case is a prototype.");
     }
     
+    
+    @Test
+    public void testCriticalHitcalculateDamage() {
+        FightController instance = new FightController();
+        int count = 0;
+        for (int i = 0; i < 1000000; i++) {
+            int value = instance.calculateDamage(10, 0);
+            if (value > 10) {
+                count++;
+            }
+        }
+        int expected = 50000;
+        int result = count;
+        //accepting a tolerance in random critical hits within 1.5%
+        assertTrue("Expected: " + expected + "    Found: " + result, Math.abs(expected - result) < 15000 );
+
+    }
+    
 
     
 }
