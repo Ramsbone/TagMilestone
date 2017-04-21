@@ -273,7 +273,7 @@ public class Boundary {
     }
 
     public void monsterAttack(Monster monster, int monsterhit, Player player) {
-        String output = monster.getName() + " attacks you and inflicts " + monsterhit + " damage." + "You have now " + player.getHealth() + " / " + player.getHealthMaxSize() + " hp"
+        String output = monster.getName() + " attacks you and inflicts " + monsterhit + " damage." + " You have now " + player.getHealth() + " / " + player.getHealthMaxSize() + " hp"
                 + "\n***********************************************************************************";
         System.out.println(output);
     }
@@ -336,24 +336,33 @@ public class Boundary {
     }
 
     public void useItem(Spell spell, Player p) {
-        String output = "***********************************************************************************"
+        String output1 = "***********************************************************************************"
                 + "\nYou have read the " + spell.getName() + ", and following changes inflict on you"
                 + "\n***********************************************************************************";
         if (spell.getDamageChange() != 0) {
-            output += "\nYour damage has been changed to " + p.getDamage();
+            output1 += "\nYour damage has been changed to " + p.getDamage();
         }
         if (spell.getProtectionChange() != 0) {
-            output += "\nYour protection has been changed to "
+            output1 += "\nYour protection has been changed to "
                     + (p.getProtection());
         }
         if (spell.getHealthChange() != 0) {
-            output += "\nYour maximum health has been changed to "
+            output1 += "\nYour maximum health has been changed to "
                     + (p.getHealthMaxSize()) + " hp";
         }
-        output += "\n***********************************************************************************";
-        output += "\nAfter reading the spell it vanishes into to the air.";
-        output += "\n***********************************************************************************";
-        System.out.println(output);
+        System.out.println(output1);
+
+        try {
+            Thread.sleep(1500);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        String output2 = "***********************************************************************************";
+        output2 += "\nAfter reading the spell it vanishes into to the air.";
+        output2 += "\n***********************************************************************************";
+
+        System.out.println(output2);
     }
 
     public void useItem(Treasure treasure) {
@@ -579,5 +588,4 @@ public class Boundary {
         System.out.println("Highscore.java: quitGameHighscore: " + ex);
     }
 
-    
 }

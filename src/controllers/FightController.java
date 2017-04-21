@@ -12,7 +12,6 @@ import entities.Spell;
 import entities.Weapon;
 import java.util.Random;
 
-
 public class FightController {
 
     Boundary ui = new Boundary();
@@ -21,8 +20,13 @@ public class FightController {
         boolean flee = false;
 
         Monster monster = player.getCurrentRoom().getMonster();
-        
+
         ui.showMonster(monster);
+        try {
+            Thread.sleep(1500);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         ui.showCombatCommands();
 
         while (monster.getHealth() > 0 && player.getHealth() > 0 && !flee) {
@@ -30,10 +34,10 @@ public class FightController {
 
             int monsterhit = calculateDamage(monster.getDamage(), player.getProtection());
             hit(monsterhit, player);
-            
-            if(player.getHealth()>0){
+
+            if (player.getHealth() > 0) {
                 ui.monsterAttack(monster, monsterhit, player);
-            }else{
+            } else {
                 ui.monsterAttackIfPlayerDead(monster, monsterhit, player);
             }
 
@@ -61,9 +65,9 @@ public class FightController {
                             hit(playerhit, monster);
                             validMove = true;
                             ui.playerAttack(playerhit, player);
-                            try{
-                            Thread.sleep(1000);
-                            } catch(Exception e){
+                            try {
+                                Thread.sleep(1000);
+                            } catch (Exception e) {
                                 System.out.println(e);
                             }
                             break;
@@ -81,11 +85,12 @@ public class FightController {
         }
         if (monster.getHealth() <= 0) {
             int monsterGold = monster.monsterDies(player);
-            player.setKillCounter(player.getKillCounter()+1);
+            player.setKillCounter(player.getKillCounter() + 1);
             ui.monsterDefeated(monster, player, monsterGold);
             ui.killCounterFeedBack(player);
-        } if(player.getHealth() <= 0){
-            ui.playerDefeated(monster,player);
+        }
+        if (player.getHealth() <= 0) {
+            ui.playerDefeated(monster, player);
         }
         return flee;
 
@@ -99,7 +104,7 @@ public class FightController {
                 int value = ((Weapon) item).getDamageIncrease();
                 item.changeDamage(player, value);
                 player.setWeapon((Weapon) item);
-                ui.useItem((Weapon)item, player);                
+                ui.useItem((Weapon) item, player);
             }
             if (item instanceof Armour) {
                 int value = ((Armour) item).getProtectionIncrease();
@@ -113,7 +118,7 @@ public class FightController {
             }
             if (item instanceof Spell) {
                 ((Spell) item).activateSpell(player);
-                ui.useItem((Spell) item, player);                
+                ui.useItem((Spell) item, player);
             }
 
         } else {
@@ -165,7 +170,7 @@ public class FightController {
         int n = r.nextInt(3); //int mellem 1 og 3
         double dmg = damage;
 
-        dmg = dmg*(1-n/10.0);
+        dmg = dmg * (1 - n / 10.0);
         dmg = dmg - ((protection / 100) * dmg);
         damage = (int) dmg;
 
@@ -200,7 +205,7 @@ public class FightController {
             succes = true;
             player.setCurrentRoom(fleeRoom);
             ui.playerFlees(player);
-        }else{
+        } else {
             ui.cannotFlee();
         }
 

@@ -37,12 +37,16 @@ public class CommandController {
             Player player = new Player(ui.inputPlayerName(), null);
             rc.roomBuilder(player);
             ui.showStartText();
+            try {
+                Thread.sleep(1500);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
             restartGame = commandControl(player, rc);
         }
         ui.comeBack();
     }
 
-    
     //Handles the different commands from the player.
     private boolean commandControl(Player player, RoomController rc) {
         String userInput = "";
@@ -55,7 +59,7 @@ public class CommandController {
                 && player.getHealth() > 0) {
 
             rc.enterRoom(player);
-            
+
             boolean moveOn = false;
             if (player.getCurrentRoom().getMonster() != null) {
                 moveOn = fc.fight(player);
@@ -63,7 +67,6 @@ public class CommandController {
             if (player.getHealth() > 0 && moveOn == false) {
                 ui.showRoom(player.getCurrentRoom());
             }
-
 
             while (!moveOn && player.getHealth() > 0) {
 
@@ -134,7 +137,7 @@ public class CommandController {
         if (player.getHealth() <= 0) {
             ui.died();
             restartGame = restartRequest();
-            
+
         } else if (userInput.equals("quit")) {
             ui.usedQuitCommand();
 
@@ -144,7 +147,7 @@ public class CommandController {
 
         } else {
             int treasureValue = checkForTreasures(player);
-            ui.showEndText(player.getGold(),treasureValue);
+            ui.showEndText(player.getGold(), treasureValue);
             infoFromHighscore(player);
             writeToHighscoreDocument(player);
             restartGame = restartRequest();
@@ -188,7 +191,7 @@ public class CommandController {
         } else {
             Item item = player.getCurrentRoom().checkForItem(parameter);
             if (item != null) {
-                if ((player.isInventoryFull() && !(item instanceof Potion)) 
+                if ((player.isInventoryFull() && !(item instanceof Potion))
                         || (player.isPotionInventoryFull() && (item instanceof Potion))) {
                     ui.cantCarryMore(item);
                 } else {
@@ -252,7 +255,7 @@ public class CommandController {
         if (item != null) {
             if (item instanceof Weapon) {
                 player.setWeapon((Weapon) item);
-                ui.useItem((Weapon)item, player);
+                ui.useItem((Weapon) item, player);
             }
             if (item instanceof Armour) {
                 player.setArmour((Armour) item);
@@ -274,15 +277,13 @@ public class CommandController {
             item = player.getCurrentRoom().checkForItem(parameter);
             if (item != null) {
                 if (item instanceof Portal) {
-                    moveOn = true; 
+                    moveOn = true;
                     ui.useItem((Portal) item, ((Portal) item).useItem(player));
-                }
-                else if (item instanceof TreasureChest) {
+                } else if (item instanceof TreasureChest) {
                     int goldInChest = ((TreasureChest) item).getGoldReserve();
                     ((TreasureChest) item).use(player);
                     ui.goldInChest(goldInChest);
-                } 
-                else {
+                } else {
                     ui.pickUpItemFirst();
                 }
             } else {
@@ -390,14 +391,14 @@ public class CommandController {
                 }
             }
         }
-        player.setGold(player.getGold()+value);
+        player.setGold(player.getGold() + value);
         return value;
     }
-    
+
     //returns true or false depending on if player wants to restart
     private boolean restartRequest() {
         char requestChar = ' ';
-            requestChar = ui.inputRestartRequest().toLowerCase().charAt(0);
+        requestChar = ui.inputRestartRequest().toLowerCase().charAt(0);
         while (requestChar != 'y' && requestChar != 'n') {
             ui.unknownRequest();
             requestChar = ui.inputRestartRequest().toLowerCase().charAt(0);
@@ -410,7 +411,7 @@ public class CommandController {
             hs.writeToHighscoreDocument(player.getName(), player.getGold());
         } catch (FileNotFoundException ex) {
             ui.ErrorTextWriteHighScore(ex);
-            
+
         } catch (IOException ex) {
             ui.ErrorTextWriteHighScore(ex);
             //Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
