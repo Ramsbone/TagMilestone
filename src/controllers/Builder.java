@@ -297,7 +297,7 @@ public class Builder {
                 + "\nLight and flexible.");
         Armour heavy = new Armour("Heavy Armour", 20,
                 "A very heavy but effective armour, with great protection. "
-                + "\nThe metal is dark, almost black, and probably used to belong to "
+                + "\nThe metal is dark, almost black, and it probably used to belong to "
                 + "\na great warrior");
 
         Portal portal1 = new Portal("Pirate Portal", findRoomInList("Lovers Den"),

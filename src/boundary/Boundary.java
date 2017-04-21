@@ -267,7 +267,7 @@ public class Boundary {
     }
 
     public void aNPCsneaksAway() {
-        String output = "You hear a faint noise. You look around but see nothing...pobably just a rat..."
+        String output = "You hear a faint noise. You look around but see nothing...probably just a rat..."
                 + "\n***********************************************************************************";
         System.out.println(output);
     }
