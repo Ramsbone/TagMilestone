@@ -17,7 +17,7 @@ public abstract class Item {
         validateName();
     }
 
-    public void validateName() {
+    private void validateName() {
         if (this.getName().split(" ").length > 2) {
             throw new InitiationException("class: Items: Invalid name - max 2 words!");
         }
@@ -81,7 +81,7 @@ public abstract class Item {
      /**
      * Removes item from the player's inventory, and adds it to player's currentRoom inventory 
      */
-    public void DropItem(Player player) {
+    public void dropItem(Player player) {
         if (this instanceof Potion) {
         player.getCurrentRoom().addToInventory(this);
         player.removeFromPotionInventory(this);

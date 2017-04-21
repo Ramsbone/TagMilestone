@@ -221,7 +221,7 @@ public class CommandController {
         } else {
             Item item = player.checkForItem(parameter);
             if (item != null) {
-                item.DropItem(player);
+                item.dropItem(player);
                 ui.droppedItem(item.getName());
 
                 if (item instanceof Weapon) {
