@@ -90,7 +90,7 @@ public class Boundary {
                 + "\n-'drop gold'\t\t\t: Drops some or all gold in the current room"
                 + "\n-'drop <item>'\t\t\t: Drops item in the current room"
                 + "\n-'use <item>'\t\t\t: Hold/wear/drink the item"
-                + "\n-'inventory'\t\t\t: Shows players inventory and "
+                + "\n-'inventory'\t\t\t: Shows players inventory"
                 + "\n-'look'\t\t\t\t: Shows room info"
                 + "\n-'look <item>'\t\t\t: Shows item info"
                 + "\n***********************************************************************************";
