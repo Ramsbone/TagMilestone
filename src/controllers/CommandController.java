@@ -26,7 +26,7 @@ public class CommandController {
     private final FightController fc = new FightController();
     private final Highscore hs = new Highscore();
     //Debug can be set to true when access is needed to roomList.
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
 
     //Launch the game.
     public void start() {
