@@ -301,9 +301,9 @@ public class Builder {
                 + "\na great warrior");
 
         Portal portal1 = new Portal("Pirate Portal", findRoomInList("Lovers Den"),
-                "The pirate flag on the wall seems to function as a magical portal to another place");
+                "The pirate flag on the wall seems to function as a magical portal to another place", "n");
         Portal portal2 = new Portal("Mirror Portal", findRoomInList("Narrow Path"),
-                "It seems that the mirror on the wall is a magical portal to another place");
+                "It seems that the mirror on the wall is a magical portal to another place", "e");
         //potions laying in rooms
         Potion potion01 = new Potion("Green Bottle", 50, "Drinkable potion in a glassbottle");
         Potion potion02 = new Potion("Yellow Bottle", 50, "Drinkable potion in a glassbottle");

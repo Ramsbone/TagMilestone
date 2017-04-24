@@ -278,7 +278,8 @@ public class CommandController {
             if (item != null) {
                 if (item instanceof Portal) {
                     moveOn = true;
-                    ui.useItem((Portal) item, ((Portal) item).useItem(player));
+                    String moveDirection = ((Portal) item).getMoveDirection();
+                    ui.useItem((Portal) item, ((Portal) item).useItem(player, moveDirection));
                 } else if (item instanceof TreasureChest) {
                     int goldInChest = ((TreasureChest) item).getGoldReserve();
                     ((TreasureChest) item).use(player);
