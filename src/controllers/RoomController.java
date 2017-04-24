@@ -13,6 +13,7 @@ public class RoomController {
 
     private final Builder build = new Builder();
     private final Boundary ui = new Boundary();
+    private final DebugBuilder debugger = new DebugBuilder();
     private ArrayList<Room> roomList = new ArrayList<Room>();
 
     //Build adventure using build-controller
@@ -32,7 +33,7 @@ public class RoomController {
     public void roomDebugger() {
 
         for (Room r : roomList) {
-            ui.debugRoom(r);
+            ui.showDebugRoom(debugger.debug(r));
         }
         ui.showNumberOfRooms(roomList.size());
     }

@@ -192,4 +192,12 @@ public abstract class Character {
         }
         return output;
     }
+        
+    public String showItems(ArrayList<Item> inventory) {
+        String output = "";
+        for (Item item : inventory) {
+            output += item.getName() + " * ";
+        }
+        return output;
+    }
 }

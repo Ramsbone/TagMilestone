@@ -18,14 +18,6 @@ import entities.Weapon;
 
 public class Boundary {
 
-    //Colors are used only in our debugging function.
-    private final String BLACK = (char) 27 + "[30m";
-    private final String RED = (char) 27 + "[31m";
-    private final String GREEN = (char) 27 + "[32m";
-    private final String YELLOW = (char) 27 + "[33m";
-    private final String BLUE = (char) 27 + "[34m";
-    private final String PURPLE = (char) 27 + "[35m";
-    private final String CYAN = (char) 27 + "[36m";
 
     Scanner scan = new Scanner(System.in);
 
@@ -145,7 +137,7 @@ public class Boundary {
                     + "\n***********************************************************************************";
         }
         if (!room.isInventoryEmpty()) {
-            output += "\nItems : " + showItems(room.getInventory())
+            output += "\nItems : " + room.showItems(room.getInventory())
                     + "\n***********************************************************************************";
         }
         System.out.println(output);
@@ -221,18 +213,10 @@ public class Boundary {
     public void showPlayerInventory(Player player) {
         String output = "***********************************************************************************"
                 + "\nGold amount      : " + (player.getGold() == 0 ? "" : (player.getGold() + " pieces of gold."))
-                + "\nPlayer inventory : " + (player.isInventoryEmpty() ? "" : showItems(player.getInventory()))
-                + "\nPotion inventory : " + (player.isPotionInventoryEmpty() ? "" : showItems(player.getPotionInventory()))
+                + "\nPlayer inventory : " + (player.isInventoryEmpty() ? "" : player.showItems(player.getInventory()))
+                + "\nPotion inventory : " + (player.isPotionInventoryEmpty() ? "" : player.showItems(player.getPotionInventory()))
                 + "\n***********************************************************************************";
         System.out.println(output);
-    }
-
-    public String showItems(ArrayList<Item> inventory) {
-        String output = "";
-        for (Item item : inventory) {
-            output += item.getName() + " * ";
-        }
-        return output;
     }
 
     public void printInfoFromHighscore(ArrayList<String> infoFromHighscore) {
@@ -424,107 +408,7 @@ public class Boundary {
         System.out.println("You want to drop more gold than you have");
     }
 
-    //Shows a list of all the rooms in alphabetic order.
-    //Also shows attributes if not null or false.
-    public void debugRoom(Room r) {
-
-        String N, S, E, W;
-
-        try {
-            N = "N: " + r.getNorth().getName();
-        } catch (Exception e) {
-            N = "";
-        }
-        try {
-            S = " S: " + r.getSouth().getName();
-        } catch (Exception e) {
-            S = "";
-        }
-        try {
-            E = " E: " + r.getEast().getName();
-        } catch (Exception e) {
-            E = "";
-        }
-        try {
-            W = " W: " + r.getWest().getName();
-        } catch (Exception e) {
-            W = "";
-        }
-
-        String boobytrap, thief, taxcollector;
-
-        boobytrap = Boolean.toString(r.isBoobytrap());
-        thief = Boolean.toString(r.isThief());
-        taxcollector = Boolean.toString(r.isTaxcollector());
-
-        if (boobytrap.equals("false")) {
-            boobytrap = "";
-        } else {
-            boobytrap = "boobytrap: " + GREEN + boobytrap + BLACK;
-        }
-        if (thief.equals("false")) {
-            thief = "";
-        } else {
-            thief = "Thief: " + GREEN + thief + BLACK;
-        }
-        if (taxcollector.equals("false")) {
-            taxcollector = "";
-        } else {
-            taxcollector = "Taxcollector: " + GREEN + taxcollector + BLACK;
-        }
-
-        String name = r.getName();
-        String gold = Integer.toString(r.getGold());
-        String goldchance = Integer.toString(r.getGoldchance());
-        String rooms = N + S + E + W;
-
-        //get items in inventory:
-        ArrayList<Item> inventory;
-        String inventoryString = "";
-        inventory = r.getInventory();
-
-        for (Item i : inventory) {
-            Item itemInstance = i.getClass().cast(i);
-            inventoryString = inventoryString
-                    + itemInstance.getName()
-                    + ", ";
-        }
-
-        //get monster and items from monster:
-        String monsterLine = "";
-        String monsterName = "";
-        String monsterInventory = "";
-        for (int i = 0; i < r.getMonsterList().size(); i++) {
-            try {
-                monsterName += r.getMonsterList().get(i).getName();
-
-                try {
-                    for (int j = 0; j < r.getMonsterList().get(i).getInventory().size(); j++) {
-                        monsterInventory += r.getMonsterList().get(i).getInventory().get(j).getName();
-                        monsterInventory += ", ";
-                    }
-                } catch (Exception e) {
-                    monsterInventory += "";
-                }
-
-            } catch (Exception e) {
-                monsterName += "";
-            }
-
-            monsterLine += RED + monsterName + BLACK + "--" + monsterInventory + " ***";
-            monsterName = "";
-            monsterInventory = "";
-
-        }
-
-        String output
-                = BLUE + name + BLACK
-                + " Gold: " + RED + gold + BLACK
-                + " GC: " + CYAN + goldchance + BLACK
-                + " \n\t" + rooms
-                + "\n\t" + inventoryString
-                + "\n\t" + boobytrap + thief + taxcollector
-                + "\n\t" + monsterLine;
+    public void showDebugRoom(String output) {
 
         System.out.println(output);
 
