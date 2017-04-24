@@ -137,7 +137,7 @@ public class Boundary {
                     + "\n***********************************************************************************";
         }
         if (!room.isInventoryEmpty()) {
-            output += "\nItems : " + showItems(room.getInventory())
+            output += "\nItems : " + room.showItems(room.getInventory())
                     + "\n***********************************************************************************";
         }
         System.out.println(output);
@@ -213,18 +213,10 @@ public class Boundary {
     public void showPlayerInventory(Player player) {
         String output = "***********************************************************************************"
                 + "\nGold amount      : " + (player.getGold() == 0 ? "" : (player.getGold() + " pieces of gold."))
-                + "\nPlayer inventory : " + (player.isInventoryEmpty() ? "" : showItems(player.getInventory()))
-                + "\nPotion inventory : " + (player.isPotionInventoryEmpty() ? "" : showItems(player.getPotionInventory()))
+                + "\nPlayer inventory : " + (player.isInventoryEmpty() ? "" : player.showItems(player.getInventory()))
+                + "\nPotion inventory : " + (player.isPotionInventoryEmpty() ? "" : player.showItems(player.getPotionInventory()))
                 + "\n***********************************************************************************";
         System.out.println(output);
-    }
-
-    public String showItems(ArrayList<Item> inventory) {
-        String output = "";
-        for (Item item : inventory) {
-            output += item.getName() + " * ";
-        }
-        return output;
     }
 
     public void printInfoFromHighscore(ArrayList<String> infoFromHighscore) {
